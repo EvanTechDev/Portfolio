@@ -131,7 +131,7 @@ export default function Page() {
         <section id="connect">
           <BlurFade delay={BLUR_FADE_DELAY * 4.5}>
             <div className="space-y-4">
-              <h2 className="text-xl font-bold">Let's collaborate 🤝🏻</h2>
+              <h2 className="text-xl font-bold">Let's connect 🤝🏻</h2>
               <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
                 {Object.entries(DATA.contact.social).map(([name, social], idx) => (
                   <SocialIconLink
@@ -355,11 +355,11 @@ export default function Page() {
               
               <div className="mt-6 space-y-4">
                 <a
-                  href="mailto:prasen.nayak@hotmail.com"
+                  href="mailto:evan.huang000@proton.me"
                   className="flex items-center gap-2 underline underline-offset-4 hover:opacity-70 transition-opacity"
                 >
                   <Icons.email className="size-4" />
-                  prasen.nayak@hotmail.com
+                  evan.huang000@proton.me
                 </a>
 
                 <a
