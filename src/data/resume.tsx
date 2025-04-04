@@ -5,28 +5,22 @@ import { HomeIcon, NotebookIcon, ThumbsDown, VideoIcon, FolderIcon } from "lucid
 import { title } from "process";
 
 export const DATA = {
-  name: "Prasenjit Nayak",
-  initials: "PN",
-  url: "https://github.com/StarKnightt/prasendev",
-  location: "Odisha, India",
-  locationLink: "https://www.google.com/maps/place/odisha",
+  name: "Evan Huang",
+  initials: "Evan",
+  url: "https://github.com/Dev-Huang1/",
+  location: "China",
+  locationLink: "",
   description:
-    "A Full Stack Developer from India, Code is an art 🎨 be the artist!",
+    "A Frontend Developer from China. Let's connect!🔥",
   summary:
-    "A Computer Science graduate from [Trident Academy Of Technology](https://tat.ac.in/), specialize in modern web development and am actively working on [open-source projects](https://github.com/StarKnightt). I'm passionate about creating impactful solutions and sharing knowledge through my [technical blog](https://prasen.dev/blog) and [YouTube](https://youtube.com/@Star_Knight12) channel as well as on [X(Twitter)](https://x.com/Star_Knight12/highlights) too | Free-lancer.",
+    "Hello 👋 My name is Evan Huang I am an engineer specializing in web development, mastering React, Next.js, TypeScript. I'm currently focus on front-end development.  As for the future development direction, I look forward to continuous learning and growth.",
   avatarUrl: "/prasen(1).webp",
   skills: [
     "React",
     "Next.js",
     "Typescript",
-    "Node.js",
-    "Java",
-    "MongoDB",
     "JavaScript",
-    "git",
-    "Linux",
-    "RestAPI",
-    "AI API",
+    "TailwindCSS",
   ],
   videos: [
     {
@@ -83,56 +77,43 @@ export const DATA = {
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/blog", icon: NotebookIcon, label: "Blog" },
-    { href: "/videos", icon: VideoIcon, label: "Videos" },
+    {/*{ href: "/videos", icon: VideoIcon, label: "Videos" },*/}
     { href: "/projects", icon: FolderIcon, label: "Projects" },
     { href: "/gadgets", icon: Icons.shop, label: "Gadgets" },
   ],
   contact: {
-    email: "prasenjitt4e@gmail.com",
-    tel: "+91 6294925956",
+    email: "evan.huang000@proton.me",
+    tel: "",
     social: {
       GitHub: {
         name: "GitHub",
-        url: "https://github.com/StarKnightt",
+        url: "https://github.com/Dev-Huang1",
         icon: Icons.github,
-
-        navbar: true,
-      },
-      LinkedIn: {
-        name: "LinkedIn",
-        url: "https://www.linkedin.com/in/prasenjitnayak/",
-        icon: Icons.linkedin,
 
         navbar: true,
       },
       X: {
         name: "X",
-        url: "https://x.com/Star_Knight12",
+        url: "https://x.com/Dev_Huang1",
         icon: Icons.x,
 
         navbar: true,
       },
       Youtube: {
         name: "Youtube",
-        url: "https://youtube.com/@Star_Knight12",
+        url: "https://youtube.com/@Dev_Huang",
         icon: Icons.youtube,
         navbar: true,
       },
-      CodePen: {
-        name: "CodePen",
-        url: "https://codepen.io/StarKnightt",
-        icon: Icons.codepen,
-        navbar: true,
-      },
-      buyMeACoffee: {
-        name: "buyMeACoffee",
-        url: "https://buymeacoffee.com/prasen",
-        icon: Icons.buyMeACoffee,
+      Instagram: {
+        name: "Instagram",
+        url: "https://instagram.com/dev.huant",
+        icon: Icons.instagram,
         navbar: true,
       },
       email: {
         name: "Send Email",
-        url: "mailto:prasen.nayak@hotmail.com",
+        url: "mailto: evan.huang000@proton.me",
         icon: Icons.email,
         navbar: false,
       },
