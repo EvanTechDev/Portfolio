@@ -22,22 +22,22 @@ const fontSans = FontSans({
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
   title: {
-    default: "Prasenjit Nayak | Full Stack Developer",
-    template: `%s | Prasenjit Nayak`,
+    default: "Evan Huang | Frontend Developer",
+    template: `%s | Evan Huang`,
   },
-  description: "Prasenjit Nayak is a Full Stack Developer from India, with expertise in React, Next.js, TypeScript and Node.js. I create modern web applications and have a passion for clean, efficient code. View my portfolio to see my latest projects and technical blog posts.",
-  keywords: ["Prasenjit Nayak", "Full Stack Developer", "React Developer", "Next.js Developer", "TypeScript Developer", "Node.js Developer", "Web Developer India", "Software Engineer"],
-  authors: [{ name: "Prasenjit Nayak" }],
-  creator: "Prasenjit Nayak",
-  publisher: "Prasenjit Nayak",
+  description: "Hello 👋 My name is Evan Huang I am an engineer specializing in web development, mastering React, Next.js, TypeScript. I'm currently focus on front-end development.  As for the future development direction, I look forward to continuous learning and growth.",
+  keywords: ["Evan Huang", "Frontend Developer", "React Developer", "Next.js Developer", "TypeScript Developer", "Web Developer", "Software Engineer"],
+  authors: [{ name: "Evan Huang" }],
+  creator: "Evan Huang",
+  publisher: "Evan Huang",
   alternates: {
     canonical: DATA.url,
   },
   openGraph: {
-    title: "Prasenjit Nayak | Full Stack Developer",
-    description: "Full Stack Developer specializing in React, Next.js, TypeScript and Node.js. Check out my portfolio, projects and blog posts.",
+    title: "Evan Huang | Frontend Developer",
+    description: "Frontend Developer specializing in React, Next.js and TypeScript. Check out my portfolio, projects and blog posts.",
     url: DATA.url,
-    siteName: "Prasenjit Nayak - Portfolio",
+    siteName: "Evan Huang - Portfolio",
     locale: "en_US",
     type: "website",
     images: [
@@ -45,14 +45,14 @@ export const metadata: Metadata = {
         url: `${DATA.url}/me.png`,
         width: 1200,
         height: 630,
-        alt: "Prasenjit Nayak - Full Stack Developer"
+        alt: "Evan Huang - Frontend Developer"
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Prasenjit Nayak | Full Stack Developer',
-    description: 'Full Stack Developer specializing in React, Next.js, TypeScript and Node.js',
+    title: 'Evan Huang | Frontend Developer',
+    description: 'Frontend Developer specializing in React, Next.js and TypeScript.',
     images: [`${DATA.url}/me.png`],
   },
   robots: {
@@ -100,7 +100,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Prasenjit Nayak",
+    title: "Evan Huang",
   },
   other: {
     "msapplication-TileColor": "#ffffff",
