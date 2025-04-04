@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: DATA.name,
     description: DATA.summary,
-    creator: '@' + 'Star_Knight12',
+    creator: '@' + 'Dev_Huang1',
     images: ['https://prasen.dev/portfolio.png'],
   },
 };
@@ -241,7 +241,7 @@ export default function Page() {
             </BlurFade>
           </div>
         </section>
-        <section id="hackathons">
+        {/*<section id="hackathons">
           <div className="space-y-12 w-full py-12">
             <BlurFade delay={BLUR_FADE_DELAY * 13}>
               <div className="flex flex-col items-center justify-center space-y-4 text-center">
@@ -342,7 +342,7 @@ export default function Page() {
               </div>
             </div>
           </BlurFade>
-        </section>
+        </section>*/}
 
         <section id="contact">
           <BlurFade delay={BLUR_FADE_DELAY * 16}>
