@@ -70,7 +70,7 @@ export function GhibliSpirit({ className }) {
   );
 }
 
-export function Leaf Decoration({ className }) {
+export function LeafDecoration({ className }) {
   return (
     <motion.div
       className={`${className} absolute pointer-events-none`}
