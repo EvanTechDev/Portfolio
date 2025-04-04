@@ -213,70 +213,61 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "Wallpaper App",
-      href: "https://www.wallpaperz.in/",
-      dates: "January 2025 - February 2025",
+      title: "One Calendar",
+      href: "https://calendar.xyehr.cn",
+      dates: "September 2024 - Now",
       active: true,
       description:
-        "A modern wallpaper discovery platform where you can find stunning wallpapers and generate images with AI.",
+        "One Calendar is a calendar web app that uses React + Vercel/blob for storage. It has rich features: address book, notes, bookmarks, to-do lists and analysis features! 📅",
       technologies: [
         "Next.js",
-        "Git",
+        "React",
         "TailwindCSS",
-        "Framer-motion",
         "TypeScript",
-        "Imagekit",
         "shadcnUI",
-        "DreamStudio",
-        "Stability AI",
       ],
       links: [
         {
           type: "Website",
-          href: "https://www.wallpaperz.in/",
+          href: "https://calendar.xyehr.cn",
           icon: <Icons.globe className="size-3" />,
         },
         {
           type: "Source",
-          href: "https://github.com/StarKnightt/wallpaperz",
+          href: "https://github.com/Dev-Huang1/One-Calendar",
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
-      video: "https://video.gumlet.io/6745e593080b60408ca085f7/67d5057eefcecbdea7560e35/download.mp4",
+      image: "https://private-user-images.githubusercontent.com/138128991/418572501-1b37257f-d7c1-4b65-8622-07574c5c7e55.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDM3NjI0OTcsIm5iZiI6MTc0Mzc2MjE5NywicGF0aCI6Ii8xMzgxMjg5OTEvNDE4NTcyNTAxLTFiMzcyNTdmLWQ3YzEtNGI2NS04NjIyLTA3NTc0YzVjN2U1NS5qcGc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwNDA0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDQwNFQxMDIzMTdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT05MzA1Y2FhNzkzMTlhYmVlNzJjYzhkZjk2YWU3ZWJlMmM2ZTY4MmJiZTc1NjYxN2JhNzQ0NTY5NWEwNTAyZjAxJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.hrW5rzoy3VsvfZJnha18eeMlG00ZHbkxkLQAVQxiL-4",
+      video: "",
     },
     {
-      title: "Resume Builder",
-      href: "https://resume-builder-ten-opal.vercel.app/",
-      dates: "May 2023 - Sept 2023",
+      title: "One Captcha",
+      href: "https://captcha.xyehr.cn",
+      dates: "Jul 2024 - Now",
       active: true,
       description:
-        "It was my final year [Project](https://github.com/StarKnightt/ResumeBuilder) in our college, It is a interactive and versatile Dynamic CV Builder, completely build from scratch with backend functionallity .",
+        "🤖🛡️A free human-machine verification product project that is secure and privacy-protecting. ",
       technologies: [
-        "CSS",
-        "javascript",
-        "MongoDB",
-        "Express.js",
         "HTML",
-        "Regex",
-        "Node.js",
+        "javascript",
+        "CSS",
       ],
       links: [
         {
           type: "Website",
-          href: "https://builddresume.vercel.app/",
+          href: "https://calendar.xyehr.cn/",
           icon: <Icons.globe className="size-3" />,
         },
         {
           type: "Source",
-          href: "https://github.com/StarKnightt/ResumeBuilder",
+          href: "https://github.com/Dev-Huang1/One-Captcha",
           icon: <Icons.github className="size-3" />,
         },
       ],
       
       image: "",
-      video:
-        "https://video.gumlet.io/6745e593080b60408ca085f7/6745e5e5080b60408ca08984/download.mp4",
+      video: "",
     },
     {
       title: "GitHub Buddy Finder",
