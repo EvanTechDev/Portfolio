@@ -45,8 +45,7 @@ export const products: Product[] = [
   {
     id: '4',
     title: 'Train Sim World',
-    description: 'The Rails are Yours in Train Sim World 5! Take on new challenges and new roles as you master the tracks and trains of iconic cities across 3 new routes. Immerse yourself in the ultimate rail hobby and embark on your next journey.
-',
+    description: 'The Rails are Yours in Train Sim World 5! Take on new challenges and new roles as you master the tracks and trains of iconic cities across 3 new routes. Immerse yourself in the ultimate rail hobby and embark on your next journey.',
     imageUrl: 'https://store-images.s-microsoft.com/image/apps.62258.13533673129408975.95f4b180-e431-4714-922e-b555f8c6879d.8a14e824-59f7-4b59-9130-27f2541edf23',
     amazonLink: 'https://amzn.to/3QsYt5n',
     sellingPrice: 50,
