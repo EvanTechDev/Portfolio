@@ -10,13 +10,11 @@ export function FloatingCloud({ className, duration = 20 }: {
   return (
     <motion.div
       className={`absolute pointer-events-none ${className}`}
-      initial={{ x: "-100%" }}
-      animate={{ x: "100vw" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{
-        duration: duration,
-        repeat: Infinity,
-        repeatType: "loop",
-        ease: "linear",
+        duration: 1,
+        ease: "easeInOut",
       }}
     >
       <svg
@@ -28,7 +26,7 @@ export function FloatingCloud({ className, duration = 20 }: {
         className="w-full h-full"
       >
         <path
-          d="M165.243 57.95C161.019 41.214 146.761 29.099 129.764 29.099C123.221 29.099 116.883 30.815 111.427 34.003C102.94 16.002 85.085 3.998 64.757 3.998C35.269 3.998 11.262 27.899 11.262 57.261C11.262 58.189 11.288 59.112 11.339 60.03C4.75 65.508 0.5 74.19 0.5 83.9C0.5 100.063 13.55 113 29.85 113H158.65C169.798 113 178.845 104.024 178.845 92.962C178.845 79.988 173.209 69.077 165.243 57.95Z"
+          d="M168 50C163 40 150 32 135 32C130 32 125 34 120 37C112 22 95 10 75 10C50 10 30 30 30 50C30 51 30 52 30 53C10 60 10 80 30 85H150C160 85 170 75 170 65C170 60 165 55 168 50Z"
           fill="hsl(var(--ghibli-element-fill))"
           fillOpacity="var(--ghibli-element-opacity)"
         />
@@ -60,7 +58,7 @@ export function LeafDecoration({ className }: { className?: string }) {
 export function GhibliSkyBackground() {
   return (
     <>
-      <FloatingCloud className="top-[10%] opacity-80" duration={20} />
+      <FloatingCloud className="top-[25%] opacity-80" duration={20} />
       <FloatingCloud className="top-[5%] opacity-90 scale-75" duration={25} />
       <FloatingCloud className="top-[15%] opacity-70 scale-50" duration={18} />
     </>
