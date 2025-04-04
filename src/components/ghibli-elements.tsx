@@ -11,14 +11,14 @@ export function FloatingCloud({ className, delay = 0, duration = 20 }: {
   return (
     <motion.div
       className={`absolute pointer-events-none ${className}`}
-      initial={{ x: "-120%", opacity: 0.8 }}
-      animate={{ x: "110vw", opacity: [0.8, 1, 0.8] }}
+      initial={{ x: "-100%" }}
+      animate={{ x: "100vw" }}
       transition={{
-        duration,
+        duration: duration,
         repeat: Infinity,
         repeatType: "loop",
-        ease: "easeInOut",
-        delay,
+        ease: "linear",
+        delay: delay,
       }}
     >
       <svg
