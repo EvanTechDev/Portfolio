@@ -171,18 +171,10 @@ export default function Page() {
               <div className="flex flex-col space-y-4">
                 <BlogCard
                   post={{
-                    title: "Is Computer Science Saturated?",
-                    publishedAt: "2024-06-18",
-                    summary: "Blogs are preparing to launch. Stay tuned!",
-                    slug: "hello-world"
-                  }}
-                />
-                <BlogCard
-                  post={{
-                    title: "Web Developement for 2025: A Guide to what's next",
-                    publishedAt: "2025-01-02",
-                    summary: "Web Development has come a long way,let's know more about it",
-                    slug: "web-development-2025"
+                    title: "My new portfolio website!",
+                    publishedAt: "2025-04-04",
+                    summary: "I deployed a new portfolio website",
+                    slug: "hello"
                   }}
                 />
                 <Link
