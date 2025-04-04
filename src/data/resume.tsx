@@ -238,7 +238,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "https://calendar.xyehr.cn/Banner.jpg",
+      image: "/One-Captcha-Banner.png",
       video: "",
     },
     {
@@ -266,7 +266,7 @@ export const DATA = {
         },
       ],
       
-      image: "https://raw.githubusercontent.com/Dev-Huang1/One-Captcha/main/assets/One-Captcha-Banner.png",
+      image: "/Banner.jpg",
       video: "",
     },
     {
