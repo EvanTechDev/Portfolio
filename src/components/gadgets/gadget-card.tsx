@@ -41,15 +41,15 @@ export function GadgetCard({ product }: GadgetCardProps) {
         
         <div className="flex items-center justify-between mb-4">
           <div className="flex flex-col">
-            <span className="text-2xl font-bold">₹{product.sellingPrice}</span>
-            <span className="text-sm text-muted-foreground line-through">₹{product.mrp}</span>
+            <span className="text-2xl font-bold">${product.sellingPrice}</span>
+            {/*<span className="text-sm text-muted-foreground line-through">${product.mrp}</span>*/}
           </div>
-          <Badge variant="secondary" className="text-green-600 bg-green-50 dark:bg-green-950">
+          {/*<Badge variant="secondary" className="text-green-600 bg-green-50 dark:bg-green-950">
             {Math.round(((product.mrp - product.sellingPrice) / product.mrp) * 100)}% OFF
-          </Badge>
+          </Badge>*/}
         </div>
 
-        <Button
+        {/*<Button
           variant="default"
           size="lg"
           className="w-full font-semibold text-base"
@@ -64,7 +64,7 @@ export function GadgetCard({ product }: GadgetCardProps) {
             Buy on Amazon
             <ShoppingCart className="size-4" />
           </Link>
-        </Button>
+        </Button>*/}
       </div>
     </MagicCard>
   );
