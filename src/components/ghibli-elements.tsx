@@ -3,30 +3,34 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export function FloatingCloud({ className, duration = 20 }: {
+export function FloatingCloud({ className, delay = 0, duration = 25 }: {
   className?: string;
+  delay?: number;
   duration?: number;
 }) {
   return (
     <motion.div
       className={`absolute pointer-events-none ${className}`}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      initial={{ x: "-120%", opacity: 0.8 }}
+      animate={{ x: "110vw", opacity: [0.8, 1, 0.8] }}
       transition={{
-        duration: 1,
+        duration,
+        repeat: Infinity,
+        repeatType: "loop",
         ease: "easeInOut",
+        delay,
       }}
     >
       <svg
-        width="180"
-        height="100"
-        viewBox="0 0 180 100"
+        width="200"
+        height="110"
+        viewBox="0 0 200 110"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
       >
         <path
-          d="M168 50C163 40 150 32 135 32C130 32 125 34 120 37C112 22 95 10 75 10C50 10 30 30 30 50C30 51 30 52 30 53C10 60 10 80 30 85H150C160 85 170 75 170 65C170 60 165 55 168 50Z"
+          d="M170 60C165 42 150 30 130 30C120 30 115 32 110 36C100 18 85 5 65 5C35 5 10 30 10 60C10 61 10 62 10 63C5 67 2 75 2 85C2 100 15 110 30 110H170C180 110 190 100 190 90C190 78 180 68 170 60Z"
           fill="hsl(var(--ghibli-element-fill))"
           fillOpacity="var(--ghibli-element-opacity)"
         />
@@ -35,32 +39,12 @@ export function FloatingCloud({ className, duration = 20 }: {
   );
 }
 
-export function LeafDecoration({ className }: { className?: string }) {
-  return (
-    <div className={`${className} absolute pointer-events-none`}>
-      <svg
-        width="100"
-        height="80"
-        viewBox="0 0 100 80"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M23.5 2C14.5 15.5 10.5 35 23.5 48C36.5 61 61.5 58 78 47C94.5 36 94.5 13 78 5C61.5 -3 32.5 -11.5 23.5 2Z"
-          fill="#A5D6A7"
-          fillOpacity="0.2"
-        />
-      </svg>
-    </div>
-  );
-}
-
 export function GhibliSkyBackground() {
   return (
     <>
-      <FloatingCloud className="top-[25%] opacity-80" duration={20} />
-      <FloatingCloud className="top-[5%] opacity-90 scale-75" duration={25} />
-      <FloatingCloud className="top-[15%] opacity-70 scale-50" duration={18} />
+      <FloatingCloud className="top-[10%] opacity-80" delay={0} duration={30} />
+      <FloatingCloud className="top-[5%] opacity-85 scale-75" delay={7} duration={35} />
+      <FloatingCloud className="top-[12%] opacity-75 scale-50" delay={3} duration={28} />
     </>
   );
 }
