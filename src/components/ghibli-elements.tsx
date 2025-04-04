@@ -39,59 +39,28 @@ export function FloatingCloud({ className, delay = 0, duration = 20 }: {
   );
 }
 
-export function GhibliSpirit({ className }: { className?: string }) {
+export function Rain() {
   return (
     <motion.div
-      className={`${className} floating-animation`}
-      animate={{ y: [0, -10, 0] }}
-      transition={{
-        duration: 4,
-        repeat: Infinity,
-        repeatType: "reverse",
-        ease: "easeInOut",
-      }}
+      className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden"
+      initial={{ opacity: 0.5 }}
+      animate={{ opacity: [0.5, 0.7, 0.5] }}
+      transition={{ duration: 5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
     >
-      <svg
-        width="40"
-        height="50"
-        viewBox="0 0 40 50"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M20 2C16.2 2 13.5 5.8 13.5 10.5C13.5 15.2 16.2 19 20 19C23.8 19 26.5 15.2 26.5 10.5C26.5 5.8 23.8 2 20 2Z"
-          fill="hsl(var(--ghibli-element-fill))"
-          fillOpacity="var(--ghibli-element-opacity)"
+      {Array.from({ length: 30 }).map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-[2px] h-[15px] bg-blue-400 dark:bg-blue-200 opacity-60"
+          style={{
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+          }}
+          initial={{ y: -20 }}
+          animate={{ y: "100vh" }}
+          transition={{ duration: Math.random() * 2 + 1, repeat: Infinity, ease: "linear" }}
         />
-        <path
-          d="M19.9999 17C16.6862 17 14.5 22.3726 14.5 29C14.5 35.6274 16.6862 41 19.9999 41C23.3137 41 25.5 35.6274 25.5 29C25.5 22.3726 23.3137 17 19.9999 17Z"
-          fill="hsl(var(--ghibli-element-fill))"
-          fillOpacity="var(--ghibli-element-opacity)"
-        />
-        <ellipse cx="17" cy="9" rx="1.5" ry="2" fill="black" />
-        <ellipse cx="23" cy="9" rx="1.5" ry="2" fill="black" />
-      </svg>
+      ))}
     </motion.div>
-  );
-}
-
-export function LeafDecoration({ className }: { className?: string }) {
-  return (
-    <div className={`${className} absolute pointer-events-none`}>
-      <svg
-        width="100"
-        height="80"
-        viewBox="0 0 100 80"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M23.5 2C14.5 15.5 10.5 35 23.5 48C36.5 61 61.5 58 78 47C94.5 36 94.5 13 78 5C61.5 -3 32.5 -11.5 23.5 2Z"
-          fill="#A5D6A7"
-          fillOpacity="0.2"
-        />
-      </svg>
-    </div>
   );
 }
 
@@ -101,6 +70,7 @@ export function GhibliSkyBackground() {
       <FloatingCloud className="top-[10%] opacity-80" delay={0} />
       <FloatingCloud className="top-[5%] opacity-90 scale-75" delay={7} duration={25} />
       <FloatingCloud className="top-[15%] opacity-70 scale-50" delay={3} duration={18} />
+      <Rain />
     </>
   );
 }
