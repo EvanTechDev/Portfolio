@@ -3,17 +3,16 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export function FloatingCloud({ className, delay = 0, duration = 25, yOffset = 0 }: {
+export function FloatingCloud({ className, delay = 0, duration = 25 }: {
   className?: string;
   delay?: number;
   duration?: number;
-  yOffset?: number;
 }) {
   return (
     <motion.div
       className={`absolute pointer-events-none ${className}`}
-      initial={{ x: "-120%", y: yOffset, opacity: 0.8 }}
-      animate={{ x: "110vw", y: [yOffset, yOffset + 10, yOffset], opacity: [0.8, 1, 0.8] }}
+      initial={{ x: "-120%", opacity: 0.8 }}
+      animate={{ x: "110vw", opacity: [0.8, 1, 0.8] }}
       transition={{
         duration,
         repeat: Infinity,
@@ -51,7 +50,7 @@ export function GhibliRain() {
       {Array.from({ length: 30 }).map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-[2px] h-[15px] bg-white opacity-60"
+          className="absolute w-[2px] h-[15px] bg-blue-400 dark:bg-blue-200 opacity-60"
           style={{
             top: `${Math.random() * 100}%`,
             left: `${Math.random() * 100}%`,
@@ -68,9 +67,9 @@ export function GhibliRain() {
 export function GhibliSkyBackground() {
   return (
     <>
-      <FloatingCloud className="top-[10%] opacity-80" delay={0} duration={30} yOffset={-5} />
-      <FloatingCloud className="top-[5%] opacity-85 scale-75" delay={7} duration={35} yOffset={10} />
-      <FloatingCloud className="top-[15%] opacity-75 scale-50" delay={3} duration={28} yOffset={-15} />
+      <FloatingCloud className="top-[10%] opacity-80" delay={0} duration={30} />
+      <FloatingCloud className="top-[5%] opacity-85 scale-75" delay={7} duration={35} />
+      <FloatingCloud className="top-[15%] opacity-75 scale-50" delay={3} duration={28} />
       <GhibliRain />
     </>
   );
