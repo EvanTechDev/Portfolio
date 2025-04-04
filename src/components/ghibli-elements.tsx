@@ -101,10 +101,6 @@ export function GhibliSkyBackground() {
       <FloatingCloud className="top-[10%] opacity-80" delay={0} />
       <FloatingCloud className="top-[5%] opacity-90 scale-75" delay={7} duration={25} />
       <FloatingCloud className="top-[15%] opacity-70 scale-50" delay={3} duration={18} />
-      <GhibliSpirit className="absolute top-[20%] right-[15%]" />
-      <GhibliSpirit className="absolute bottom-[30%] left-[10%] scale-75" />
-      <LeafDecoration className="top-[5%] right-[5%] rotate-45" />
-      <LeafDecoration className="bottom-[10%] left-[5%] rotate-12" />
     </>
   );
 }
