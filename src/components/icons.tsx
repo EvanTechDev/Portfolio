@@ -279,13 +279,14 @@ export const Icons = {
   ),
   instagram: (props: IconProps) => (
     <svg 
-      fill="#000000" 
+      fill="currentColor" 
       width="800px" 
       height="800px" 
       viewBox="0 0 32 32" 
       id="Camada_1" 
       version="1.1" 
       xmlns="http://www.w3.org/2000/svg" 
+      {...props}
     >
       <g>
         <path d="M22.3,8.4c-0.8,0-1.4,0.6-1.4,1.4c0,0.8,0.6,1.4,1.4,1.4c0.8,0,1.4-0.6,1.4-1.4C23.7,9,23.1,8.4,22.3,8.4z"/>
