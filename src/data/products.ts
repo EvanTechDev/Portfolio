@@ -3,9 +3,9 @@ export interface Product {
   title: string;
   description: string;
   imageUrl: string;
-  amazonLink?: string;
+  amazonLink: string;
   sellingPrice: number;  // Actual selling price
-  mrp?: number;          // Higher "fake" price
+  mrp: number;          // Higher "fake" price
   category: string;
   featured?: boolean;
 }
@@ -16,7 +16,9 @@ export const products: Product[] = [
     title: 'Minecraft',
     description: 'Experience unforgettable adventures as you face mysterious foes, traverse exciting landscapes, and travel to perilous dimensions.',
     imageUrl: '/images/products/logitech.webp',
+    amazonLink: "amazon.com",
     sellingPrice: 20,
+    mrp: 1,
     category: 'Games',
     featured: true,
   },
