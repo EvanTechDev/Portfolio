@@ -281,6 +281,7 @@ export const DATA = {
         "OtpLib",
         "shadcnUI",
         "TypeScript",
+        "Next.js",
       ],
       links: [
         {
@@ -294,50 +295,52 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
+      image: "/EAuth.png",
       video: "",
     },
     {
-      title: "Solar System",
-      href: "https://solarrsystem.vercel.app/",
-      dates: "September 2024 - October 2024",
+      title: "Easy Note",
+      href: "https://note.xyehr.cn/",
+      dates: "July 2024 - Now",
       active: true,
       description:
-        "This project is a visually stunning and interactive web application that provides information about the solar system and it's planet with music.",
+        "📃 A web notepad developed by Tech-Art Studio. Data is stored in local cookies",
       technologies: [
         "React.js",
-        "font-awesome",
-        "react-icons",
-        "react-dom",
-        "CSS3",
-        "Vite",
-        "Git",
+        "Typescript",
+        "Tiptap",
+        "CSS",
+        "Next.js",
       ],
       links: [
         {
           type: "Website",
-          href: "https://solarrsystem.vercel.app/",
+          href: "https://note.xyehr.cn/",
           icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/Dev-Huang1/Easy-Note",
+          icon: <Icons.github className="size-3" />,
         },
       ],
       image: "",
       video:
-        "https://video.gumlet.io/6745e593080b60408ca085f7/6745ef75b79a267f99668bda/download.mp4",
+        "",
     },
     {
-      title: "Coffee-Website",
-      href: "https://coffee-websitee.vercel.app/",
-      dates: "September 2024 - October 2024",
+      title: "Mail",
+      href: "https://mail.xyehr.cn/",
+      dates: "January 2025 - Now",
       active: true,
       description:
-        "A web app, with the futurisitc yet nostalgic design of a coffee shop, with a menu and blend of retro vibes.",
+        "This is a resend email sending web application built with NextJS, Password protected.",
       technologies: [
         "React.js",
-        "Git",
-        "TailwindCSS",
-        "Framer-motion",
-        "React-icons",
-        "React-router-dom",
+        "Resend",
+        "shadcnUI",
+        "Next.js",
+        "Typescript",
       ],
       links: [
         {
