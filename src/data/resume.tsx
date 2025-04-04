@@ -391,25 +391,91 @@ export const DATA = {
   ],
   hackathons: [
     {
-      title: "Smart India Hackathon",
-      dates: "March 23rd - 25th, 2022",
-      location: "Bhubaneswar, India",
+      title: "Joined Github",
+      dates: "June 29, 2023",
+      location: "China",
       description:
-        "Developed a learing portal with some free education content with the best paid contents too, the project was called as 'EducationX'.",
+        "Officially started my programming life",
       image:
         "/smart-india-hackathon.webp",
-      mlh: "https://github.com/Synchrotek/E-LearningX",
+      mlh: "https://github.com/Dev-Huang1",
       links: [],
     },
     {
-      title: "Smart India Hackathon",
-      dates: "December 19th - 23rd, 2023",
-      location: "Bhubaneswar, India",
+      title: "Joined Tech-Art Studio",
+      dates: "June 29, 2024",
+      location: "China",
       description:
-        "Developed A collaborative coding web platform that enables Multiuser collboration on a coding project in real-time with features of group chat, to-do lists.",
+        "Created a programming studio and had fun programming with my friends.",
       image:
         "/logo.webp",
-      mlh: "https://nexuslink01v.netlify.app/",
+      mlh: "",
+      links: [],
+    },
+    {
+      title: "Created One Captcha",
+      dates: "July 4, 2024",
+      location: "China",
+      description:
+        "Created a static JavaScript Captcha web app",
+      image:
+        "/logo.webp",
+      mlh: "",
+      links: [],
+    },
+    {
+      title: "Created Easy-Note",
+      dates: "July 4, 2024",
+      location: "China",
+      description:
+        "A simple note-taking app, originally built with HTML and later moved to Reactjs",
+      image:
+        "/logo.webp",
+      mlh: "",
+      links: [],
+    },
+    {
+      title: "Created Mail",
+      dates: "January 20, 2025",
+      location: "China",
+      description:
+        "A webapp that sends emails using a custom domain name",
+      image:
+        "/logo.webp",
+      mlh: "",
+      links: [],
+    },
+    {
+      title: "Created One Calendar",
+      dates: "January 23, 2025",
+      location: "China",
+      description:
+        "A clean calendar using vercel/blob storage and built with React and shadcn/ui",
+      image:
+        "/logo.webp",
+      mlh: "",
+      links: [],
+    },
+    {
+      title: "Created Open Wallet",
+      dates: "January 25, 2025",
+      location: "China",
+      description:
+        "A simple account book that supports import and export functions",
+      image:
+        "/logo.webp",
+      mlh: "",
+      links: [],
+    },
+    {
+      title: "Created EAuth",
+      dates: "February 18, 2025",
+      location: "China",
+      description:
+        "A 2FA code webapp using React and homemade totp principle",
+      image:
+        "/logo.webp",
+      mlh: "",
       links: [],
     },
   ],
