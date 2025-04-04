@@ -1,10 +1,12 @@
 "use client"
+
 import React from "react";
 import { motion } from "framer-motion";
+
 export function FloatingCloud({ className, delay = 0, duration = 20 }) {
   return (
     <motion.div
-      className={absolute pointer-events-none ${className}}
+      className={`absolute pointer-events-none ${className}`}
       initial={{ x: "-20%", opacity: 0.6 }}
       animate={{ x: "110vw", opacity: [0.6, 0.8, 0.6] }}
       transition={{
@@ -31,10 +33,11 @@ export function FloatingCloud({ className, delay = 0, duration = 20 }) {
     </motion.div>
   );
 }
+
 export function GhibliSpirit({ className }) {
   return (
     <motion.div
-      className={${className}}
+      className={`${className}`}
       animate={{ y: [0, -8, 0], rotate: [0, 2, -2, 0] }}
       transition={{
         duration: 5,
@@ -66,10 +69,11 @@ export function GhibliSpirit({ className }) {
     </motion.div>
   );
 }
-export function LeafDecoration({ className }) {
+
+export function Leaf Decoration({ className }) {
   return (
     <motion.div
-      className={${className} absolute pointer-events-none}
+      className={`${className} absolute pointer-events-none`}
       animate={{ y: [0, 5, 0], rotate: [0, 3, -3, 0] }}
       transition={{
         duration: 6,
@@ -94,6 +98,7 @@ export function LeafDecoration({ className }) {
     </motion.div>
   );
 }
+
 export function GhibliSkyBackground() {
   return (
     <>
