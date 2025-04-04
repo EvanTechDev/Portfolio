@@ -238,7 +238,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/One-Captcha-Banner.png",
+      image: "/Banner.jpg",
       video: "",
     },
     {
@@ -266,7 +266,7 @@ export const DATA = {
         },
       ],
       
-      image: "/Banner.jpg",
+      image: "/One-Captcha-Banner.png",
       video: "",
     },
     {
@@ -345,17 +345,17 @@ export const DATA = {
       links: [
         {
           type: "Website",
-          href: "https://coffee-websitee.vercel.app/",
+          href: "https://mail.xyehr.cn/",
           icon: <Icons.globe className="size-3" />,
         },
         {
           type: "Source",
-          href: "https://github.com/StarKnightt/Coffee-Website",
+          href: "https://github.com/Dev-Huang1/Mail",
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
-      video: "https://video.gumlet.io/6745e593080b60408ca085f7/6745ea2d080b60408ca0bc08/download.mp4",
+      image: "Mail.jpg",
+      video: "",
     },
     {
       title: "3D Carousel Gallery",
