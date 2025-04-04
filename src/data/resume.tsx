@@ -357,124 +357,93 @@ export const DATA = {
       image: "Mail.jpg",
       video: "",
     },
-    {
-      title: "3D Carousel Gallery",
-      href: "https://3dcarousell.vercel.app/",
-      dates: "December 2024 - January 2025",
-      active: true,
-      description:
-        "A beautiful and interactive 3D carousel gallery built with Next.js, featuring image and video support with an integrated music player.",
-      technologies: [
-        "Next.js",
-        "CSS 3D Transform",
-        "SoundCloud Widget API",
-        "Modern-Javascript",
-        "Vercel",
-        "Git",
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "https://3dcarousell.vercel.app/",
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: "Source",
-          href: "https://github.com/StarKnightt/3D-Carousel",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "",
-      video:
-        "https://video.gumlet.io/6745e593080b60408ca085f7/67912b93d696a7af3b2e38ef/download.mp4",
-    }
   ],
   hackathons: [
     {
       title: "Joined Github",
       dates: "June 29, 2023",
-      location: "China",
+      location: "",
       description:
         "Officially started my programming life",
       image:
-        "/smart-india-hackathon.webp",
+        "/GitHub.png",
       mlh: "https://github.com/Dev-Huang1",
       links: [],
     },
     {
       title: "Joined Tech-Art Studio",
       dates: "June 29, 2024",
-      location: "China",
+      location: "",
       description:
         "Created a programming studio and had fun programming with my friends.",
       image:
-        "/logo.webp",
+        "/R_20240629_124936_0000.png",
       mlh: "",
       links: [],
     },
     {
       title: "Created One Captcha",
       dates: "July 4, 2024",
-      location: "China",
+      location: "",
       description:
         "Created a static JavaScript Captcha web app",
       image:
-        "/logo.webp",
+        "/One-Captcha-Logo.png",
       mlh: "",
       links: [],
     },
     {
       title: "Created Easy-Note",
       dates: "July 4, 2024",
-      location: "China",
+      location: "",
       description:
         "A simple note-taking app, originally built with HTML and later moved to Reactjs",
       image:
-        "/logo.webp",
+        "/Easy-Notes-Logo.png",
       mlh: "",
       links: [],
     },
     {
       title: "Created Mail",
       dates: "January 20, 2025",
-      location: "China",
+      location: "",
       description:
         "A webapp that sends emails using a custom domain name",
       image:
-        "/logo.webp",
+        "/vercel.jpeg",
       mlh: "",
       links: [],
     },
     {
       title: "Created One Calendar",
       dates: "January 23, 2025",
-      location: "China",
+      location: "",
       description:
         "A clean calendar using vercel/blob storage and built with React and shadcn/ui",
       image:
-        "/logo.webp",
+        "/calendar.png",
       mlh: "",
       links: [],
     },
     {
       title: "Created Open Wallet",
       dates: "January 25, 2025",
-      location: "China",
+      location: "",
       description:
         "A simple account book that supports import and export functions",
       image:
-        "/logo.webp",
+        "/vercel.jpeg",
       mlh: "",
       links: [],
     },
     {
       title: "Created EAuth",
       dates: "February 18, 2025",
-      location: "China",
+      location: "",
       description:
         "A 2FA code webapp using React and homemade totp principle",
       image:
-        "/logo.webp",
+        "/vercel.jpeg",
       mlh: "",
       links: [],
     },
