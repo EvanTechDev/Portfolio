@@ -10,7 +10,7 @@ export function FloatingCloud({ className, delay = 0, duration = 20 }: {
 }) {
   return (
     <motion.div
-      className={`absolute pointer-events-none ${className}`}
+      className={`relative pointer-events-none ${className}`}
       initial={{ x: "-100%" }}
       animate={{ x: "100vw" }}
       transition={{
@@ -69,7 +69,7 @@ export function GhibliSkyBackground() {
     <>
       <FloatingCloud className="top-[20%] opacity-80" delay={0} />
       <FloatingCloud className="top-[5%] opacity-90 scale-75" delay={7} duration={25} />
-      <FloatingCloud className="top-[35%] opacity-70 scale-50" delay={3} duration={18} />
+      <FloatingCloud className="top-[50%] opacity-70 scale-50" delay={3} duration={18} />
       <Rain />
     </>
   );
