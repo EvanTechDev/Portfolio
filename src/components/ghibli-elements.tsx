@@ -83,26 +83,25 @@ export function GhibliSkyBackground() {
   const [clouds, setClouds] = useState<JSX.Element[]>([])
 
   const generateClouds = () => {
-    const count = 6
     const cloudsArr = []
+    const zoneA = [2, 5, 8, 11]
+    const zoneB = [20, 23, 26, 29]
     let useZoneA = true
 
-    for (let i = 0; i < count; i++) {
-      let top = 0
-      if (useZoneA) {
-        top = Math.random() * 11 + 1
-      } else {
-        top = Math.random() * 11 + 19
-      }
+    for (let i = 0; i < 6; i++) {
+      const zone = useZoneA ? zoneA : zoneB
+      const index = Math.floor(Math.random() * zone.length)
+      const top = zone.splice(index, 1)[0]
 
       cloudsArr.push(
         <FloatingCloud
           key={i + "-" + Date.now()}
-          top={`${top.toFixed(2)}%`}
+          top={`${top}%`}
           delay={i * 6}
           duration={15}
         />
       )
+
       useZoneA = !useZoneA
     }
 
