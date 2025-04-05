@@ -125,7 +125,7 @@ export const DATA = {
     {
       company: "Tech-Art Studio",
       href: "https://xyehr.cn",
-      badges: [Tech],
+      badges: [],
       location: "China",
       title: "Founder | Developer | Marketing",
       logoUrl: "/R_20240629_124936_0000.png",
