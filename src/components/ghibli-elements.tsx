@@ -48,31 +48,36 @@ function FloatingCloud({
 export function GhibliSkyBackground() {
   const [clouds, setClouds] = useState<JSX.Element[]>([])
 
-  function getShuffledTopRanges(min: number, max: number, count: number): number[] {
-    const step = (max - min) / count
-    const positions = Array.from({ length: count }, (_, i) =>
-      min + step * i + Math.random() * step * 0.6
-    )
-    return positions.sort(() => Math.random() - 0.5)
+  function getUniqueTopPositions(min: number, max: number, count: number): number[] {
+    const positions = new Set<number>()
+    while (positions.size < count) {
+      const position = min + Math.random() * (max - min)
+      positions.add(parseFloat(position.toFixed(2)))
+    }
+    return Array.from(positions)
   }
 
   function generateClouds() {
     const cloudCount = 6
-    const aTops = getShuffledTopRanges(1, 12, Math.ceil(cloudCount / 2))
-    const bTops = getShuffledTopRanges(19, 30, Math.ceil(cloudCount / 2)) // 改为Math.ceil确保有足够的位置
+    const topRange1 = getUniqueTopPositions(1, 12, Math.ceil(cloudCount / 2))
+    const topRange2 = getUniqueTopPositions(19, 30, Math.ceil(cloudCount / 2))
 
     const tops: number[] = []
     for (let i = 0; i < cloudCount; i++) {
-      const sourceArray = i % 2 === 0 ? aTops : bTops
-      tops.push(sourceArray.pop() ?? (i % 2 === 0 ? 6 : 24)) // 提供默认值
+      const sourceArray = i % 2 === 0 ? topRange1 : topRange2
+      if (sourceArray.length > 0) {
+        tops.push(sourceArray.pop()!)
+      } else {
+        tops.push(i % 2 === 0 ? 6 + Math.random() * 6 : 24 + Math.random() * 6)
+      }
     }
 
     const elements = tops.map((top, i) => (
       <FloatingCloud
         key={`cloud-${i}-${top}`}
-        top={`${top.toFixed(2)}%`}
+        top={`${top}%`}
         delay={i * 6}
-        duration={15}
+        duration={15 + Math.random() * 5}
       />
     ))
 
