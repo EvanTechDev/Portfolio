@@ -64,6 +64,23 @@ export function Rain() {
   );
 }
 
+export function Birds() {
+  return (
+    <motion.div
+      className="absolute pointer-events-none"
+      style={{ top: "20%", left: "10%" }}
+      initial={{ x: 0 }}
+      animate={{ x: "100vw" }}
+      transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+    >
+      <svg width="60" height="30" viewBox="0 0 60 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 15 Q15 0 30 15 Q45 0 60 15" stroke="black" strokeWidth="2" fill="none" />
+      </svg>
+    </motion.div>
+  );
+}
+
+
 export function GhibliSkyBackground() {
   return (
     <>
@@ -71,6 +88,7 @@ export function GhibliSkyBackground() {
       <FloatingCloud className="top-[5%] opacity-90 scale-75" delay={7} duration={25} />
       <FloatingCloud className="top-[27%] opacity-70 scale-50" delay={5} duration={22} />
       <Rain />
+      <Birds />
     </>
   );
 }
