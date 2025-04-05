@@ -49,11 +49,11 @@ export function GhibliSkyBackground() {
   const [clouds, setClouds] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
-    const cloudCount = 8;
+    const cloudCount = 4;
     const newClouds = Array.from({ length: cloudCount }).map((_, i) => {
       const top = `${Math.random() * 30}%`;
-      const delay = i * 5;
-      const duration = 30;
+      const delay = i * 6;
+      const duration = 15;
       return (
         <FloatingCloud
           key={i}
