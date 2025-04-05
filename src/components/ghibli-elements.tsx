@@ -1,17 +1,17 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 
 function FloatingCloud({
   top,
-  delay,
-  duration,
+  onEnd,
 }: {
   top: string;
-  delay: number;
-  duration: number;
+  onEnd: () => void;
 }) {
+  const duration = 20;
+
   return (
     <motion.div
       className="absolute w-[200px] h-[110px] pointer-events-none"
@@ -20,11 +20,9 @@ function FloatingCloud({
       animate={{ x: "100vw" }}
       transition={{
         duration,
-        repeat: Infinity,
-        repeatType: "loop",
         ease: "linear",
-        delay,
       }}
+      onAnimationComplete={onEnd}
     >
       <svg
         width="200"
@@ -45,46 +43,40 @@ function FloatingCloud({
   );
 }
 
-interface CloudConfig {
-  key: string;
-  top: string;
-  delay: number;
-  duration: number;
-}
-
 export function GhibliSkyBackground() {
-  const [cloudConfigs, setCloudConfigs] = useState<CloudConfig[]>([]);
-  const [isUpper, setIsUpper] = useState(true);
+  const [clouds, setClouds] = useState<{ id: string; top: string }[]>([]);
+  const isUpperRef = useRef(true);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const delay = 0;
-      const duration = 20;
-      const topValue = isUpper
-        ? (1 + Math.random() * 11).toFixed(2)
-        : (19 + Math.random() * 11).toFixed(2);
-      const newConfig: CloudConfig = {
-        key: Date.now().toString() + Math.random().toString(36),
-        top: `${topValue}%`,
-        delay,
-        duration,
-      };
+    const addCloud = () => {
+      const top = isUpperRef.current
+        ? `${(1 + Math.random() * 11).toFixed(2)}%`
+        : `${(19 + Math.random() * 11).toFixed(2)}%`;
+      const id = Date.now().toString() + Math.random();
+      setClouds((prev) => [...prev, { id, top }]);
+    };
 
-      setCloudConfigs((prev) => [...prev, newConfig]);
-      setIsUpper((prev) => !prev);
-    }, 4000);
+    addCloud();
+
+    const interval = setInterval(() => {
+      addCloud();
+    }, 25000);
 
     return () => clearInterval(interval);
-  }, [isUpper]);
+  }, []);
+
+  const handleEnd = (id: string) => {
+    setClouds((prev) => prev.filter((c) => c.id !== id));
+    isUpperRef.current = !isUpperRef.current;
+  };
 
   return (
     <>
-      {cloudConfigs.map((config) => (
+      {clouds.map((cloud) => (
         <FloatingCloud
-          key={config.key}
-          top={config.top}
-          delay={config.delay}
-          duration={config.duration}
+          key={cloud.id}
+          top={cloud.top}
+          onEnd={() => handleEnd(cloud.id)}
         />
       ))}
       <Rain />
