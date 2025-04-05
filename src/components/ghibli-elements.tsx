@@ -10,7 +10,7 @@ export function FloatingCloud({ className, delay = 0, duration = 20 }: {
 }) {
   return (
     <motion.div
-      className={`absolute pointer-events-none ${className}`}
+      className={`absolute pointer-events-none w-[200px] ${className}`}
       initial={{ x: "-120%" }}
       animate={{ x: "200%" }}
       transition={{
