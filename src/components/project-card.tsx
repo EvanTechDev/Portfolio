@@ -113,7 +113,7 @@ export function ProjectCard({
         duration={4}
         size={300}
         reverse
-        className="from-transparent via-green-500 to-transparent"
+        className="from-transparent via-[#0066ff] to-transparent"
       />
     </Card>
   );
