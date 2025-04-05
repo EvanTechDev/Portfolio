@@ -1,90 +1,48 @@
-"use client";
+"use client"
 
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react"
+import { motion } from "framer-motion"
 
 function FloatingCloud({
   top,
+  delay,
   duration,
-  offset,
 }: {
-  top: string;
-  duration: number;
-  offset: number;
+  top: string
+  delay: number
+  duration: number
 }) {
-  const currentX = `calc(${(offset % duration) / duration * 100 + -100}% + ${offset % duration}px)`;
-
   return (
     <motion.div
       className="absolute w-[200px] h-[110px] pointer-events-none"
       style={{ top }}
-      initial={false}
+      initial={{ x: "-100%" }}
       animate={{ x: "100vw" }}
       transition={{
         duration,
         repeat: Infinity,
         repeatType: "loop",
         ease: "linear",
+        delay,
       }}
     >
-      <motion.div
-        initial={{ x: currentX }}
-        animate={{ x: "100vw" }}
-        transition={{
-          duration,
-          repeat: Infinity,
-          repeatType: "loop",
-          ease: "linear",
-        }}
+      <svg
+        width="200"
+        height="110"
+        viewBox="0 0 200 110"
+        preserveAspectRatio="xMidYMid meet"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-full h-full"
       >
-        <svg
-          width="200"
-          height="110"
-          viewBox="0 0 200 110"
-          preserveAspectRatio="xMidYMid meet"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-full"
-        >
-          <path
-            d="M170 60C165 42 150 30 130 30C120 30 115 32 110 36C100 18 85 5 65 5C35 5 10 30 10 60C10 61 10 62 10 63C5 67 2 75 2 85C2 100 15 110 30 110H170C180 110 190 100 190 90C190 78 180 68 170 60Z"
-            fill="hsl(var(--ghibli-element-fill))"
-            fillOpacity="var(--ghibli-element-opacity)"
-          />
-        </svg>
-      </motion.div>
+        <path
+          d="M170 60C165 42 150 30 130 30C120 30 115 32 110 36C100 18 85 5 65 5C35 5 10 30 10 60C10 61 10 62 10 63C5 67 2 75 2 85C2 100 15 110 30 110H170C180 110 190 100 190 90C190 78 180 68 170 60Z"
+          fill="hsl(var(--ghibli-element-fill))"
+          fillOpacity="var(--ghibli-element-opacity)"
+        />
+      </svg>
     </motion.div>
-  );
-}
-
-export function GhibliSkyBackground() {
-  const [clouds, setClouds] = useState<JSX.Element[]>([]);
-
-  useEffect(() => {
-    const duration = 15;
-    const now = Date.now();
-    const positions = [
-      [1, 12],
-      [19, 30],
-    ];
-    const list: JSX.Element[] = [];
-
-    for (let i = 0; i < 8; i++) {
-      const range = positions[i % 2];
-      const top = `${range[0] + Math.random() * (range[1] - range[0])}%`;
-      const offset = (now + i * 3000) % (duration * 1000);
-      list.push(<FloatingCloud key={i} top={top} duration={duration} offset={offset} />);
-    }
-
-    setClouds(list);
-  }, []);
-
-  return (
-    <>
-      {clouds}
-      <Rain />
-    </>
-  );
+  )
 }
 
 function Rain() {
@@ -118,5 +76,50 @@ function Rain() {
         />
       ))}
     </motion.div>
-  );
+  )
+}
+
+export function GhibliSkyBackground() {
+  const [clouds, setClouds] = useState<JSX.Element[]>([])
+
+  const generateClouds = () => {
+    const count = 6
+    const cloudsArr = []
+    for (let i = 0; i < count; i++) {
+      const top =
+        i % 2 === 0
+          ? `${Math.random() * 11 + 1}%`
+          : `${Math.random() * 11 + 19}%`
+      cloudsArr.push(
+        <FloatingCloud
+          key={i + "-" + Date.now()}
+          top={top}
+          delay={i * 6}
+          duration={15}
+        />
+      )
+    }
+    setClouds(cloudsArr)
+  }
+
+  useEffect(() => {
+    generateClouds()
+
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        generateClouds()
+      }
+    }
+
+    document.addEventListener("visibilitychange", handleVisibility)
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibility)
+  }, [])
+
+  return (
+    <>
+      {clouds}
+      <Rain />
+    </>
+  )
 }
