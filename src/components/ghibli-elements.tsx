@@ -48,52 +48,43 @@ function FloatingCloud({
 export function GhibliSkyBackground() {
   const [clouds, setClouds] = useState<JSX.Element[]>([])
 
-  function getRandomTop(min: number, max: number): number {
-    return Math.random() * (max - min) + min
-  }
-
-  function isTooClose(value: number, others: number[]): boolean {
-    return others.some((v) => Math.abs(v - value) < 4)
+  function getShuffledTopRanges(min: number, max: number, count: number): number[] {
+    const step = (max - min) / count
+    const positions = Array.from({ length: count }, (_, i) =>
+      min + step * i + Math.random() * step * 0.6
+    )
+    return positions.sort(() => Math.random() - 0.5)
   }
 
   function generateClouds() {
     const cloudCount = 6
-    const tops: number[] = []
-    const elements: JSX.Element[] = []
+    const aTops = getShuffledTopRanges(1, 12, Math.ceil(cloudCount / 2))
+    const bTops = getShuffledTopRanges(19, 30, Math.floor(cloudCount / 2))
 
+    const tops: number[] = []
     for (let i = 0; i < cloudCount; i++) {
-      const useA = i % 2 === 0
-      const min = useA ? 1 : 19
-      const max = useA ? 12 : 30
-      let top = getRandomTop(min, max)
-      let attempt = 0
-      while (isTooClose(top, tops) && attempt < 20) {
-        top = getRandomTop(min, max)
-        attempt++
-      }
-      tops.push(top)
-      elements.push(
-        <FloatingCloud
-          key={i + "-" + Date.now()}
-          top={`${top.toFixed(2)}%`}
-          delay={i * 6}
-          duration={15}
-        />
-      )
+      tops.push(i % 2 === 0 ? aTops.shift()! : bTops.shift()!)
     }
+
+    const elements = tops.map((top, i) => (
+      <FloatingCloud
+        key={i + "-" + Date.now()}
+        top={`${top.toFixed(2)}%`}
+        delay={i * 6}
+        duration={15}
+      />
+    ))
 
     setClouds(elements)
   }
 
   useEffect(() => {
     generateClouds()
-
     const handleVisibility = () => {
       if (document.visibilityState === "visible") {
         generateClouds()
       }
     }
-
     document.addEventListener("visibilitychange", handleVisibility)
     return () => {
       document.removeEventListener("visibilitychange", handleVisibility)
