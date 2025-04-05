@@ -241,6 +241,35 @@ export const DATA = {
       video: "",
     },
     {
+      title: "Mail",
+      href: "https://mail.xyehr.cn/",
+      dates: "January 2025 - Now",
+      active: true,
+      description:
+        "This is a resend email sending web application built with NextJS, Password protected.",
+      technologies: [
+        "React.js",
+        "Resend",
+        "shadcnUI",
+        "Next.js",
+        "Typescript",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://mail.xyehr.cn/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/Dev-Huang1/Mail",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "Mail.jpg",
+      video: "",
+    },
+    {
       title: "Easy Note",
       href: "https://note.xyehr.cn/",
       dates: "July 2024 - Now",
@@ -269,35 +298,6 @@ export const DATA = {
       image: "",
       video:
         "",
-    },
-    {
-      title: "Mail",
-      href: "https://mail.xyehr.cn/",
-      dates: "January 2025 - Now",
-      active: true,
-      description:
-        "This is a resend email sending web application built with NextJS, Password protected.",
-      technologies: [
-        "React.js",
-        "Resend",
-        "shadcnUI",
-        "Next.js",
-        "Typescript",
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "https://mail.xyehr.cn/",
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: "Source",
-          href: "https://github.com/Dev-Huang1/Mail",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "Mail.jpg",
-      video: "",
     },
   ],
   hackathons: [
