@@ -202,7 +202,7 @@ export const DATA = {
       links: [
         {
           type: "Website",
-          href: "https://calendar.xyehr.cn/",
+          href: "https://captcha.xyehr.cn/",
           icon: <Icons.globe className="size-3" />,
         },
         {
