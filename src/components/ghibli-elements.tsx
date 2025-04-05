@@ -45,6 +45,69 @@ function FloatingCloud({
   )
 }
 
+export function GhibliSkyBackground() {
+  const [clouds, setClouds] = useState<JSX.Element[]>([])
+
+  function getRandomTop(min: number, max: number): number {
+    return Math.random() * (max - min) + min
+  }
+
+  function isTooClose(value: number, others: number[]): boolean {
+    return others.some((v) => Math.abs(v - value) < 4)
+  }
+
+  function generateClouds() {
+    const cloudCount = 6
+    const tops: number[] = []
+    const elements: JSX.Element[] = []
+
+    for (let i = 0; i < cloudCount; i++) {
+      const useA = i % 2 === 0
+      const min = useA ? 1 : 19
+      const max = useA ? 12 : 30
+      let top = getRandomTop(min, max)
+      let attempt = 0
+      while (isTooClose(top, tops) && attempt < 20) {
+        top = getRandomTop(min, max)
+        attempt++
+      }
+      tops.push(top)
+      elements.push(
+        <FloatingCloud
+          key={i + "-" + Date.now()}
+          top={`${top.toFixed(2)}%`}
+          delay={i * 6}
+          duration={15}
+        />
+      )
+    }
+
+    setClouds(elements)
+  }
+
+  useEffect(() => {
+    generateClouds()
+
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        generateClouds()
+      }
+    }
+
+    document.addEventListener("visibilitychange", handleVisibility)
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibility)
+    }
+  }, [])
+
+  return (
+    <>
+      {clouds}
+      <Rain />
+    </>
+  )
+}
+
 function Rain() {
   return (
     <motion.div
@@ -76,56 +139,5 @@ function Rain() {
         />
       ))}
     </motion.div>
-  )
-}
-
-export function GhibliSkyBackground() {
-  const [clouds, setClouds] = useState<JSX.Element[]>([])
-
-  const generateClouds = () => {
-    const cloudsArr = []
-    const zoneA = [2, 5, 8, 11]
-    const zoneB = [20, 23, 26, 29]
-    let useZoneA = true
-
-    for (let i = 0; i < 6; i++) {
-      const zone = useZoneA ? zoneA : zoneB
-      const index = Math.floor(Math.random() * zone.length)
-      const top = zone.splice(index, 1)[0]
-
-      cloudsArr.push(
-        <FloatingCloud
-          key={i + "-" + Date.now()}
-          top={`${top}%`}
-          delay={i * 6}
-          duration={15}
-        />
-      )
-
-      useZoneA = !useZoneA
-    }
-
-    setClouds(cloudsArr)
-  }
-
-  useEffect(() => {
-    generateClouds()
-
-    const handleVisibility = () => {
-      if (document.visibilityState === "visible") {
-        generateClouds()
-      }
-    }
-
-    document.addEventListener("visibilitychange", handleVisibility)
-    return () =>
-      document.removeEventListener("visibilitychange", handleVisibility)
-  }, [])
-
-  return (
-    <>
-      {clouds}
-      <Rain />
-    </>
   )
 }
