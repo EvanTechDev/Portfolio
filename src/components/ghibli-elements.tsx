@@ -1,31 +1,36 @@
-"use client"
+"use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-export function FloatingCloud({ className, delay = 0, duration = 20 }: {
-  className?: string;
-  delay?: number;
-  duration?: number;
+function FloatingCloud({
+  top,
+  delay,
+  duration,
+}: {
+  top: string;
+  delay: number;
+  duration: number;
 }) {
-  
   return (
     <motion.div
-      className={`absolute pointer-events-none ${className}`}
+      className="absolute w-[200px] h-[110px] pointer-events-none"
+      style={{ top }}
       initial={{ x: "-100%" }}
-      animate={{ x: "300%" }}
+      animate={{ x: "100vw" }}
       transition={{
-        duration: duration,
+        duration,
         repeat: Infinity,
         repeatType: "loop",
         ease: "linear",
-        delay: delay,
+        delay,
       }}
     >
       <svg
         width="200"
         height="110"
         viewBox="0 0 200 110"
+        preserveAspectRatio="xMidYMid meet"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
@@ -40,13 +45,47 @@ export function FloatingCloud({ className, delay = 0, duration = 20 }: {
   );
 }
 
-export function Rain() {
+export function GhibliSkyBackground() {
+  const [clouds, setClouds] = useState<JSX.Element[]>([]);
+
+  useEffect(() => {
+    const cloudCount = 8;
+    const newClouds = Array.from({ length: cloudCount }).map((_, i) => {
+      const top = `${Math.random() * 30}%`;
+      const delay = i * 5;
+      const duration = 30;
+      return (
+        <FloatingCloud
+          key={i}
+          top={top}
+          delay={delay}
+          duration={duration}
+        />
+      );
+    });
+    setClouds(newClouds);
+  }, []);
+
+  return (
+    <>
+      {clouds}
+      <Rain />
+    </>
+  );
+}
+
+function Rain() {
   return (
     <motion.div
       className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden"
       initial={{ opacity: 0.6 }}
       animate={{ opacity: [0.6, 0.8, 0.6] }}
-      transition={{ duration: 5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+      transition={{
+        duration: 5,
+        repeat: Infinity,
+        repeatType: "reverse",
+        ease: "easeInOut",
+      }}
     >
       {Array.from({ length: 42 }).map((_, i) => (
         <motion.div
@@ -58,20 +97,13 @@ export function Rain() {
           }}
           initial={{ y: -20 }}
           animate={{ y: "100vh" }}
-          transition={{ duration: Math.random() * 2 + 1, repeat: Infinity, ease: "linear" }}
+          transition={{
+            duration: Math.random() * 2 + 1,
+            repeat: Infinity,
+            ease: "linear",
+          }}
         />
       ))}
     </motion.div>
-  );
-}
-
-export function GhibliSkyBackground() {
-  return (
-    <>
-      <FloatingCloud className="top-[15%] opacity-80" delay={0} />
-      <FloatingCloud className="top-[5%] opacity-90 scale-75" delay={8.5} />
-      <FloatingCloud className="top-[27%] opacity-70 scale-50" delay={5} />
-      <Rain />
-    </>
   );
 }
