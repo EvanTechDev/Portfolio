@@ -59,16 +59,17 @@ export function GhibliSkyBackground() {
   function generateClouds() {
     const cloudCount = 6
     const aTops = getShuffledTopRanges(1, 12, Math.ceil(cloudCount / 2))
-    const bTops = getShuffledTopRanges(19, 30, Math.floor(cloudCount / 2))
+    const bTops = getShuffledTopRanges(19, 30, Math.ceil(cloudCount / 2)) // 改为Math.ceil确保有足够的位置
 
     const tops: number[] = []
     for (let i = 0; i < cloudCount; i++) {
-      tops.push(i % 2 === 0 ? aTops.shift()! : bTops.shift()!)
+      const sourceArray = i % 2 === 0 ? aTops : bTops
+      tops.push(sourceArray.pop() ?? (i % 2 === 0 ? 6 : 24)) // 提供默认值
     }
 
     const elements = tops.map((top, i) => (
       <FloatingCloud
-        key={i + "-" + Date.now()}
+        key={`cloud-${i}-${top}`}
         top={`${top.toFixed(2)}%`}
         delay={i * 6}
         duration={15}
