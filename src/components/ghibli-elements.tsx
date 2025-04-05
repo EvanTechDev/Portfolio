@@ -45,37 +45,48 @@ function FloatingCloud({
   );
 }
 
+interface CloudConfig {
+  key: string;
+  top: string;
+  delay: number;
+  duration: number;
+}
+
 export function GhibliSkyBackground() {
-  const [clouds, setClouds] = useState<JSX.Element[]>([]);
-  const [useUpper, setUseUpper] = useState(true);
+  const [cloudConfigs, setCloudConfigs] = useState<CloudConfig[]>([]);
+  const [isUpper, setIsUpper] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
       const delay = 0;
-      const duration = 15;
-      const topValue = useUpper
-        ? 1 + Math.random() * 11
-        : 19 + Math.random() * 11;
+      const duration = 20;
+      const topValue = isUpper
+        ? (1 + Math.random() * 11).toFixed(2)
+        : (19 + Math.random() * 11).toFixed(2);
+      const newConfig: CloudConfig = {
+        key: Date.now().toString() + Math.random().toString(36),
+        top: `${topValue}%`,
+        delay,
+        duration,
+      };
 
-      const newCloud = (
-        <FloatingCloud
-          key={Date.now() + Math.random()}
-          top={`${topValue.toFixed(2)}%`}
-          delay={delay}
-          duration={duration}
-        />
-      );
-
-      setClouds((prev) => [...prev, newCloud]);
-      setUseUpper((prev) => !prev);
+      setCloudConfigs((prev) => [...prev, newConfig]);
+      setIsUpper((prev) => !prev);
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [useUpper]);
+  }, [isUpper]);
 
   return (
     <>
-      {clouds}
+      {cloudConfigs.map((config) => (
+        <FloatingCloud
+          key={config.key}
+          top={config.top}
+          delay={config.delay}
+          duration={config.duration}
+        />
+      ))}
       <Rain />
     </>
   );
