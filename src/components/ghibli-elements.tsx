@@ -1,9 +1,17 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 
-function FloatingCloud({ top, delay, duration }: { top: string; delay: number; duration: number }) {
+function FloatingCloud({
+  top,
+  onEnd,
+}: {
+  top: string;
+  onEnd: () => void;
+}) {
+  const duration = 20;
+
   return (
     <motion.div
       className="absolute w-[200px] h-[110px] pointer-events-none"
@@ -12,11 +20,9 @@ function FloatingCloud({ top, delay, duration }: { top: string; delay: number; d
       animate={{ x: "100vw" }}
       transition={{
         duration,
-        repeat: Infinity,
-        repeatType: "loop",
         ease: "linear",
-        delay,
       }}
+      onAnimationComplete={onEnd}
     >
       <svg
         width="200"
@@ -37,38 +43,42 @@ function FloatingCloud({ top, delay, duration }: { top: string; delay: number; d
   );
 }
 
-function generateClouds() {
-  const clouds: JSX.Element[] = [];
-  const duration = 15;
-  for (let i = 0; i < 8; i++) {
-    const isEven = i % 2 === 0;
-    const min = isEven ? 1 : 19;
-    const max = isEven ? 12 : 30;
-    const top = `${Math.random() * (max - min) + min}%`;
-    clouds.push(<FloatingCloud key={i + '-' + Date.now()} top={top} delay={i * 6} duration={duration} />);
-  }
-  return clouds;
-}
-
 export function GhibliSkyBackground() {
-  const [clouds, setClouds] = useState<JSX.Element[]>([]);
+  const [clouds, setClouds] = useState<{ id: string; top: string }[]>([]);
+  const isUpperRef = useRef(true);
 
   useEffect(() => {
-    setClouds(generateClouds());
-
-    const handleVisibility = () => {
-      if (document.visibilityState === "visible") {
-        setClouds(generateClouds());
-      }
+    const addCloud = () => {
+      const top = isUpperRef.current
+        ? `${(1 + Math.random() * 11).toFixed(2)}%`
+        : `${(19 + Math.random() * 11).toFixed(2)}%`;
+      const id = Date.now().toString() + Math.random();
+      setClouds((prev) => [...prev, { id, top }]);
     };
 
-    document.addEventListener("visibilitychange", handleVisibility);
-    return () => document.removeEventListener("visibilitychange", handleVisibility);
+    addCloud();
+
+    const interval = setInterval(() => {
+      addCloud();
+    }, 25000);
+
+    return () => clearInterval(interval);
   }, []);
+
+  const handleEnd = (id: string) => {
+    setClouds((prev) => prev.filter((c) => c.id !== id));
+    isUpperRef.current = !isUpperRef.current;
+  };
 
   return (
     <>
-      {clouds}
+      {clouds.map((cloud) => (
+        <FloatingCloud
+          key={cloud.id}
+          top={cloud.top}
+          onEnd={() => handleEnd(cloud.id)}
+        />
+      ))}
       <Rain />
     </>
   );
