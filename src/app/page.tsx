@@ -100,7 +100,7 @@ export default function Page() {
                 />
               </div>
               <BlurFade delay={BLUR_FADE_DELAY}>
-                <div className="profile-wrapper bg-[#0066FF]">
+                <div className="profile-wrapper">
                   <Avatar className="size-28 relative z-10">
                     <AvatarImage
                       alt={DATA.name}
