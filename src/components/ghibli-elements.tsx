@@ -46,23 +46,37 @@ function FloatingCloud({
 }
 
 export function GhibliSkyBackground() {
+export function GhibliSkyBackground() {
   const [clouds, setClouds] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
     const cloudCount = 4;
-    const newClouds = Array.from({ length: cloudCount }).map((_, i) => {
-      const top = `${Math.random() * 30}%`;
+    const newClouds: JSX.Element[] = [];
+    let lastTop = Math.random() * 30;
+
+    for (let i = 0; i < cloudCount; i++) {
       const delay = i * 6;
       const duration = 15;
-      return (
+      let topValue: number;
+
+      if (lastTop > 15) {
+        topValue = Math.random() * 15; // 0 - 15%
+      } else {
+        topValue = 15 + Math.random() * 15; // 15 - 30%
+      }
+
+      lastTop = topValue;
+
+      newClouds.push(
         <FloatingCloud
           key={i}
-          top={top}
+          top={`${topValue}%`}
           delay={delay}
           duration={duration}
         />
       );
-    });
+    }
+
     setClouds(newClouds);
   }, []);
 
