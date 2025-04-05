@@ -1,30 +1,39 @@
-"use client"
+"use client";
 
-import React, { useEffect, useState } from "react"
-import { motion } from "framer-motion"
+import React, { useEffect, useState, useRef } from "react";
+import { motion, useAnimationControls } from "framer-motion";
 
 function FloatingCloud({
   top,
-  delay,
-  duration,
+  onEnd,
 }: {
-  top: string
-  delay: number
-  duration: number
+  top: string;
+  onEnd: () => void;
 }) {
+  const duration = 20;
+  const controls = useAnimationControls();
+
+  useEffect(() => {
+    const startAnimation = async () => {
+      await controls.start({
+        x: "100vw",
+        transition: {
+          duration,
+          ease: "linear",
+        },
+      });
+      onEnd();
+    };
+    
+    startAnimation();
+  }, [controls, onEnd, duration]);
+
   return (
     <motion.div
       className="absolute w-[200px] h-[110px] pointer-events-none"
       style={{ top }}
       initial={{ x: "-100%" }}
-      animate={{ x: "100vw" }}
-      transition={{
-        duration,
-        repeat: Infinity,
-        repeatType: "loop",
-        ease: "linear",
-        delay,
-      }}
+      animate={controls}
     >
       <svg
         width="200"
@@ -42,67 +51,53 @@ function FloatingCloud({
         />
       </svg>
     </motion.div>
-  )
+  );
 }
 
 export function GhibliSkyBackground() {
-  const [clouds, setClouds] = useState<JSX.Element[]>([])
-
-  function getUniqueTopPositions(min: number, max: number, count: number): number[] {
-    const positions = new Set<number>()
-    while (positions.size < count) {
-      const position = min + Math.random() * (max - min)
-      positions.add(parseFloat(position.toFixed(2)))
-    }
-    return Array.from(positions)
-  }
-
-  function generateClouds() {
-    const cloudCount = 6
-    const topRange1 = getUniqueTopPositions(1, 12, Math.ceil(cloudCount / 2))
-    const topRange2 = getUniqueTopPositions(19, 30, Math.ceil(cloudCount / 2))
-
-    const tops: number[] = []
-    for (let i = 0; i < cloudCount; i++) {
-      const sourceArray = i % 2 === 0 ? topRange1 : topRange2
-      if (sourceArray.length > 0) {
-        tops.push(sourceArray.pop()!)
-      } else {
-        tops.push(i % 2 === 0 ? 6 + Math.random() * 6 : 24 + Math.random() * 6)
-      }
-    }
-
-    const elements = tops.map((top, i) => (
-      <FloatingCloud
-        key={`cloud-${i}-${top}`}
-        top={`${top}%`}
-        delay={i * 6}
-        duration={15 + Math.random() * 5}
-      />
-    ))
-
-    setClouds(elements)
-  }
+  const [clouds, setClouds] = useState<{ id: string; top: string }[]>([]);
+  const isUpperRef = useRef(true);
+  const cloudTimerRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    generateClouds()
-    const handleVisibility = () => {
-      if (document.visibilityState === "visible") {
-        generateClouds()
-      }
-    }
-    document.addEventListener("visibilitychange", handleVisibility)
+    const addCloud = () => {
+      const top = isUpperRef.current
+        ? `${(1 + Math.random() * 11).toFixed(2)}%`
+        : `${(19 + Math.random() * 11).toFixed(2)}%`;
+      const id = Date.now().toString() + Math.random();
+      setClouds((prev) => [...prev, { id, top }]);
+    };
+
+    addCloud();
+
+    cloudTimerRef.current = setInterval(() => {
+      addCloud();
+    }, 25000);
+
     return () => {
-      document.removeEventListener("visibilitychange", handleVisibility)
-    }
-  }, [])
+      if (cloudTimerRef.current) {
+        clearInterval(cloudTimerRef.current);
+      }
+    };
+  }, []);
+
+  const handleEnd = (id: string) => {
+    setClouds((prev) => prev.filter((c) => c.id !== id));
+    isUpperRef.current = !isUpperRef.current;
+  };
 
   return (
     <>
-      {clouds}
+      {clouds.map((cloud) => (
+        <FloatingCloud
+          key={cloud.id}
+          top={cloud.top}
+          onEnd={() => handleEnd(cloud.id)}
+        />
+      ))}
       <Rain />
     </>
-  )
+  );
 }
 
 function Rain() {
@@ -136,5 +131,5 @@ function Rain() {
         />
       ))}
     </motion.div>
-  )
+  );
 }
