@@ -75,8 +75,8 @@ export function GhibliSkyBackground() {
   return (
     <>
       <FloatingCloud className="top-[15%] opacity-80" delay={0} />
-      <FloatingCloud className="top-[5%] opacity-90 scale-75" delay={14} />
-      <FloatingCloud className="top-[27%] opacity-70 scale-50" delay={9} />
+      <FloatingCloud className="top-[5%] opacity-90 scale-75" delay={8.5} />
+      <FloatingCloud className="top-[27%] opacity-70 scale-50" delay={5} />
       <Rain />
     </>
   );
