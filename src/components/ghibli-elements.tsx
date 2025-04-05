@@ -46,23 +46,41 @@ function FloatingCloud({
 export function GhibliSkyBackground() {
   const [clouds, setClouds] = useState<{ id: string; top: string }[]>([]);
   const isUpperRef = useRef(true);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    const addCloud = () => {
-      const top = isUpperRef.current
-        ? `${(1 + Math.random() * 11).toFixed(2)}%`
-        : `${(19 + Math.random() * 11).toFixed(2)}%`;
-      const id = Date.now().toString() + Math.random();
-      setClouds((prev) => [...prev, { id, top }]);
-    };
+  const addCloud = () => {
+    const top = isUpperRef.current
+      ? `${(1 + Math.random() * 11).toFixed(2)}%`
+      : `${(19 + Math.random() * 11).toFixed(2)}%`;
+    const id = Date.now().toString() + Math.random();
+    setClouds((prev) => [...prev, { id, top }]);
+  };
 
+  const startCloudLoop = () => {
     addCloud();
-
-    const interval = setInterval(() => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
       addCloud();
     }, 25000);
+  };
 
-    return () => clearInterval(interval);
+  useEffect(() => {
+    startCloudLoop();
+
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        setClouds([]);
+        isUpperRef.current = true;
+        startCloudLoop();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
   }, []);
 
   const handleEnd = (id: string) => {
@@ -83,6 +101,7 @@ export function GhibliSkyBackground() {
     </>
   );
 }
+
 
 function Rain() {
   return (
