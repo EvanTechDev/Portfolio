@@ -46,7 +46,6 @@ function FloatingCloud({
 }
 
 export function GhibliSkyBackground() {
-export function GhibliSkyBackground() {
   const [clouds, setClouds] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
