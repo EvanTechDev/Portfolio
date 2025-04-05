@@ -90,14 +90,12 @@ export const DATA = {
         name: "GitHub",
         url: "https://github.com/Dev-Huang1",
         icon: Icons.github,
-
         navbar: true,
       },
       X: {
         name: "X",
         url: "https://x.com/Dev_Huang1",
         icon: Icons.x,
-
         navbar: true,
       },
       Youtube: {
@@ -112,6 +110,12 @@ export const DATA = {
         icon: Icons.instagram,
         navbar: true,
       },
+      Threads: {
+        name: "Threads",
+        url: "https://threads.net/@dev.huang",
+        icon: Icons.threads,
+        navbar:true
+      }
       email: {
         name: "Send Email",
         url: "mailto: evan.huang000@proton.me",
