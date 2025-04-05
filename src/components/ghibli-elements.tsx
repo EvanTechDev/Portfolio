@@ -3,11 +3,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export function FloatingCloud({ className, delay = 0, duration = 20, position = { top: "10%", left: "10%" }}: {
+export function FloatingCloud({ className, delay = 0, duration = 20 }: {
   className?: string;
   delay?: number;
   duration?: number;
-  position?: { top: string; left: string };
 }) {
   return (
     <motion.div
@@ -20,10 +19,6 @@ export function FloatingCloud({ className, delay = 0, duration = 20, position = 
         repeatType: "loop",
         ease: "linear",
         delay: delay,
-      }}
-      style={{
-        top: position.top,
-        left: position.left, 
       }}
     >
       <svg
@@ -72,9 +67,9 @@ export function Rain() {
 export function GhibliSkyBackground() {
   return (
     <>
-      <FloatingCloud className="opacity-80" delay={0} position={{ top: "10%", left: "20%" }} />
-      <FloatingCloud className="opacity-90 scale-75" delay={7} duration={25} position={{ top: "30%", left: "40%" }} />
-      <FloatingCloud className="opacity-70 scale-50" delay={3} duration={18} position={{ top: "50%", left: "60%" }} />
+      <FloatingCloud className="top-[20%] opacity-80" delay={0} />
+      <FloatingCloud className="top-[5%] opacity-90 scale-75" delay={7} duration={25} />
+      <FloatingCloud className="top-[35%] opacity-70 scale-50" delay={3} duration={18} />
       <Rain />
     </>
   );
