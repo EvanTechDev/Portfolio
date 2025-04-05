@@ -49,27 +49,26 @@ export function GhibliSkyBackground() {
   const [clouds, setClouds] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
-    const cloudCount = 8;
     const newClouds: JSX.Element[] = [];
+    let useUpperRange = true;
 
-    for (let i = 0; i < cloudCount; i++) {
+    for (let i = 0; i < 8; i++) {
       const delay = i * 6;
       const duration = 15;
-
       let topValue: number;
 
-      if (i % 2 === 0) {
-        // 第1,3,5朵云：1% ~ 12%
+      if (useUpperRange) {
         topValue = 1 + Math.random() * 11;
       } else {
-        // 第2,4,6朵云：19% ~ 30%
         topValue = 19 + Math.random() * 11;
       }
+
+      useUpperRange = !useUpperRange;
 
       newClouds.push(
         <FloatingCloud
           key={i}
-          top={`${topValue}%`}
+          top={`${topValue.toFixed(2)}%`}
           delay={delay}
           duration={duration}
         />
