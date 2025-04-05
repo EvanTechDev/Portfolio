@@ -47,36 +47,31 @@ function FloatingCloud({
 
 export function GhibliSkyBackground() {
   const [clouds, setClouds] = useState<JSX.Element[]>([]);
+  const [useUpper, setUseUpper] = useState(true);
 
   useEffect(() => {
-    const newClouds: JSX.Element[] = [];
-    let useUpperRange = true;
-
-    for (let i = 0; i < 8; i++) {
-      const delay = i * 6;
+    const interval = setInterval(() => {
+      const delay = 0;
       const duration = 15;
-      let topValue: number;
+      const topValue = useUpper
+        ? 1 + Math.random() * 11
+        : 19 + Math.random() * 11;
 
-      if (useUpperRange) {
-        topValue = 1 + Math.random() * 11;
-      } else {
-        topValue = 19 + Math.random() * 11;
-      }
-
-      useUpperRange = !useUpperRange;
-
-      newClouds.push(
+      const newCloud = (
         <FloatingCloud
-          key={i}
+          key={Date.now() + Math.random()}
           top={`${topValue.toFixed(2)}%`}
           delay={delay}
           duration={duration}
         />
       );
-    }
 
-    setClouds(newClouds);
-  }, []);
+      setClouds((prev) => [...prev, newCloud]);
+      setUseUpper((prev) => !prev);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [useUpper]);
 
   return (
     <>
