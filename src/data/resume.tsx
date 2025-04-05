@@ -115,7 +115,7 @@ export const DATA = {
         url: "https://threads.net/@dev.huang",
         icon: Icons.threads,
         navbar:true
-      }
+      },
       email: {
         name: "Send Email",
         url: "mailto: evan.huang000@proton.me",
