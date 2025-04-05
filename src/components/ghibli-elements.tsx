@@ -10,7 +10,7 @@ function FloatingCloud({
   top: string;
   onEnd: () => void;
 }) {
-  const duration = 20;
+  const duration = 15;
 
   return (
     <motion.div
@@ -61,7 +61,7 @@ export function GhibliSkyBackground() {
     if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
       addCloud();
-    }, 25000);
+    }, 5000);
   };
 
   useEffect(() => {
