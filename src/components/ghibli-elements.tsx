@@ -47,7 +47,7 @@ export function Rain() {
       animate={{ opacity: [0.6, 0.8, 0.6] }}
       transition={{ duration: 5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
     >
-      {Array.from({ length: 50 }).map((_, i) => (
+      {Array.from({ length: 42 }).map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-[2px] h-[15px] bg-blue-400 dark:bg-blue-200 opacity-60"
@@ -69,7 +69,7 @@ export function GhibliSkyBackground() {
     <>
       <FloatingCloud className="top-[15%] opacity-80" delay={0} />
       <FloatingCloud className="top-[5%] opacity-90 scale-75" delay={7} duration={25} />
-      <FloatingCloud className="top-[24%] opacity-70 scale-50" delay={5} duration={22} />
+      <FloatingCloud className="top-[27%] opacity-70 scale-50" delay={5} duration={22} />
       <Rain />
     </>
   );
