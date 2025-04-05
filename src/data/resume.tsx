@@ -16,11 +16,13 @@ export const DATA = {
     "Hello 👋 My name is Evan, I'm an engineer specializing in web development, mastering React, Next.js, TypeScript. I'm currently focus on front-end development.  As for the future development direction, I look forward to continuous learning and growth.",
   avatarUrl: "/Evan.jpg",
   skills: [
-    "React",
+    "React.js",
     "Next.js",
     "Typescript",
     "JavaScript",
     "TailwindCSS",
+    "Node.js",
+    "Python"
   ],
   videos: [
     {
