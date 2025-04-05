@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 export function FloatingCloud({ className, delay = 0, duration = 20 }: {
@@ -8,11 +8,18 @@ export function FloatingCloud({ className, delay = 0, duration = 20 }: {
   delay?: number;
   duration?: number;
 }) {
+  const [endX, setEndX] = useState("100vw");
+
+  useEffect(() => {
+    const width = window.innerWidth;
+    setEndX(`${width + 200}px`);
+  }, []);
+  
   return (
     <motion.div
       className={`absolute pointer-events-none ${className}`}
       initial={{ x: "-120%" }}
-      animate={{ x: "120vw" }}
+      animate={{ x: endX }}
       transition={{
         duration: duration,
         repeat: Infinity,
