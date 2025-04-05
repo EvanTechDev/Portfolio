@@ -85,20 +85,27 @@ export function GhibliSkyBackground() {
   const generateClouds = () => {
     const count = 6
     const cloudsArr = []
+    let useZoneA = true
+
     for (let i = 0; i < count; i++) {
-      const top =
-        i % 2 === 0
-          ? `${Math.random() * 11 + 1}%`
-          : `${Math.random() * 11 + 19}%`
+      let top = 0
+      if (useZoneA) {
+        top = Math.random() * 11 + 1
+      } else {
+        top = Math.random() * 11 + 19
+      }
+
       cloudsArr.push(
         <FloatingCloud
           key={i + "-" + Date.now()}
-          top={top}
+          top={`${top.toFixed(2)}%`}
           delay={i * 6}
           duration={15}
         />
       )
+      useZoneA = !useZoneA
     }
+
     setClouds(cloudsArr)
   }
 
