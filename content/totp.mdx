@@ -1,0 +1,61 @@
+---
+title: "Diving into TOTP: A Guide to Time-Based One-Time Passwords"
+publishedAt: "2025-04-04"
+summary: "TOTP or Time-based One-Time Password, is a dynamic password generation algorithm widely used in two-factor authentication (2FA)."
+tags: ["coding", "develop", "totp"]
+---
+
+## What is TOTP?
+
+TOTP or **Time-based One-Time Password**, is a dynamic password generation algorithm widely used in two-factor authentication (2FA). It leverages the current time and a shared secret to produce a short-lived password (typically valid for 30 seconds). For developers, it’s a straightforward yet powerful tool to enhance security. TOTP evolved from HOTP (HMAC-based One-Time Password), swapping counters for time-based logic, as standardized in [RFC 6238](https://tools.ietf.org/html/rfc6238).
+
+## How TOTP Works The TOTP algorithm boils down to a few key steps: 
+
+1. **Shared Secret**: A Base32-encoded key, securely exchanged between client and server. 
+
+2. **Time Counter**: `T = floor(current Unix timestamp / 30)`. 
+
+3. **HMAC-SHA1**: Compute a hash using the secret and time counter. 
+
+4. **Truncation**: Extract a 6- or 8-digit code from the hash. On the server side, the same computation validates the user’s input. The 30-second time step ensures the password refreshes automatically. 
+
+## Sample Implementation in Python Here’s a minimal TOTP generator: 
+
+```python
+import hmac, base64, struct, hashlib, time
+
+def get_totp(secret): 
+    key = base64.b32decode(secret, True) 
+    msg = struct.pack(">Q", int(time.time()) // 30) 
+    h = hmac.new(key, msg, hashlib.sha1).digest() 
+    o = h[19] & 0xf 
+    return str((struct.unpack(">I", h[o:o+4])[0] & 0x7fffffff) % 1000000).zfill(6)
+```
+
+## Technical Advantages
+
+- Offline Capability: No network needed—ideal for mobile apps.
+
+- Replay Resistance: Time-based expiration thwarts replay attacks.
+
+- Cross-Platform: Standardized, integrates easily with any stack.
+
+## Challenges and Optimizations
+
+- Time Sync: Client-server time drift beyond 30 seconds breaks it. Use NTP to sync.
+
+- Secret Security: If the key leaks, it’s game over. Encrypt it in storage.
+
+- Performance: HMAC-SHA1 is fast, but SHA256 might be worth it for high-load systems.
+
+## Use Cases
+
+- API token authentication
+
+- SSH login with 2FA
+
+- Token validation in microservices
+
+## Wrap-Up
+
+TOTP is a must-know for developers building secure systems. It’s simple, efficient, and battle-tested. Understanding its mechanics and implementation can save you time and boost your app’s security.
