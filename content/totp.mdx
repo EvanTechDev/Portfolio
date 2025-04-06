@@ -13,7 +13,7 @@ TOTP or **Time-based One-Time Password**, is a dynamic password generation algor
 
 1. **Shared Secret**: A Base32-encoded key, securely exchanged between client and server. 
 
-2. **Time Counter**: `T = floor(current Unix timestamp / 30)`. 
+2. **Time Counter**: T = floor(current Unix timestamp / 30). 
 
 3. **HMAC-SHA1**: Compute a hash using the secret and time counter. 
 
