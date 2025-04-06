@@ -10,11 +10,11 @@ import Link from 'next/link';
 import { ShoppingCart } from "lucide-react";
 import { MagicCard } from "@/components/magicui/magic-card";
 
-interface GadgetCardProps {
+interface CartCardProps {
   product: Product;
 }
 
-export function GadgetCard({ product }: GadgetCardProps) {
+export function CartCard({ product }: CartCardProps) {
   return (
     <MagicCard className="group relative overflow-hidden bg-card rounded-xl">
       <div className="relative aspect-video">
