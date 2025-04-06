@@ -61,7 +61,7 @@ export function GhibliSkyBackground() {
     if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
       addCloud();
-    }, 5000);
+    }, 6500);
   };
 
   useEffect(() => {
