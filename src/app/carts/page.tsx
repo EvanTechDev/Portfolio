@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState, useMemo, Suspense } from 'react';
-import { GadgetCard } from '@/components/gadgets/gadget-card';
-import { GadgetFilters } from '@/components/gadgets/gadget-filters';
+import { CartCard } from '@/components/carts/cart-card';
+import { CartFilters } from '@/components/carts/cart-filters';
 import { products } from '@/data/products';
 import BlurFade from '@/components/magicui/blur-fade';
-import { GadgetSkeleton } from "@/components/skeletons/gadget-skeleton";
+import { CartSkeleton } from "@/components/skeletons/cart-skeleton";
 
 export default function GadgetsPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -29,7 +29,7 @@ export default function GadgetsPage() {
 
   return (
     <main className="container max-w-6xl mx-auto px-4 py-12">
-      <Suspense fallback={<GadgetSkeleton />}>
+      <Suspense fallback={<CartSkeleton />}>
         <BlurFade>
           <div className="max-w-3xl mx-auto mb-16 text-center space-y-4">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">My Cart 🛒</h1>
@@ -39,7 +39,7 @@ export default function GadgetsPage() {
           </div>
           
           <div className="space-y-8">
-            <GadgetFilters
+            <CartFilters
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
               selectedCategory={selectedCategory}
@@ -54,7 +54,7 @@ export default function GadgetsPage() {
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {filteredProducts.map((product) => (
-                  <GadgetCard key={product.id} product={product} />
+                  <CartCard key={product.id} product={product} />
                 ))}
               </div>
             )}
