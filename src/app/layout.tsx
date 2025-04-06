@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { GeistMono as FontSans } from "geist/font/mono";
+import { GeistMono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ScrollProgress } from "@/components/scroll-progress";
@@ -14,7 +14,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { SpeedInsights } from "@vercel/speed-insights/react";
 
-const fontSans = FontSans({
+const fontSans = Geist({
   subsets: ["latin"],
   variable: "--font-sans",
 });
