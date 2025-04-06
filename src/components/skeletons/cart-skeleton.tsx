@@ -1,5 +1,5 @@
 
-export function GadgetSkeleton() {
+export function CartSkeleton() {
   return (
     <div className="space-y-8 animate-pulse">
       <div className="space-y-4">
