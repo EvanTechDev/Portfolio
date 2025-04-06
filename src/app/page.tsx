@@ -36,9 +36,9 @@ export const metadata: Metadata = {
     siteName: DATA.name,
     images: [
       {
-        url: 'https://prasen.dev/portfolio.png',
-        width: 1200,
-        height: 630,
+        url: 'https://e.xyehr.cn/portfolio.png',
+        width: 1920,
+        height: 1080,
         alt: `${DATA.name}'s Portfolio`,
       },
     ],
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     title: DATA.name,
     description: DATA.summary,
     creator: '@' + 'Dev_Huang1',
-    images: ['https://prasen.dev/portfolio.png'],
+    images: ['https://e.xyehr.cn/portfolio.png'],
   },
 };
 
