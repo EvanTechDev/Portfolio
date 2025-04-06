@@ -4,7 +4,7 @@ import { DATA } from "@/data/resume";
 import fs from 'fs';
 import path from 'path';
 
-const baseUrl = 'https://prasen.dev';
+const baseUrl = 'https://e.xyehr.cn';
 
 export const revalidate = 86400; // Revalidate once per day
 
@@ -36,12 +36,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
-    {
+    {/* {
       url: `${baseUrl}/videos`,
       lastModified: getFileModDate('src/app/videos/page.tsx'),
       changeFrequency: 'weekly',
       priority: 0.8,
-    },
+    }, */}
     {
       url: `${baseUrl}/gadgets`,
       lastModified: getFileModDate('src/app/gadgets/page.tsx'),
