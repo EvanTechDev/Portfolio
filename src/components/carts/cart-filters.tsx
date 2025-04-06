@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 
-interface GadgetFiltersProps {
+interface CartFiltersProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   selectedCategory: string;
@@ -11,18 +11,18 @@ interface GadgetFiltersProps {
   categories: string[];
 }
 
-export function GadgetFilters({
+export function CartFilters({
   searchQuery,
   setSearchQuery,
   selectedCategory,
   setSelectedCategory,
   categories,
-}: GadgetFiltersProps) {
+}: CartFiltersProps) {
   return (
     <div className="mb-8 space-y-4">
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="flex-1">
-          <Label htmlFor="search" className="mb-2 block">Search Gadgets</Label>
+          <Label htmlFor="search" className="mb-2 block">Search Carts</Label>
           <Input
             id="search"
             type="text"
