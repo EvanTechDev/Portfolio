@@ -43,7 +43,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     }, */
     {
-      url: `${baseUrl}/gadgets`,
+      url: `${baseUrl}/carts`,
       lastModified: getFileModDate('src/app/gadgets/page.tsx'),
       changeFrequency: 'monthly',
       priority: 0.7,
