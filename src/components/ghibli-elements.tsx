@@ -48,8 +48,6 @@ export function GhibliSkyBackground() {
   const isUpperRef = useRef(true);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const isDesktop = () => typeof window !== "undefined" && window.innerWidth >= 1024;
-
   const addCloud = () => {
     const top = isUpperRef.current
       ? `${(1 + Math.random() * 11).toFixed(2)}%`
@@ -61,20 +59,13 @@ export function GhibliSkyBackground() {
   const startCloudLoop = () => {
     addCloud();
     if (intervalRef.current) clearInterval(intervalRef.current);
-
-    const intervalTime = isDesktop() ? 4500 : 6500; // 4.5s for desktop, 6.5s otherwise
-
     intervalRef.current = setInterval(() => {
       addCloud();
-    }, intervalTime);
+    }, 6500);
   };
 
   useEffect(() => {
     startCloudLoop();
-
-    const handleResize = () => {
-      startCloudLoop(); // restart interval on resize
-    };
 
     const handleVisibility = () => {
       if (document.visibilityState === "visible") {
@@ -84,12 +75,10 @@ export function GhibliSkyBackground() {
       }
     };
 
-    window.addEventListener("resize", handleResize);
     document.addEventListener("visibilitychange", handleVisibility);
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
-      window.removeEventListener("resize", handleResize);
       document.removeEventListener("visibilitychange", handleVisibility);
     };
   }, []);
@@ -112,6 +101,7 @@ export function GhibliSkyBackground() {
     </>
   );
 }
+
 
 function Rain() {
   return (
