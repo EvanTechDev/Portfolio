@@ -46,6 +46,9 @@
 
       --ghibli-element-fill: 210 11.1% 85%; /* Light gray for light mode */
       --ghibli-element-opacity: 0.6;
+
+      --shiki-light: #1a1a1a;
+      --shiki-light-bg: #ffffff;
     }
 
     .dark {
@@ -84,6 +87,9 @@
 
       --ghibli-element-fill: 0 0% 85%; /* Gray for dark mode */
       --ghibli-element-opacity: 0.7;
+
+      --shiki-dark: #dcdcdc;
+      --shiki-dark-bg: #1e1e1e;
     }
   }
 
