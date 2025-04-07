@@ -26,9 +26,9 @@ export default async function BlogPage() {
       }}
     >
       <section>
-        {/*<BlurFade delay={BLUR_FADE_DELAY}>*/}
+        <BlurFade delay={BLUR_FADE_DELAY}>
           <h1 className="font-medium text-2xl mb-8 tracking-tighter">blog</h1>
-        {/*</BlurFade>*/}
+        </BlurFade>
         {posts
           .sort((a, b) => {
             if (
@@ -39,7 +39,7 @@ export default async function BlogPage() {
             return 1;
           })
           .map((post, id) => (
-            {/*<BlurFade delay={BLUR_FADE_DELAY * 2 + id * 0.05} key={post.slug}>*/}
+            <BlurFade delay={BLUR_FADE_DELAY * 2 + id * 0.05} key={post.slug}>
               <Link
                 className="flex flex-col space-y-1 mb-4"
                 href={`/blog/${post.slug}`}
@@ -51,7 +51,7 @@ export default async function BlogPage() {
                   </p>
                 </div>
               </Link>
-      {/*</BlurFade>*/}
+      </BlurFade>
           ))}
       </section>
     </div>
