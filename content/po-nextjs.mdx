@@ -23,7 +23,7 @@ Next.js supports automatic code splitting, but you can take it a step further by
 ### Actionable Tips:
 - Use `next/dynamic` to load components only when they are needed, reducing the initial page load time.
 
-```JavaScript
+```js
 import dynamic from 'next/dynamic';
 
 const DynamicComponent = dynamic(() => import('../components/HeavyComponent'));
@@ -42,7 +42,7 @@ Images often account for a significant portion of the page load time. Next.js pr
 - Define width and height for your images to avoid layout shifts.
 - Leverage modern image formats like WebP for even better compression.
 
-```JavaScript
+```js
 import Image from 'next/image';
 
 <Image 
@@ -61,7 +61,7 @@ Next.js allows you to prefetch pages and assets, improving the perceived perform
 - Use the `next/link` prefetching feature to automatically preload linked pages.
 - Lazy-load non-essential components and images to improve the initial load time.
 
-```JavaScript
+```jd
 import Link from 'next/link';
 
 <Link href="/about">
@@ -85,7 +85,7 @@ Web fonts can slow down the rendering of your pages. Next.js provides a way to o
 - Use `font-display: swap` for non-blocking font loading.
 - Import fonts with `next/head` for better font performance.
 
-```JavaScript
+```js
 import Head from 'next/head';
 
 <Head>
