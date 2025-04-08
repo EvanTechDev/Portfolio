@@ -1,0 +1,80 @@
+---
+title: "Using Next.js to Implement SSR and SSG: Which One to Choose?"
+publishedAt: "2025-04-08"
+summary: "This article will help you distinguish between SSR and SSG and which one to choose"
+tags: ["tech", "nextjs", "coding"]
+---
+
+When building modern web applications with Next.js, developers often face a crucial decision: should they use Server-Side Rendering (SSR) or Static Site Generation (SSG)? Both rendering strategies offer distinct advantages, and understanding their differences is key to making the right architectural choice for your project.
+
+## Understanding SSR and SSG in Next.js
+
+**Server-Side Rendering (SSR)** generates HTML on the server for each request. In Next.js, you implement SSR by using `getServerSideProps` in your page components.
+
+```js
+export async function getServerSideProps(context) {
+  const res = await fetch(`https://api.example.com/data`);
+  const data = await res.json();
+
+  return { props: { data } };
+}
+```
+
+**Static Site Generation (SSG)** generates HTML at build time. Next.js provides `getStaticProps` for static generation:
+
+```js
+export async function getStaticProps() {
+  const res = await fetch(`https://api.example.com/data`);
+  const data = await res.json();
+
+  return { props: { data }, revalidate: 60 };
+}
+```
+
+## When to Choose SSR
+
+1. **Frequently Updated Data**: When your page displays data that changes often and needs to be up-to-date for every request
+2. **User-Specific Content**: For pages that show personalized content based on cookies or authentication
+3. **SEO for Dynamic Content**: When you need search engines to crawl content that changes frequently
+
+## When to Choose SSG
+
+1. **Performance Critical Applications**: SSG pages load faster as they're pre-rendered and can be served via CDN
+2. **Content That Rarely Changes**: For blogs, documentation, marketing pages, etc.
+3. **Better Scalability**: Static files are easier to cache and distribute globally
+
+## Hybrid Approaches
+
+Next.js allows combining both strategies in what's called Incremental Static Regeneration (ISR):
+
+```js
+export async function getStaticProps() {
+  const res = await fetch(`https://api.example.com/data`);
+  const data = await res.json();
+
+  return { 
+    props: { data },
+    // Re-generate the page at most once every 60 seconds
+    revalidate: 60 
+  };
+}
+```
+
+This approach gives you the benefits of SSG with the ability to update content periodically without rebuilding the entire site.
+
+## Performance Considerations
+
+- **SSG**: Faster initial page loads, better caching, lower server load
+- **SSR**: Slower initial response (TTFB), but always shows fresh data
+- **ISR**: Balances both, with fast cached responses and background updates
+
+## Making the Decision
+
+Consider these factors when choosing:
+
+1. **Content Update Frequency**: How often does your data change?
+2. **Traffic Patterns**: Do you expect high traffic that would benefit from caching?
+3. **User Personalization**: Does the content vary significantly per user?
+4. **SEO Requirements**: How important is having the absolute latest content in search results?
+
+For most applications, a combination of both approaches works best. Use SSG for most pages and SSR only where absolutely necessary. Next.js's flexibility allows you to mix both strategies on a page-by-page basis, giving you the optimal balance of performance and freshness.
