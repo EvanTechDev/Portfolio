@@ -421,7 +421,7 @@ export default function Page() {
                   </p>
                   <p>
                     Moe ICP Record No. 20250408
-                  <p/>
+                  </p>
                 </div>
                 <div className="flex space-x-4">
                   <Link href="/sitemap.xml" className="text-sm text-muted-foreground hover:text-foreground">
