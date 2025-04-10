@@ -1,0 +1,143 @@
+---
+title: 'React.js Hooks: Which One to Choose?'
+publishedAt: "2025-04-11"
+summary: 'Introducing React.js hooks and which one to choose'
+tags: ['React.js', 'Hooks', 'Web Development', 'JavaScript']
+---
+
+React Hooks, introduced in React 16.8, have revolutionized how we write components by allowing us to use state and other React features without writing classes. With numerous hooks available, developers often face the question: "Which hook should I use for this situation?" This article explores the most commonly used React hooks and provides guidance on when to use each one.
+
+## Core React Hooks
+
+### 1. useState
+**When to use:** 
+- When you need to manage local component state
+- For simple state values that don't require complex logic
+- When state changes don't trigger expensive calculations
+
+```jsx
+const [count, setCount] = useState(0);
+```
+
+### 2. useEffect
+**When to use:**
+- For side effects (data fetching, subscriptions, manual DOM manipulations)
+- When you need to run code after render
+- To synchronize with external systems
+
+```jsx
+useEffect(() => {
+  document.title = `You clicked ${count} times`;
+}, [count]); // Only re-run if count changes
+```
+
+### 3. useContext
+**When to use:**
+- When you need to access context values
+- To avoid prop drilling through multiple component levels
+- For theme, authentication, or other global state
+
+```jsx
+const theme = useContext(ThemeContext);
+```
+
+## Additional Basic Hooks
+
+### 4. useReducer
+**When to choose over useState:**
+- When state logic is complex
+- When next state depends on the previous one
+- When you have multiple sub-values in your state
+- For state that's shared between components
+
+```jsx
+const [state, dispatch] = useReducer(reducer, initialState);
+```
+
+### 5. useRef
+**When to use:**
+- To access DOM elements directly
+- To persist mutable values between renders without causing re-renders
+- For storing previous values or any mutable variable
+
+```jsx
+const inputRef = useRef(null);
+```
+
+## Performance Optimization Hooks
+
+### 6. useMemo
+**When to use:**
+- To optimize expensive calculations
+- When you need to memoize a value
+- When passing computed values to child components to prevent unnecessary re-renders
+
+```jsx
+const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
+```
+
+### 7. useCallback
+**When to use:**
+- To memoize functions between re-renders
+- When passing callbacks to optimized child components
+- To prevent unnecessary re-renders of child components
+
+```jsx
+const memoizedCallback = useCallback(() => {
+  doSomething(a, b);
+}, [a, b]);
+```
+
+## Less Common But Useful Hooks
+
+### 8. useLayoutEffect
+**When to choose over useEffect:**
+- When you need to perform DOM measurements or mutations
+- When visual updates need to be synchronous with DOM changes
+- For animations or transitions where timing is critical
+
+### 9. useImperativeHandle
+**When to use:**
+- When you need to customize the instance value exposed to parent components
+- When working with forwardRef
+- For exposing specific methods to parent components
+
+## Custom Hooks
+
+Beyond built-in hooks, you can create your own hooks to extract component logic into reusable functions. This is particularly useful for:
+
+- Data fetching logic
+- Form handling
+- Subscription management
+- Any reusable stateful logic
+
+```jsx
+function useFetch(url) {
+  const [data, setData] = useState(null);
+  
+  useEffect(() => {
+    fetch(url)
+      .then(res => res.json())
+      .then(data => setData(data));
+  }, [url]);
+
+  return data;
+}
+```
+
+## Choosing the Right Hook: Decision Guide
+
+1. **Need basic state management?** → `useState`
+2. **Complex state logic?** → `useReducer`
+3. **Side effects?** → `useEffect`
+4. **Need to optimize computations?** → `useMemo`
+5. **Need to optimize function references?** → `useCallback`
+6. **Working with DOM elements?** → `useRef`
+7. **Accessing context?** → `useContext`
+8. **Need synchronous DOM measurements?** → `useLayoutEffect`
+
+## Conclusion
+
+React hooks provide a powerful and flexible way to manage state and side effects in functional components. The key to choosing the right hook lies in understanding your specific use case and the strengths of each hook. Start with the basic hooks (`useState`, `useEffect`, `useContext`) and gradually incorporate others as your needs become more complex. Remember that hooks can be combined to create sophisticated solutions while keeping your code clean and maintainable.
+
+By mastering React hooks, you'll write more concise, readable, and maintainable React components while leveraging the full power of React's functional paradigm.
