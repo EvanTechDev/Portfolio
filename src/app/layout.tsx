@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
+// import { Inter as FontSans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ScrollProgress } from "@/components/scroll-progress";
@@ -13,11 +13,12 @@ import { PageBackground } from "@/components/page-background";
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { GeistSans } from "geist/font/sans"
 
-const fontSans = FontSans({
+/* const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
-});
+}); */
 
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
@@ -117,7 +118,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(fontSans.variable, "font-sans antialiased")}>
+      <body className={GeistSans.className}>
         {/* Background container */}
         <div className="fixed inset-0 z-[-1]">
           <PageBackground />
