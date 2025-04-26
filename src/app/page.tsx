@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: DATA.name,
     description: DATA.summary,
-    creator: '@' + 'Dev_Huang1',
+    creator: '@' + 'EvanTechDev',
     images: ['https://e.xyehr.cn/portfolio.png'],
   },
 };
