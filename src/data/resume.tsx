@@ -7,7 +7,7 @@ import { title } from "process";
 export const DATA = {
   name: "Evan Huang",
   initials: "Evan",
-  url: "https://github.com/Dev-Huang1/",
+  url: "https://github.com/EvanTechDev/",
   location: "China",
   locationLink: "",
   description:
@@ -88,31 +88,31 @@ export const DATA = {
     social: {
       GitHub: {
         name: "GitHub",
-        url: "https://github.com/Dev-Huang1",
+        url: "https://github.com/EvanTechDev",
         icon: Icons.github,
         navbar: true,
       },
       X: {
         name: "X",
-        url: "https://x.com/Dev_Huang1",
+        url: "https://x.com/EvanTechDev",
         icon: Icons.x,
         navbar: true,
       },
       Youtube: {
         name: "Youtube",
-        url: "https://youtube.com/@Dev_Huang",
+        url: "https://youtube.com/@EvanTechDev",
         icon: Icons.youtube,
         navbar: true,
       },
       Instagram: {
         name: "Instagram",
-        url: "https://instagram.com/dev.huang",
+        url: "https://instagram.com/evan.dev",
         icon: Icons.instagram,
         navbar: true,
       },
       Threads: {
         name: "Threads",
-        url: "https://threads.net/@dev.huang",
+        url: "https://threads.net/@evan.dev",
         icon: Icons.threads,
         navbar:true
       },
