@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
-import Particles from '@components/ui/particles';
+import Particles from '@/components/ui/particles';
 
 function FloatingCloud({
   top,
