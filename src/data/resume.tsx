@@ -128,7 +128,7 @@ export const DATA = {
         url: "https://evantechdev.t.me",
         icon: Icons.telegram,
         navbar: true,
-      }
+      },
       email: {
         name: "Send Email",
         url: "mailto: evan.huang000@proton.me",
