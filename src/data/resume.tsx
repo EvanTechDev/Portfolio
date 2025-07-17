@@ -11,9 +11,9 @@ export const DATA = {
   location: "China",
   locationLink: "",
   description:
-    "A Frontend Developer from China. Let's connect!🔥",
+    "A Frontend Developer. Let's connect!",
   summary:
-    "Hello 👋 My name is Evan, I'm an engineer specializing in web development, mastering React, Next.js, TypeScript.🔥 I'm currently focus on front-end development.❤️  As for the future development direction, I look forward to continuous learning and growth.🌱",
+    "Hello My name is Evan, I'm an engineer specializing in web development, mastering React, Next.js, TypeScript. I'm currently focus on front-end development.❤️  As for the future development direction, I look forward to continuous learning and growth.🌱",
   avatarUrl: "/Evan.jpg",
   skills: [
     "React.js",
@@ -92,6 +92,12 @@ export const DATA = {
         icon: Icons.github,
         navbar: true,
       },
+      Threads: {
+        name: "Threads",
+        url: "https://threads.net/@evan.dev",
+        icon: Icons.threads,
+        navbar:true
+      },
       X: {
         name: "X",
         url: "https://x.com/EvanTechDev",
@@ -109,12 +115,6 @@ export const DATA = {
         url: "https://instagram.com/evan.dev",
         icon: Icons.instagram,
         navbar: true,
-      },
-      Threads: {
-        name: "Threads",
-        url: "https://threads.net/@evan.dev",
-        icon: Icons.threads,
-        navbar:true
       },
       email: {
         name: "Send Email",
@@ -180,68 +180,11 @@ export const DATA = {
         },
         {
           type: "Source",
-          href: "https://github.com/Dev-Huang1/One-Calendar",
+          href: "https://github.com/EvanTechDev/One-Calendar",
           icon: <Icons.github className="size-3" />,
         },
       ],
       image: "/Banner.jpg",
-      video: "",
-    },
-    {
-      title: "One Captcha",
-      href: "https://captcha.xyehr.cn",
-      dates: "Jul 2024 - Now",
-      active: true,
-      description:
-        "🤖🛡️A free human-machine verification product project that is secure and privacy-protecting. ",
-      technologies: [
-        "HTML",
-        "javascript",
-        "CSS",
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "https://captcha.xyehr.cn/",
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: "Source",
-          href: "https://github.com/Dev-Huang1/One-Captcha",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      
-      image: "/One-Captcha-Banner.png",
-      video: "",
-    },
-    {
-      title: "EAuth",
-      href: "https://auth.xyehr.cn",
-      dates: "Jan 2025 - Now",
-      active: true,
-      description:
-        "A 2FA Code app built with NextJS",
-      technologies: [
-        "React.js",
-        "OtpLib",
-        "shadcnUI",
-        "TypeScript",
-        "Next.js",
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "https://auth.xyehr.cn/",
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: "Source",
-          href: "https://github.com/Dev-Huang1/EAuth",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "/EAuth.png",
       video: "",
     },
     {
@@ -266,44 +209,14 @@ export const DATA = {
         },
         {
           type: "Source",
-          href: "https://github.com/Dev-Huang1/Mail",
+          href: "https://github.com/EvanTechDev/Mail",
           icon: <Icons.github className="size-3" />,
         },
       ],
       image: "Mail.jpg",
       video: "",
     },
-    {
-      title: "Easy Note",
-      href: "https://note.xyehr.cn/",
-      dates: "July 2024 - Now",
-      active: true,
-      description:
-        "📃 A web notepad developed by Tech-Art Studio. Data is stored in local cookies",
-      technologies: [
-        "React.js",
-        "Typescript",
-        "Tiptap",
-        "CSS",
-        "Next.js",
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "https://note.xyehr.cn/",
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: "Source",
-          href: "https://github.com/Dev-Huang1/Easy-Note",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "",
-      video:
-        "",
-    },
-  ],
+    ],
   hackathons: [
     {
       title: "Joined Github",
@@ -313,7 +226,7 @@ export const DATA = {
         "Officially started my programming life",
       image:
         "/GitHub.png",
-      mlh: "https://github.com/Dev-Huang1",
+      mlh: "https://github.com/EvanTechDev",
       links: [],
     },
     {
@@ -324,28 +237,6 @@ export const DATA = {
         "Created a programming studio and had fun programming with my friends.",
       image:
         "/R_20240629_124936_0000.png",
-      mlh: "",
-      links: [],
-    },
-    {
-      title: "Created One Captcha",
-      dates: "July 4, 2024",
-      location: "",
-      description:
-        "Created a static JavaScript Captcha web app",
-      image:
-        "/One-Captcha-Logo.png",
-      mlh: "",
-      links: [],
-    },
-    {
-      title: "Created Easy-Note",
-      dates: "July 4, 2024",
-      location: "",
-      description:
-        "A simple note-taking app, originally built with HTML and later moved to Reactjs",
-      image:
-        "/Easy-Notes-Logo.png",
       mlh: "",
       links: [],
     },
@@ -368,28 +259,6 @@ export const DATA = {
         "A clean calendar using vercel/blob storage and built with React and shadcn/ui",
       image:
         "/calendar.png",
-      mlh: "",
-      links: [],
-    },
-    {
-      title: "Created Open Wallet",
-      dates: "January 25, 2025",
-      location: "",
-      description:
-        "A simple account book that supports import and export functions",
-      image:
-        "/vercel.jpeg",
-      mlh: "",
-      links: [],
-    },
-    {
-      title: "Created EAuth",
-      dates: "February 18, 2025",
-      location: "",
-      description:
-        "A 2FA code webapp using React and homemade totp principle",
-      image:
-        "/vercel.jpeg",
       mlh: "",
       links: [],
     },
