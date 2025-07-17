@@ -11,14 +11,13 @@ import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import { BorderBeam } from "@/components/magicui/border-beam";
-import { MagicCard } from "@/components/magicui/magic-card";
 
 interface Props {
   title: string;
   href?: string;
   description: string;
   dates: string;
-  tags?: string[];
+  tags?: readonly string[];
   link?: string;
   image?: string;
   video?: string;
@@ -43,7 +42,7 @@ export function ProjectCard({
   className,
 }: Props) {
   return (
-    <Card className={cn("relative overflow-hidden group", className)}>
+    <Card className={cn("flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full relative group", className)}>
       <Link
         href={href || "#"}
         className="block cursor-pointer"
@@ -82,10 +81,10 @@ export function ProjectCard({
       </CardHeader>
       <CardContent className="mt-auto flex flex-col px-2">
         {tags && tags.length > 0 && (
-          <div className="mt-2 flex flex-wrap gap-1">
+          <div className="mt-2 flex flex-wrap gap-1 max-w-full overflow-hidden">
             {tags?.map((tag) => (
               <Badge
-                className="px-1 py-0 text-[10px]"
+                className="px-1 py-0 text-[10px] whitespace-nowrap"
                 variant="secondary"
                 key={tag}
               >
@@ -113,7 +112,7 @@ export function ProjectCard({
         duration={4}
         size={300}
         reverse
-        className="from-transparent via-[#0066ff] to-transparent"
+        className="from-transparent via-[#0066FF] to-transparent"
       />
     </Card>
   );
