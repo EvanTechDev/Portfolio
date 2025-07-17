@@ -97,7 +97,13 @@ export const DATA = {
         name: "Threads",
         url: "https://threads.net/@evan.dev",
         icon: Icons.threads,
-        navbar:true
+        navbar: true,
+      },
+      Bluesky: {
+        name: "Bluesky",
+        url: "https://bsky.app/profile/e.xyehr.cn",
+        icon: Icons.bluesky,
+        navbar: true,
       },
       X: {
         name: "X",
