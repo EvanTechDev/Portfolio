@@ -381,13 +381,22 @@ export default function Page() {
                 </a>
 
                 <a
-                  href={DATA.contact.social.X.url}
+                  href={DATA.contact.social.Threads.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-foreground text-background hover:opacity-90 transition-opacity"
                 >
-                  <DATA.contact.social.X.icon className="size-4" />
-                  Connect on X
+                  <DATA.contact.social.Threads.icon className="size-4" />
+                  Connect on Threads
+                </a>
+                <a
+                  href={DATA.contact.social.Bluesky.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-foreground text-background hover:opacity-90 transition-opacity bg-[#1185FE] text-white"
+                >
+                  <DATA.contact.social.Bluesky.icon className="size-4" />
+                  Connect on Bluesky
                 </a>
               </div>
             </div>
@@ -418,9 +427,6 @@ export default function Page() {
                     >
                       GitHub
                     </a>
-                  </p>
-                  <p>
-                    Moe ICP Record No. 20250408
                   </p>
                 </div>
                 <div className="flex space-x-4">
