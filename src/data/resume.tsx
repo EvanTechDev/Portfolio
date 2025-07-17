@@ -95,7 +95,7 @@ export const DATA = {
       },
       Threads: {
         name: "Threads",
-        url: "https://threads.net/@evan.dev",
+        url: "https://threads.net/@evan.tech",
         icon: Icons.threads,
         navbar: true,
       },
