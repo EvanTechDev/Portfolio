@@ -389,11 +389,13 @@ export default function Page() {
                   <DATA.contact.social.Threads.icon className="size-4" />
                   Connect on Threads
                 </a>
+                </div>
+              <div>
                 <a
                   href={DATA.contact.social.Bluesky.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-foreground text-background hover:opacity-90 transition-opacity bg-[#1185FE] text-white"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md text-background hover:opacity-90 transition-opacity bg-[#1185FE] text-white"
                 >
                   <DATA.contact.social.Bluesky.icon className="size-4" />
                   Connect on Bluesky
