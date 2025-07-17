@@ -238,47 +238,14 @@ export const DATA = {
     ],
   hackathons: [
     {
-      title: "Joined Github",
-      dates: "June 29, 2023",
+      title: "Next.js Global Hackathon",
+      dates: "June 29, 2025",
       location: "",
       description:
-        "Officially started my programming life",
+        "first global Next.js hackathon",
       image:
-        "/GitHub.png",
-      mlh: "https://github.com/EvanTechDev",
-      links: [],
-    },
-    {
-      title: "Joined Tech-Art Studio",
-      dates: "June 29, 2024",
-      location: "",
-      description:
-        "Created a programming studio and had fun programming with my friends.",
-      image:
-        "/R_20240629_124936_0000.png",
-      mlh: "",
-      links: [],
-    },
-    {
-      title: "Created Mail",
-      dates: "January 20, 2025",
-      location: "",
-      description:
-        "A webapp that sends emails using a custom domain name",
-      image:
-        "/vercel.jpeg",
-      mlh: "",
-      links: [],
-    },
-    {
-      title: "Created One Calendar",
-      dates: "January 23, 2025",
-      location: "",
-      description:
-        "A clean calendar using vercel/blob storage and built with React and shadcn/ui",
-      image:
-        "/calendar.png",
-      mlh: "",
+        "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/event-covers/8q/17eb732e-b863-423f-9b5a-03a8170f258e.jpg",
+      mlh: "https://next-hackathon-2025.vercel.app/",
       links: [],
     },
   ],
