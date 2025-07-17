@@ -22,6 +22,8 @@ export const DATA = {
     "JavaScript",
     "TailwindCSS",
     "Node.js",
+    "Git",
+    "PostgreSQL",
     "Python"
   ],
   videos: [
@@ -80,7 +82,6 @@ export const DATA = {
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/blog", icon: NotebookIcon, label: "Blog" },
     { href: "/projects", icon: FolderIcon, label: "Projects" },
-    { href: "/carts", icon: Icons.shop, label: "Cart" },
   ],
   contact: {
     email: "evan.huang000@proton.me",
