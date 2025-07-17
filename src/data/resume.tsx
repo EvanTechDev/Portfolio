@@ -129,6 +129,12 @@ export const DATA = {
         icon: Icons.telegram,
         navbar: true,
       },
+      Signal: {
+        name: "Signal",
+        url: "https://signal.me/#eu/LPSp6Cqhc0hdrV50dcwPhoG1fyvOTQklMmjVnZEr-KVasz3wPiRPYZZ1eyjM5BwZ",
+        icon: Icons.signal,
+        navbar: true,
+      },
       email: {
         name: "Send Email",
         url: "mailto: evan.huang000@proton.me",
