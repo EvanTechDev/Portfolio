@@ -208,3 +208,4 @@ useEffect(() => {
     gl.getExtension("WEBGL_lose_context")?.loseContext();
   };
 }, [amplitude, blend, colorStops, speed]);
+}
