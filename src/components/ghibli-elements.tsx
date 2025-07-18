@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
-import Aurora from '@/components/aurora';
+import dynamic from "next/dynamic";
 
 function FloatingCloud({
   top,
@@ -12,6 +12,7 @@ function FloatingCloud({
   onEnd: () => void;
 }) {
   const duration = 15;
+  const Aurora = dynamic(() => import("@/components/aurora"), { ssr: false });
 
   return (
     <motion.div
@@ -141,13 +142,16 @@ function Rain() {
 
 function Background() {
   return (
-    <div className="hidden dark:block" style={{ width: '100%', height: '600px', position: 'relative' }}>
-<Aurora
+    <div style={{ width: '100%', height: '600px', position: 'relative' }}>
+    {theme === "dark" && (
+      <Aurora
+        key={theme + Date.now()}
   colorStops={["#2ECC71", "#8E44AD", "#3498DB"]}
   blend={0.5}
   amplitude={1.0}
   speed={0.5}
 />
+      )}
     </div>
   )
 }
