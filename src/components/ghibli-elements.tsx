@@ -13,8 +13,6 @@ function FloatingCloud({
   onEnd: () => void;
 }) {
   const duration = 15;
-  const Aurora = dynamic(() => import("@/components/aurora"), { ssr: false });
-  const { theme } = useTheme();
 
   return (
     <motion.div
@@ -143,6 +141,9 @@ function Rain() {
 }
 
 function Background() {
+  const Aurora = dynamic(() => import("@/components/aurora"), { ssr: false });
+  const { theme } = useTheme();
+
   return (
     <div style={{ width: '100%', height: '600px', position: 'relative' }}>
     {theme === "dark" && (
