@@ -179,7 +179,7 @@ export default function Aurora(props: AuroraProps) {
     });
 
     function initializeScene() {
-      if (isInitialized || isContextLost) return;
+      if (isInitialized || isContextLost || !ctn) return;
       
       const width = ctn.offsetWidth || window.innerWidth;
       const height = ctn.offsetHeight || window.innerHeight;
