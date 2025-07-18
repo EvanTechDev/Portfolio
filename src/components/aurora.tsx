@@ -117,14 +117,11 @@ interface AuroraProps {
 
 export default function Aurora(props: AuroraProps) {
   const {
-    colorStops = ["#2ECC71", "#8E44AD", "#3498DB"], // 使用你要求的颜色
+    colorStops = ["#2ECC71", "#8E44AD", "#3498DB"],
     amplitude = 1.0,
     blend = 0.5,
-    speed = 1.0, // 添加默认值
+    speed = 1.0,
   } = props;
-  const propsRef = useRef<AuroraProps>(props);
-  propsRef.current = props;
-
   const ctnDom = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -141,8 +138,47 @@ export default function Aurora(props: AuroraProps) {
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     gl.canvas.style.backgroundColor = "transparent";
+    gl.canvas.style.position = "absolute";
+    gl.canvas.style.top = "0";
+    gl.canvas.style.left = "0";
+    gl.canvas.style.width = "100%";
+    gl.canvas.style.height = "100%";
+
+    gl.canvas.addEventListener("webglcontextlost", (e) => {
+      e.preventDefault();
+    });
+    gl.canvas.addEventListener("webglcontextrestored", () => {
+      initializeWebGL();
+    });
 
     let program: Program | undefined;
+
+    function initializeWebGL() {
+      const geometry = new Triangle(gl);
+      if (geometry.attributes.uv) {
+        delete geometry.attributes.uv;
+      }
+
+      const colorStopsArray = colorStops.map((hex) => {
+        const c = new Color(hex);
+        return [c.r, c.g, c.b];
+      });
+
+      program = new Program(gl, {
+        vertex: VERT,
+        fragment: FRAG,
+        uniforms: {
+          uTime: { value: 0 },
+          uAmplitude: { value: amplitude },
+          uColorStops: { value: colorStopsArray },
+          uResolution: { value: [ctn.offsetWidth, ctn.offsetHeight] },
+          uBlend: { value: blend },
+        },
+      });
+
+      const mesh = new Mesh(gl, { geometry, program });
+      ctn.appendChild(gl.canvas);
+    }
 
     function resize() {
       if (!ctn) return;
@@ -155,45 +191,20 @@ export default function Aurora(props: AuroraProps) {
     }
     window.addEventListener("resize", resize);
 
-    const geometry = new Triangle(gl);
-    if (geometry.attributes.uv) {
-      delete geometry.attributes.uv;
-    }
-
-    const colorStopsArray = colorStops.map((hex) => {
-      const c = new Color(hex);
-      return [c.r, c.g, c.b];
-    });
-
-    program = new Program(gl, {
-      vertex: VERT,
-      fragment: FRAG,
-      uniforms: {
-        uTime: { value: 0 },
-        uAmplitude: { value: amplitude },
-        uColorStops: { value: colorStopsArray },
-        uResolution: { value: [ctn.offsetWidth, ctn.offsetHeight] },
-        uBlend: { value: blend },
-      },
-    });
-
-    const mesh = new Mesh(gl, { geometry, program });
-    ctn.appendChild(gl.canvas);
+    initializeWebGL();
 
     let animateId = 0;
     const update = (t: number) => {
       animateId = requestAnimationFrame(update);
-      const { time = t * 0.01, speed = 1.0 } = propsRef.current;
       if (program) {
-        program.uniforms.uTime.value = time * speed * 0.1;
-        program.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
-        program.uniforms.uBlend.value = propsRef.current.blend ?? blend;
-        const stops = propsRef.current.colorStops ?? colorStops;
-        program.uniforms.uColorStops.value = stops.map((hex: string) => {
+        program.uniforms.uTime.value = t * 0.01 * speed;
+        program.uniforms.uAmplitude.value = amplitude;
+        program.uniforms.uBlend.value = blend;
+        program.uniforms.uColorStops.value = colorStops.map((hex) => {
           const c = new Color(hex);
           return [c.r, c.g, c.b];
         });
-        renderer.render({ scene: mesh });
+        renderer.render({ scene: program });
       }
     };
     animateId = requestAnimationFrame(update);
@@ -213,7 +224,7 @@ export default function Aurora(props: AuroraProps) {
   return (
     <div
       ref={ctnDom}
-      style={{ width: "100%", height: "100%", position: "absolute", top: 0, left: 0 }}
+      style={{ width: "100%", height: "100%", position: "absolute", top: 0, left: 0, background: "transparent" }}
     />
   );
 }
