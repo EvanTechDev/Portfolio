@@ -171,7 +171,7 @@ export default function Aurora(props: AuroraProps) {
           uTime: { value: 0 },
           uAmplitude: { value: amplitude },
           uColorStops: { value: colorStopsArray },
-          uResolution: { value: [ctn.offsetWidth, ctn.offsetHeight] },
+          uResolution: { value: [ctn.offsetWidth || window.innerWidth, ctn.offsetHeight || window.innerHeight] },
           uBlend: { value: blend },
         },
       });
@@ -182,8 +182,8 @@ export default function Aurora(props: AuroraProps) {
 
     function resize() {
       if (!ctn) return;
-      const width = ctn.offsetWidth;
-      const height = ctn.offsetHeight;
+      const width = ctn.offsetWidth || window.innerWidth;
+      const height = ctn.offsetHeight || window.innerHeight;
       renderer.setSize(width, height);
       if (program) {
         program.uniforms.uResolution.value = [width, height];
