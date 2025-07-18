@@ -180,6 +180,8 @@ export default function Aurora(props: AuroraProps) {
     ctn.appendChild(gl.canvas);
 
     function resize() {
+      if (!ctn) return;
+      
       const width = ctn.offsetWidth || window.innerWidth;
       const height = ctn.offsetHeight || window.innerHeight;
       renderer.setSize(width, height);
@@ -187,6 +189,7 @@ export default function Aurora(props: AuroraProps) {
         program.uniforms.uResolution.value = [width, height];
       }
     }
+    
     window.addEventListener("resize", resize);
 
     let animateId = 0;
