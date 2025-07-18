@@ -125,7 +125,7 @@ export default function Aurora(props: AuroraProps) {
   const ctnDom = useRef<HTMLDivElement>(null);
   const contextRef = useRef<{
     renderer: Renderer;
-    gl: WebGLRenderingContext;
+    gl: any;
     program: Program;
     mesh: Mesh;
     canvas: HTMLCanvasElement;
@@ -139,7 +139,7 @@ export default function Aurora(props: AuroraProps) {
     if (!ctn) return;
 
     let renderer: Renderer;
-    let gl: WebGLRenderingContext;
+    let gl: any;
     let program: Program;
     let mesh: Mesh;
     let canvas: HTMLCanvasElement;
@@ -308,4 +308,4 @@ export default function Aurora(props: AuroraProps) {
       }}
     />
   );
-}
+        }
