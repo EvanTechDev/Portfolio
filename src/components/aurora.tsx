@@ -147,44 +147,39 @@ export default function Aurora(props: AuroraProps) {
     gl.canvas.addEventListener("webglcontextlost", (e) => {
       e.preventDefault();
     });
-    gl.canvas.addEventListener("webglcontextrestored", () => {
-      initializeWebGL();
-    });
 
     let program: Program | undefined;
+    let mesh: Mesh | undefined;
 
-    function initializeWebGL() {
-      const width = ctn.offsetWidth || window.innerWidth;
-      const height = ctn.offsetHeight || window.innerHeight;
+    const width = ctn.offsetWidth || window.innerWidth;
+    const height = ctn.offsetHeight || window.innerHeight;
 
-      const geometry = new Triangle(gl);
-      if (geometry.attributes.uv) {
-        delete geometry.attributes.uv;
-      }
-
-      const colorStopsArray = colorStops.map((hex) => {
-        const c = new Color(hex);
-        return [c.r, c.g, c.b];
-      });
-
-      program = new Program(gl, {
-        vertex: VERT,
-        fragment: FRAG,
-        uniforms: {
-          uTime: { value: 0 },
-          uAmplitude: { value: amplitude },
-          uColorStops: { value: colorStopsArray },
-          uResolution: { value: [width, height] },
-          uBlend: { value: blend },
-        },
-      });
-
-      const mesh = new Mesh(gl, { geometry, program });
-      ctn.appendChild(gl.canvas);
+    const geometry = new Triangle(gl);
+    if (geometry.attributes.uv) {
+      delete geometry.attributes.uv;
     }
 
+    const colorStopsArray = colorStops.map((hex) => {
+      const c = new Color(hex);
+      return [c.r, c.g, c.b];
+    });
+
+    program = new Program(gl, {
+      vertex: VERT,
+      fragment: FRAG,
+      uniforms: {
+        uTime: { value: 0 },
+        uAmplitude: { value: amplitude },
+        uColorStops: { value: colorStopsArray },
+        uResolution: { value: [width, height] },
+        uBlend: { value: blend },
+      },
+    });
+
+    mesh = new Mesh(gl, { geometry, program });
+    ctn.appendChild(gl.canvas);
+
     function resize() {
-      if (!ctn) return;
       const width = ctn.offsetWidth || window.innerWidth;
       const height = ctn.offsetHeight || window.innerHeight;
       renderer.setSize(width, height);
@@ -194,12 +189,10 @@ export default function Aurora(props: AuroraProps) {
     }
     window.addEventListener("resize", resize);
 
-    initializeWebGL();
-
     let animateId = 0;
     const update = (t: number) => {
       animateId = requestAnimationFrame(update);
-      if (program) {
+      if (program && mesh) {
         program.uniforms.uTime.value = t * 0.01 * speed;
         program.uniforms.uAmplitude.value = amplitude;
         program.uniforms.uBlend.value = blend;
@@ -207,7 +200,7 @@ export default function Aurora(props: AuroraProps) {
           const c = new Color(hex);
           return [c.r, c.g, c.b];
         });
-        renderer.render({ scene: program });
+        renderer.render({ scene: mesh });
       }
     };
     animateId = requestAnimationFrame(update);
