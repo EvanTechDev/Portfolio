@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
-import Particles from '@/components/ui/particles';
+import Aurora from '@/components/ui/aurora';
 
 function FloatingCloud({
   top,
@@ -142,16 +142,12 @@ function Rain() {
 function Background() {
   return (
     <div style={{ width: '100%', height: '600px', position: 'relative' }}>
-      <Particles
-        particleColors={['#ffffff', '#ffffff']}
-        particleCount={200}
-        particleSpread={10}
-        speed={0.1}
-        particleBaseSize={100}
-        moveParticlesOnHover={true}
-        alphaParticles={false}
-        disableRotation={false}
-      />
+<Aurora
+  colorStops={["#2ECC71", "#8E44AD", "#3498DB"]}
+  blend={0.5}
+  amplitude={1.0}
+  speed={0.5}
+/>
     </div>
   )
 }
