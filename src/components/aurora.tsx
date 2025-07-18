@@ -144,9 +144,26 @@ export default function Aurora(props: AuroraProps) {
     gl.canvas.style.width = "100%";
     gl.canvas.style.height = "100%";
 
-    gl.canvas.addEventListener("webglcontextlost", (e) => {
+    let isContextLost = false;
+    let animateId = 0;
+
+    const handleContextLost = (e: Event) => {
       e.preventDefault();
-    });
+      isContextLost = true;
+      if (animateId) {
+        cancelAnimationFrame(animateId);
+      }
+    };
+
+    const handleContextRestored = () => {
+      isContextLost = false;
+      if (!animateId) {
+        animateId = requestAnimationFrame(update);
+      }
+    };
+
+    gl.canvas.addEventListener("webglcontextlost", handleContextLost);
+    gl.canvas.addEventListener("webglcontextrestored", handleContextRestored);
 
     let program: Program | undefined;
     let mesh: Mesh | undefined;
@@ -192,31 +209,63 @@ export default function Aurora(props: AuroraProps) {
     
     window.addEventListener("resize", resize);
 
-    let animateId = 0;
-    const update = (t: number) => {
+    let startTime = performance.now();
+    let lastTime = startTime;
+    
+    const update = (currentTime: number) => {
+      if (isContextLost) {
+        return;
+      }
+
       animateId = requestAnimationFrame(update);
-      if (program && mesh) {
-        program.uniforms.uTime.value = t * 0.01 * speed;
+      
+      if (program && mesh && !isContextLost) {
+        const deltaTime = currentTime - lastTime;
+        const elapsedTime = (currentTime - startTime) * 0.001;
+        
+        if (deltaTime > 100) {
+          startTime = currentTime;
+        }
+        
+        lastTime = currentTime;
+        
+        program.uniforms.uTime.value = elapsedTime * speed;
         program.uniforms.uAmplitude.value = amplitude;
         program.uniforms.uBlend.value = blend;
-        program.uniforms.uColorStops.value = colorStops.map((hex) => {
-          const c = new Color(hex);
-          return [c.r, c.g, c.b];
-        });
-        renderer.render({ scene: mesh });
+        program.uniforms.uColorStops.value = colorStopsArray;
+        
+        try {
+          renderer.render({ scene: mesh });
+        } catch (error) {
+          console.warn("Render error:", error);
+        }
       }
     };
-    animateId = requestAnimationFrame(update);
 
+    animateId = requestAnimationFrame(update);
     resize();
 
     return () => {
-      cancelAnimationFrame(animateId);
+      isContextLost = true;
+      if (animateId) {
+        cancelAnimationFrame(animateId);
+      }
       window.removeEventListener("resize", resize);
+      gl.canvas.removeEventListener("webglcontextlost", handleContextLost);
+      gl.canvas.removeEventListener("webglcontextrestored", handleContextRestored);
+      
       if (ctn && gl.canvas.parentNode === ctn) {
         ctn.removeChild(gl.canvas);
       }
-      gl.getExtension("WEBGL_lose_context")?.loseContext();
+      
+      try {
+        const loseContext = gl.getExtension("WEBGL_lose_context");
+        if (loseContext) {
+          loseContext.loseContext();
+        }
+      } catch (error) {
+        console.warn("Error losing WebGL context:", error);
+      }
     };
   }, [amplitude, blend, colorStops, speed]);
 
