@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef } from "react";
 import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
 
 const VERT = `#version 300 es
@@ -123,152 +123,190 @@ export default function Aurora(props: AuroraProps) {
     speed = 1.0,
   } = props;
   const ctnDom = useRef<HTMLDivElement>(null);
-  const rendererRef = useRef<Renderer | null>(null);
-  const programRef = useRef<Program | null>(null);
-  const meshRef = useRef<Mesh | null>(null);
-  const animateIdRef = useRef<number>(0);
-  const timeRef = useRef<number>(0);
-  const propsRef = useRef({ amplitude, blend, speed, colorStops });
-
-  propsRef.current = { amplitude, blend, speed, colorStops };
-
-  const initWebGL = useCallback(() => {
-    const ctn = ctnDom.current;
-    if (!ctn || rendererRef.current) return;
-
-    const renderer = new Renderer({
-      alpha: true,
-      premultipliedAlpha: true,
-      antialias: false,
-      powerPreference: "high-performance",
-    });
-    
-    const gl = renderer.gl;
-    gl.clearColor(0, 0, 0, 0);
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-    
-    gl.canvas.style.backgroundColor = "transparent";
-    gl.canvas.style.position = "absolute";
-    gl.canvas.style.top = "0";
-    gl.canvas.style.left = "0";
-    gl.canvas.style.width = "100%";
-    gl.canvas.style.height = "100%";
-
-    const width = ctn.offsetWidth || window.innerWidth;
-    const height = ctn.offsetHeight || window.innerHeight;
-
-    const geometry = new Triangle(gl);
-    if (geometry.attributes.uv) {
-      delete geometry.attributes.uv;
-    }
-
-    const colorStopsArray = colorStops.map((hex) => {
-      const c = new Color(hex);
-      return [c.r, c.g, c.b];
-    });
-
-    const program = new Program(gl, {
-      vertex: VERT,
-      fragment: FRAG,
-      uniforms: {
-        uTime: { value: 0 },
-        uAmplitude: { value: amplitude },
-        uColorStops: { value: colorStopsArray },
-        uResolution: { value: [width, height] },
-        uBlend: { value: blend },
-      },
-    });
-
-    const mesh = new Mesh(gl, { geometry, program });
-
-    rendererRef.current = renderer;
-    programRef.current = program;
-    meshRef.current = mesh;
-
-    ctn.appendChild(gl.canvas);
-    return { renderer, program, mesh, gl };
-  }, []);
-
-  const resize = useCallback(() => {
-    const ctn = ctnDom.current;
-    const renderer = rendererRef.current;
-    const program = programRef.current;
-    
-    if (!ctn || !renderer || !program) return;
-    
-    const width = ctn.offsetWidth || window.innerWidth;
-    const height = ctn.offsetHeight || window.innerHeight;
-    renderer.setSize(width, height);
-    program.uniforms.uResolution.value = [width, height];
-  }, []);
-
-  const animate = useCallback((currentTime: number) => {
-    const renderer = rendererRef.current;
-    const program = programRef.current;
-    const mesh = meshRef.current;
-    const props = propsRef.current;
-
-    if (!renderer || !program || !mesh) return;
-
-    timeRef.current += 0.016 * props.speed;
-
-    const colorStopsArray = props.colorStops.map((hex) => {
-      const c = new Color(hex);
-      return [c.r, c.g, c.b];
-    });
-
-    program.uniforms.uTime.value = timeRef.current;
-    program.uniforms.uAmplitude.value = props.amplitude;
-    program.uniforms.uBlend.value = props.blend;
-    program.uniforms.uColorStops.value = colorStopsArray;
-
-    renderer.render({ scene: mesh });
-    animateIdRef.current = requestAnimationFrame(animate);
-  }, []);
+  const contextRef = useRef<{
+    renderer: Renderer;
+    gl: WebGLRenderingContext;
+    program: Program;
+    mesh: Mesh;
+    canvas: HTMLCanvasElement;
+    animationId: number;
+    time: number;
+    isRunning: boolean;
+  } | null>(null);
 
   useEffect(() => {
-    const webgl = initWebGL();
-    if (!webgl) return;
+    const ctn = ctnDom.current;
+    if (!ctn) return;
 
-    window.addEventListener("resize", resize);
-    resize();
-    animateIdRef.current = requestAnimationFrame(animate);
+    let renderer: Renderer;
+    let gl: WebGLRenderingContext;
+    let program: Program;
+    let mesh: Mesh;
+    let canvas: HTMLCanvasElement;
+    let animationId = 0;
+    let time = 0;
+    let isRunning = true;
+    let lastColorStops = [...colorStops];
+
+    try {
+      renderer = new Renderer({
+        alpha: true,
+        premultipliedAlpha: true,
+        antialias: false,
+        powerPreference: "high-performance",
+        preserveDrawingBuffer: true,
+        failIfMajorPerformanceCaveat: false,
+      });
+
+      gl = renderer.gl;
+      canvas = gl.canvas as HTMLCanvasElement;
+
+      gl.clearColor(0, 0, 0, 0);
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+      gl.disable(gl.DEPTH_TEST);
+      gl.disable(gl.CULL_FACE);
+
+      canvas.style.cssText = `
+        background-color: transparent;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+      `;
+
+      const width = ctn.offsetWidth || window.innerWidth;
+      const height = ctn.offsetHeight || window.innerHeight;
+
+      const geometry = new Triangle(gl);
+      if (geometry.attributes.uv) {
+        delete geometry.attributes.uv;
+      }
+
+      const colorStopsArray = colorStops.map((hex) => {
+        const c = new Color(hex);
+        return [c.r, c.g, c.b];
+      });
+
+      program = new Program(gl, {
+        vertex: VERT,
+        fragment: FRAG,
+        uniforms: {
+          uTime: { value: 0 },
+          uAmplitude: { value: amplitude },
+          uColorStops: { value: colorStopsArray },
+          uResolution: { value: [width, height] },
+          uBlend: { value: blend },
+        },
+      });
+
+      mesh = new Mesh(gl, { geometry, program });
+
+      contextRef.current = {
+        renderer,
+        gl,
+        program,
+        mesh,
+        canvas,
+        animationId,
+        time,
+        isRunning,
+      };
+
+      const resize = () => {
+        if (!contextRef.current || !contextRef.current.isRunning) return;
+        
+        const { renderer, program } = contextRef.current;
+        const width = ctn.offsetWidth || window.innerWidth;
+        const height = ctn.offsetHeight || window.innerHeight;
+        
+        renderer.setSize(width, height);
+        program.uniforms.uResolution.value = [width, height];
+      };
+
+      const animate = () => {
+        if (!contextRef.current || !contextRef.current.isRunning) return;
+
+        const { renderer, program, mesh, gl } = contextRef.current;
+        
+        contextRef.current.time += 0.016 * speed;
+
+        const needsColorUpdate = lastColorStops.some((color, index) => color !== colorStops[index]);
+        if (needsColorUpdate) {
+          const newColorStopsArray = colorStops.map((hex) => {
+            const c = new Color(hex);
+            return [c.r, c.g, c.b];
+          });
+          program.uniforms.uColorStops.value = newColorStopsArray;
+          lastColorStops = [...colorStops];
+        }
+
+        program.uniforms.uTime.value = contextRef.current.time;
+        program.uniforms.uAmplitude.value = amplitude;
+        program.uniforms.uBlend.value = blend;
+
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        
+        renderer.render({ scene: mesh });
+        
+        contextRef.current.animationId = requestAnimationFrame(animate);
+      };
+
+      window.addEventListener("resize", resize);
+      ctn.appendChild(canvas);
+      
+      resize();
+      contextRef.current.animationId = requestAnimationFrame(animate);
+
+    } catch (error) {
+      console.error("Failed to initialize Aurora:", error);
+      return;
+    }
 
     return () => {
-      if (animateIdRef.current) {
-        cancelAnimationFrame(animateIdRef.current);
-      }
-      window.removeEventListener("resize", resize);
-      
-      const ctn = ctnDom.current;
-      const renderer = rendererRef.current;
-      
-      if (ctn && renderer && renderer.gl.canvas.parentNode === ctn) {
-        ctn.removeChild(renderer.gl.canvas);
-      }
-      
-      if (renderer) {
+      if (contextRef.current) {
+        contextRef.current.isRunning = false;
+        
+        if (contextRef.current.animationId) {
+          cancelAnimationFrame(contextRef.current.animationId);
+        }
+        
+        window.removeEventListener("resize", resize);
+        
+        if (ctn && contextRef.current.canvas && contextRef.current.canvas.parentNode === ctn) {
+          ctn.removeChild(contextRef.current.canvas);
+        }
+
         try {
-          const loseContext = renderer.gl.getExtension("WEBGL_lose_context");
+          const loseContext = contextRef.current.gl.getExtension("WEBGL_lose_context");
           if (loseContext) {
             loseContext.loseContext();
           }
         } catch (error) {
           console.warn("Error losing WebGL context:", error);
         }
+        
+        contextRef.current = null;
       }
-
-      rendererRef.current = null;
-      programRef.current = null;
-      meshRef.current = null;
     };
   }, []);
 
   return (
     <div
       ref={ctnDom}
-      style={{ width: "100%", height: "100%", position: "absolute", top: 0, left: 0, background: "transparent" }}
+      style={{ 
+        width: "100%", 
+        height: "100%", 
+        position: "absolute", 
+        top: 0, 
+        left: 0, 
+        background: "transparent",
+        overflow: "hidden"
+      }}
     />
   );
 }
