@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
-import { useTheme } from "@/components/theme-provider";
+import { useTheme } from "next-themes";
 
 function FloatingCloud({
   top,
