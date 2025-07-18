@@ -154,6 +154,9 @@ export default function Aurora(props: AuroraProps) {
     let program: Program | undefined;
 
     function initializeWebGL() {
+      const width = ctn.offsetWidth || window.innerWidth;
+      const height = ctn.offsetHeight || window.innerHeight;
+
       const geometry = new Triangle(gl);
       if (geometry.attributes.uv) {
         delete geometry.attributes.uv;
@@ -171,7 +174,7 @@ export default function Aurora(props: AuroraProps) {
           uTime: { value: 0 },
           uAmplitude: { value: amplitude },
           uColorStops: { value: colorStopsArray },
-          uResolution: { value: [ctn.offsetWidth || window.innerWidth, ctn.offsetHeight || window.innerHeight] },
+          uResolution: { value: [width, height] },
           uBlend: { value: blend },
         },
       });
