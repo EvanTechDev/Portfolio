@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
-import Aurora from '@/components/ui/aurora';
+import Aurora from '@/components/aurora';
 
 function FloatingCloud({
   top,
