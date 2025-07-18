@@ -131,12 +131,16 @@ export default function Aurora(props: AuroraProps) {
     const renderer = new Renderer({
       alpha: true,
       premultipliedAlpha: true,
-      antialias: true,
+      antialias: false,
+      powerPreference: "high-performance",
     });
     const gl = renderer.gl;
+    
     gl.clearColor(0, 0, 0, 0);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+    gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+    
     gl.canvas.style.backgroundColor = "transparent";
     gl.canvas.style.position = "absolute";
     gl.canvas.style.top = "0";
@@ -146,20 +150,21 @@ export default function Aurora(props: AuroraProps) {
 
     let isContextLost = false;
     let animateId = 0;
+    let isInitialized = false;
 
     const handleContextLost = (e: Event) => {
       e.preventDefault();
       isContextLost = true;
+      isInitialized = false;
       if (animateId) {
         cancelAnimationFrame(animateId);
+        animateId = 0;
       }
     };
 
     const handleContextRestored = () => {
       isContextLost = false;
-      if (!animateId) {
-        animateId = requestAnimationFrame(update);
-      }
+      isInitialized = false;
     };
 
     gl.canvas.addEventListener("webglcontextlost", handleContextLost);
@@ -168,85 +173,93 @@ export default function Aurora(props: AuroraProps) {
     let program: Program | undefined;
     let mesh: Mesh | undefined;
 
-    const width = ctn.offsetWidth || window.innerWidth;
-    const height = ctn.offsetHeight || window.innerHeight;
-
-    const geometry = new Triangle(gl);
-    if (geometry.attributes.uv) {
-      delete geometry.attributes.uv;
-    }
-
     const colorStopsArray = colorStops.map((hex) => {
       const c = new Color(hex);
       return [c.r, c.g, c.b];
     });
 
-    program = new Program(gl, {
-      vertex: VERT,
-      fragment: FRAG,
-      uniforms: {
-        uTime: { value: 0 },
-        uAmplitude: { value: amplitude },
-        uColorStops: { value: colorStopsArray },
-        uResolution: { value: [width, height] },
-        uBlend: { value: blend },
-      },
-    });
+    function initializeScene() {
+      if (isInitialized || isContextLost) return;
+      
+      const width = ctn.offsetWidth || window.innerWidth;
+      const height = ctn.offsetHeight || window.innerHeight;
 
-    mesh = new Mesh(gl, { geometry, program });
-    ctn.appendChild(gl.canvas);
+      const geometry = new Triangle(gl);
+      if (geometry.attributes.uv) {
+        delete geometry.attributes.uv;
+      }
+
+      program = new Program(gl, {
+        vertex: VERT,
+        fragment: FRAG,
+        uniforms: {
+          uTime: { value: 0 },
+          uAmplitude: { value: amplitude },
+          uColorStops: { value: colorStopsArray },
+          uResolution: { value: [width, height] },
+          uBlend: { value: blend },
+        },
+      });
+
+      mesh = new Mesh(gl, { geometry, program });
+      isInitialized = true;
+    }
 
     function resize() {
-      if (!ctn) return;
+      if (!ctn || !program) return;
       
       const width = ctn.offsetWidth || window.innerWidth;
       const height = ctn.offsetHeight || window.innerHeight;
       renderer.setSize(width, height);
-      if (program) {
-        program.uniforms.uResolution.value = [width, height];
-      }
+      program.uniforms.uResolution.value = [width, height];
     }
     
     window.addEventListener("resize", resize);
 
-    let startTime = performance.now();
-    let lastTime = startTime;
+    let time = 0;
+    let lastFrameTime = 0;
     
     const update = (currentTime: number) => {
       if (isContextLost) {
         return;
       }
 
-      animateId = requestAnimationFrame(update);
-      
-      if (program && mesh && !isContextLost) {
-        const deltaTime = currentTime - lastTime;
-        const elapsedTime = (currentTime - startTime) * 0.001;
-        
-        if (deltaTime > 100) {
-          startTime = currentTime;
+      if (!isInitialized) {
+        initializeScene();
+        if (!isInitialized) {
+          animateId = requestAnimationFrame(update);
+          return;
         }
-        
-        lastTime = currentTime;
-        
-        program.uniforms.uTime.value = elapsedTime * speed;
+      }
+
+      const deltaTime = currentTime - lastFrameTime;
+      lastFrameTime = currentTime;
+      
+      if (deltaTime < 200) {
+        time += deltaTime * 0.001 * speed;
+      }
+
+      if (program && mesh) {
+        program.uniforms.uTime.value = time;
         program.uniforms.uAmplitude.value = amplitude;
         program.uniforms.uBlend.value = blend;
         program.uniforms.uColorStops.value = colorStopsArray;
         
-        try {
-          renderer.render({ scene: mesh });
-        } catch (error) {
-          console.warn("Render error:", error);
-        }
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        renderer.render({ scene: mesh });
       }
+
+      animateId = requestAnimationFrame(update);
     };
 
-    animateId = requestAnimationFrame(update);
+    ctn.appendChild(gl.canvas);
+    initializeScene();
     resize();
+    animateId = requestAnimationFrame(update);
 
     return () => {
       isContextLost = true;
+      isInitialized = false;
       if (animateId) {
         cancelAnimationFrame(animateId);
       }
