@@ -209,7 +209,7 @@ export const DATA = {
     {
       title: "Mail",
       href: "https://mail.xyehr.cn/",
-      dates: "January 2025 - Now",
+      dates: "January 2025 - March 2025",
       active: true,
       description:
         "This is a resend email sending web application built with NextJS, Password protected.",
