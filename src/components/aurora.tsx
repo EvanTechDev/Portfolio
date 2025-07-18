@@ -155,7 +155,6 @@ export default function Aurora(props: AuroraProps) {
         antialias: false,
         powerPreference: "high-performance",
         preserveDrawingBuffer: true,
-        failIfMajorPerformanceCaveat: false,
       });
 
       gl = renderer.gl;
