@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import { useTheme } from "@/components/theme-provider";
 
 function FloatingCloud({
   top,
@@ -13,6 +14,7 @@ function FloatingCloud({
 }) {
   const duration = 15;
   const Aurora = dynamic(() => import("@/components/aurora"), { ssr: false });
+  const { theme } = useTheme();
 
   return (
     <motion.div
