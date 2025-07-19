@@ -133,6 +133,8 @@ export default function Aurora(props: AuroraProps) {
     time: number;
     isRunning: boolean;
   } | null>(null);
+  
+  const resizeHandlerRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     const ctn = ctnDom.current;
@@ -215,7 +217,7 @@ export default function Aurora(props: AuroraProps) {
         isRunning,
       };
 
-      const resize = () => {
+      const handleResize = () => {
         if (!contextRef.current || !contextRef.current.isRunning) return;
         
         const { renderer, program } = contextRef.current;
@@ -225,6 +227,8 @@ export default function Aurora(props: AuroraProps) {
         renderer.setSize(width, height);
         program.uniforms.uResolution.value = [width, height];
       };
+
+      resizeHandlerRef.current = handleResize;
 
       const animate = () => {
         if (!contextRef.current || !contextRef.current.isRunning) return;
@@ -255,10 +259,10 @@ export default function Aurora(props: AuroraProps) {
         contextRef.current.animationId = requestAnimationFrame(animate);
       };
 
-      window.addEventListener("resize", resize);
+      window.addEventListener("resize", handleResize);
       ctn.appendChild(canvas);
       
-      resize();
+      handleResize();
       contextRef.current.animationId = requestAnimationFrame(animate);
 
     } catch (error) {
@@ -274,7 +278,9 @@ export default function Aurora(props: AuroraProps) {
           cancelAnimationFrame(contextRef.current.animationId);
         }
         
-        window.removeEventListener("resize", resize);
+        if (resizeHandlerRef.current) {
+          window.removeEventListener("resize", resizeHandlerRef.current);
+        }
         
         if (ctn && contextRef.current.canvas && contextRef.current.canvas.parentNode === ctn) {
           ctn.removeChild(contextRef.current.canvas);
