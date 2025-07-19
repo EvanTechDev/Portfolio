@@ -56,7 +56,7 @@
     "unified": "^11.0.4",
     "geist": "latest",
     "ogl": "latest",
-    "three": "latest",
+    "three": "0.173.0",
     "postprocessing": "latest",
     "@react-three/fiber": "latest",
     "@react-three/postprocessing": "latest"
