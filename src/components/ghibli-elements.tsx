@@ -96,7 +96,7 @@ export function GhibliSkyBackground() {
 }
 
 
-function Rain() {
+function Background() {
   return (
     <div style={{ width: '100%', height: '600px', position: 'relative' }}>
       <div className="fixed -z-10 inset-0">
