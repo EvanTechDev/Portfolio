@@ -100,7 +100,7 @@ function Background() {
   return (
     <div style={{ width: '100%', height: '600px', position: 'relative' }}>
       <div className="fixed -z-10 inset-0">
-        <div className="absolute inset-0 bg-white">
+        <div className="absolute inset-0 bg-white dark:hidden">
           <div className="absolute inset-0" style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.3) 1px, transparent 0)`,
             backgroundSize: '24px 24px'
