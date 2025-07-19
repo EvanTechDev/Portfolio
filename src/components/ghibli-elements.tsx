@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import Dither from "@/components/dither";
+import dynamic from 'next/dynamic';
 
 export function GhibliSkyBackground() {
   const [clouds, setClouds] = useState<{ id: string; top: string }[]>([]);
@@ -64,6 +64,8 @@ export function GhibliSkyBackground() {
 }
 
 function Background() {
+  const Dither = dynamic(() => import('@/components/dither'), { ssr: false });
+  
   return (
     <div style={{ width: '100%', height: '600px', position: 'relative' }}>
   <Dither
