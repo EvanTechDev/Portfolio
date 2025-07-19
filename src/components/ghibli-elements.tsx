@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
-import Dither from "@/components/Dither";
+import Dither from "@/components/dither";
 
 function FloatingCloud({
   top,
