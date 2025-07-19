@@ -2,8 +2,7 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
-import { useTheme } from "next-themes";
+import Dither from "@/components/Dither";
 
 function FloatingCloud({
   top,
@@ -141,20 +140,19 @@ function Rain() {
 }
 
 function Background() {
-  const Aurora = dynamic(() => import("@/components/aurora"), { ssr: false });
-  const { theme } = useTheme();
 
   return (
     <div style={{ width: '100%', height: '600px', position: 'relative' }}>
-    {theme === "dark" && (
-      <Aurora
-        key={theme + Date.now()}
-  colorStops={["#2ECC71", "#8E44AD", "#3498DB"]}
-  blend={0.5}
-  amplitude={1.0}
-  speed={0.5}
-/>
-      )}
-    </div>
+  <Dither
+    waveColor={[0.5, 0.5, 0.5]}
+    disableAnimation={false}
+    enableMouseInteraction={true}
+    mouseRadius={0.3}
+    colorNum={4}
+    waveAmplitude={0.3}
+    waveFrequency={3}
+    waveSpeed={0.05}
+  />
+</div>
   )
 }
