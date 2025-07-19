@@ -15,7 +15,7 @@ function FloatingCloud({
 
   return (
     <motion.div
-      className="absolute w-[200px] h-[110px] pointer-events-none ${className}"
+      className="absolute w-[200px] h-[110px] pointer-events-none"
       style={{ top }}
       initial={{ x: "-100%" }}
       animate={{ x: "100vw" }}
