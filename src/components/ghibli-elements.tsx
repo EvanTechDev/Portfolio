@@ -98,73 +98,19 @@ export function GhibliSkyBackground() {
 
 function Rain() {
   return (
-    <motion.div
-      className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden"
-      initial={{ opacity: 0.6 }}
-      animate={{ opacity: [0.6, 0.8, 0.6] }}
-      transition={{
-        duration: 5,
-        repeat: Infinity,
-        repeatType: "reverse",
-        ease: "easeInOut",
-      }}
-    >
-      {Array.from({ length: 42 }).map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-[2px] h-[15px] bg-blue-400 dark:bg-blue-200 opacity-60"
-          style={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-          }}
-          initial={{ y: -20 }}
-          animate={{ y: "100vh" }}
-          transition={{
-            duration: Math.random() * 2 + 1,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-      ))}
-    </motion.div>
-  );
-}
-
-function Background() {
-  return (
-    <div 
-      style={{ 
-        width: '100%', 
-        height: '600px', 
-        position: 'relative',
-        background: `
-          linear-gradient(135deg, 
-            rgba(245, 245, 245, 0.9) 25%, 
-            transparent 25%, 
-            transparent 50%, 
-            rgba(245, 245, 245, 0.9) 50%, 
-            rgba(245, 245, 245, 0.9) 75%, 
-            transparent 75%
-          ),
-          linear-gradient(45deg, 
-            rgba(220, 220, 220, 0.8) 25%, 
-            transparent 25%, 
-            transparent 50%, 
-            rgba(220, 220, 220, 0.8) 50%, 
-            rgba(220, 220, 220, 0.8) 75%, 
-            transparent 75%
-          ),
-          linear-gradient(90deg, 
-            #f8f9fa 0%, 
-            #e9ecef 25%, 
-            #dee2e6 50%, 
-            #e9ecef 75%, 
-            #f8f9fa 100%
-          )
-        `,
-        backgroundSize: '40px 40px, 20px 20px, 100% 100%',
-        backgroundPosition: '0 0, 20px 20px, 0 0'
-      }}
-    />
+    <div style={{ width: '100%', height: '600px', position: 'relative' }}>
+      <div className="fixed -z-10 inset-0">
+        <div className="absolute inset-0 bg-white dark:hidden">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.1) 1px, transparent 0)`,
+            backgroundSize: '24px 24px'
+          }} />
+          <div className="absolute inset-0 dark:block hidden" style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.15) 1px, transparent 0)`,
+            backgroundSize: '24px 24px'
+          }} />
+        </div>
+      </div>
+    </div>
   );
 }
