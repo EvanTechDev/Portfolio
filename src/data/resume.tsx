@@ -239,7 +239,7 @@ export const DATA = {
   hackathons: [
     {
       title: "Next.js Global Hackathon",
-      dates: "June 29, 2025",
+      dates: "April 7, 2025",
       location: "",
       description:
         "first global Next.js hackathon",
