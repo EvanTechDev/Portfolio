@@ -1,9 +1,29 @@
 /* eslint-disable react/no-unknown-property */
 import { useRef, useState, useEffect } from "react";
-import { Canvas, useFrame, useThree, ThreeEvent } from "@react-three/fiber";
-import { EffectComposer, wrapEffect } from "@react-three/postprocessing";
-import { Effect } from "postprocessing";
-import * as THREE from "three";
+import dynamic from 'next/dynamic';
+
+// Dynamically import Three.js components to prevent SSR issues
+const Canvas = dynamic(() => import("@react-three/fiber").then(mod => ({ default: mod.Canvas })), { 
+  ssr: false 
+});
+const useFrame = dynamic(() => import("@react-three/fiber").then(mod => ({ default: mod.useFrame })), { 
+  ssr: false 
+});
+const useThree = dynamic(() => import("@react-three/fiber").then(mod => ({ default: mod.useThree })), { 
+  ssr: false 
+});
+const EffectComposer = dynamic(() => import("@react-three/postprocessing").then(mod => ({ default: mod.EffectComposer })), { 
+  ssr: false 
+});
+const wrapEffect = dynamic(() => import("@react-three/postprocessing").then(mod => ({ default: mod.wrapEffect })), { 
+  ssr: false 
+});
+
+// Alternative approach: Create a client-only wrapper
+const DitherClient = dynamic(() => Promise.resolve(DitherImplementation), {
+  ssr: false,
+  loading: () => <div className="w-full h-full bg-gray-900 animate-pulse" />
+});
 
 const waveVertexShader = `
 precision highp float;
@@ -132,27 +152,66 @@ void mainImage(in vec4 inputColor, in vec2 uv, out vec4 outputColor) {
 }
 `;
 
-class RetroEffectImpl extends Effect {
-  public uniforms: Map<string, THREE.Uniform<any>>;
+// This needs to be imported dynamically or handled client-side
+let THREE: any;
+let Effect: any;
+let useFrame: any;
+let useThree: any;
+let EffectComposer: any;
+let wrapEffect: any;
+
+// Client-side initialization
+if (typeof window !== 'undefined') {
+  import('three').then((module) => {
+    THREE = module;
+  });
+  import('postprocessing').then((module) => {
+    Effect = module.Effect;
+  });
+  import('@react-three/fiber').then((module) => {
+    useFrame = module.useFrame;
+    useThree = module.useThree;
+  });
+  import('@react-three/postprocessing').then((module) => {
+    EffectComposer = module.EffectComposer;
+    wrapEffect = module.wrapEffect;
+  });
+}
+
+class RetroEffectImpl {
+  public uniforms: Map<string, any>;
   constructor() {
-    const uniforms = new Map<string, THREE.Uniform<any>>([
+    if (typeof window === 'undefined' || !THREE) return;
+    
+    const uniforms = new Map([
       ["colorNum", new THREE.Uniform(4.0)],
       ["pixelSize", new THREE.Uniform(2.0)],
     ]);
-    super("RetroEffect", ditherFragmentShader, { uniforms });
+    
+    if (Effect) {
+      Effect.call(this, "RetroEffect", ditherFragmentShader, { uniforms });
+    }
     this.uniforms = uniforms;
   }
+  
   set colorNum(value: number) {
-    this.uniforms.get("colorNum")!.value = value;
+    if (this.uniforms) {
+      this.uniforms.get("colorNum")!.value = value;
+    }
   }
+  
   get colorNum(): number {
-    return this.uniforms.get("colorNum")!.value;
+    return this.uniforms?.get("colorNum")?.value || 4;
   }
+  
   set pixelSize(value: number) {
-    this.uniforms.get("pixelSize")!.value = value;
+    if (this.uniforms) {
+      this.uniforms.get("pixelSize")!.value = value;
+    }
   }
+  
   get pixelSize(): number {
-    return this.uniforms.get("pixelSize")!.value;
+    return this.uniforms?.get("pixelSize")?.value || 2;
   }
 }
 
@@ -162,6 +221,10 @@ const RetroEffect = forwardRef<
   RetroEffectImpl,
   { colorNum: number; pixelSize: number }
 >((props, ref) => {
+  if (typeof window === 'undefined' || !wrapEffect) {
+    return null;
+  }
+  
   const { colorNum, pixelSize } = props;
   const WrappedRetroEffect = wrapEffect(RetroEffectImpl);
   return (
@@ -172,16 +235,16 @@ const RetroEffect = forwardRef<
 RetroEffect.displayName = "RetroEffect";
 
 interface WaveUniforms {
-  [key: string]: THREE.Uniform<any>;
-  time: THREE.Uniform<number>;
-  resolution: THREE.Uniform<THREE.Vector2>;
-  waveSpeed: THREE.Uniform<number>;
-  waveFrequency: THREE.Uniform<number>;
-  waveAmplitude: THREE.Uniform<number>;
-  waveColor: THREE.Uniform<THREE.Color>;
-  mousePos: THREE.Uniform<THREE.Vector2>;
-  enableMouseInteraction: THREE.Uniform<number>;
-  mouseRadius: THREE.Uniform<number>;
+  [key: string]: any;
+  time: any;
+  resolution: any;
+  waveSpeed: any;
+  waveFrequency: any;
+  waveAmplitude: any;
+  waveColor: any;
+  mousePos: any;
+  enableMouseInteraction: any;
+  mouseRadius: any;
 }
 
 interface DitheredWavesProps {
@@ -207,11 +270,17 @@ function DitheredWaves({
   enableMouseInteraction,
   mouseRadius,
 }: DitheredWavesProps) {
-  const mesh = useRef<THREE.Mesh>(null);
+  const mesh = useRef<any>(null);
   const [mousePos, setMousePos] = useState<{ x: number; y: number }>({
     x: 0,
     y: 0,
   });
+
+  // Early return if not in browser
+  if (typeof window === 'undefined' || !useThree || !useFrame || !THREE) {
+    return null;
+  }
+
   const { viewport, size, gl } = useThree();
 
   const waveUniformsRef = useRef<WaveUniforms>({
@@ -227,6 +296,7 @@ function DitheredWaves({
   });
 
   useEffect(() => {
+    if (!gl) return;
     const dpr = gl.getPixelRatio();
     const newWidth = Math.floor(size.width * dpr);
     const newHeight = Math.floor(size.height * dpr);
@@ -252,8 +322,8 @@ function DitheredWaves({
     }
   });
 
-  const handlePointerMove = (e: ThreeEvent<PointerEvent>) => {
-    if (!enableMouseInteraction) return;
+  const handlePointerMove = (e: any) => {
+    if (!enableMouseInteraction || !gl) return;
     const rect = gl.domElement.getBoundingClientRect();
     const dpr = gl.getPixelRatio();
     const x = (e.clientX - rect.left) * dpr;
@@ -272,9 +342,11 @@ function DitheredWaves({
         />
       </mesh>
 
-      <EffectComposer>
-        <RetroEffect colorNum={colorNum} pixelSize={pixelSize} />
-      </EffectComposer>
+      {EffectComposer && (
+        <EffectComposer>
+          <RetroEffect colorNum={colorNum} pixelSize={pixelSize} />
+        </EffectComposer>
+      )}
 
       <mesh
         onPointerMove={handlePointerMove}
@@ -301,7 +373,7 @@ interface DitherProps {
   mouseRadius?: number;
 }
 
-export default function Dither({
+function DitherImplementation({
   waveSpeed = 0.05,
   waveFrequency = 3,
   waveAmplitude = 0.3,
@@ -312,11 +384,24 @@ export default function Dither({
   enableMouseInteraction = true,
   mouseRadius = 1,
 }: DitherProps) {
+  // Import Canvas dynamically
+  const [CanvasComponent, setCanvasComponent] = useState<any>(null);
+
+  useEffect(() => {
+    import('@react-three/fiber').then((module) => {
+      setCanvasComponent(() => module.Canvas);
+    });
+  }, []);
+
+  if (!CanvasComponent) {
+    return <div className="w-full h-full bg-gray-900 animate-pulse" />;
+  }
+
   return (
-    <Canvas
+    <CanvasComponent
       className="w-full h-full relative"
       camera={{ position: [0, 0, 6] }}
-      dpr={window.devicePixelRatio}
+      dpr={typeof window !== 'undefined' ? window.devicePixelRatio : 1}
       gl={{ antialias: true, preserveDrawingBuffer: true }}
     >
       <DitheredWaves
@@ -330,6 +415,10 @@ export default function Dither({
         enableMouseInteraction={enableMouseInteraction}
         mouseRadius={mouseRadius}
       />
-    </Canvas>
+    </CanvasComponent>
   );
 }
+
+export default function Dither(props: DitherProps) {
+  return <DitherClient {...props} />;
+      }
