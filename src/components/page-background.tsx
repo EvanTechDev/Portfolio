@@ -10,6 +10,7 @@ import { InteractiveGridPattern } from './ui/interactive-grid-pattern';
 export function PageBackground() {
   const pathname = usePathname();
   const isBlogPage = pathname?.includes('/blog');
+  const isProjectPage = pathname?.includes('/projects');
   const isGadgetsPage = pathname?.includes('/gadgets');
 
   if (isBlogPage) {
@@ -17,6 +18,10 @@ export function PageBackground() {
   }
 
   if (isGadgetsPage) {
+    return <GridPattern className="w-full h-full" />;
+  }
+
+  if (isProjectPage) {
     return <GridPattern className="w-full h-full" />;
   }
   // Show meteors on all other pages
