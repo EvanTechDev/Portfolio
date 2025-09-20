@@ -327,7 +327,6 @@ export default function Page() {
               <h2 className="text-xl font-bold">Certificates</h2>
               <div className="grid gap-6 sm:grid-cols-2 h-full">
                 {DATA.videos.slice(0, 4).map((video, idx) => (
-                  <VideoCard video={video} />
                   <BlurFade key={video.url} delay={BLUR_FADE_DELAY * 11 + idx * 0.05}>
                     <div className="relative overflow-hidden rounded-xl">
                       <BorderBeam
@@ -342,6 +341,7 @@ export default function Page() {
                           damping: 20,
                         }}
                       />
+                      <VideoCard video={video} />
                     </div>
                   </BlurFade>
                 ))}
