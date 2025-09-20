@@ -23,32 +23,33 @@ export function VideoCard({ video }: VideoCardProps) {
 
   return (
     <>
-      <div onClick={() => setIsModalOpen(true)} className="cursor-pointer">
-        <Card className={cn("flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full relative group")}>
-          <div className="relative group">
-            <Image
-              src={video.thumbnail}
-              alt={video.title}
-              width={500}
-              height={280}
-              className="w-full h-48 object-cover"
-              priority
-            />
-            {/*<div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <PlayIcon className="w-12 h-12 text-white" />
-            </div>*/}
-          </div>
-          <CardHeader className="p-4">
-            <CardTitle className="text-lg">{video.title}</CardTitle>
-            <time className="text-sm text-muted-foreground">
-              {formatDate(video.date)}
-            </time>
-          </CardHeader>
-          <CardContent className="p-4 pt-0">
-            <p className="text-sm text-muted-foreground">{video.description}</p>
-          </CardContent>
-        </Card>
-      </div>
+      <div
+  onClick={() => setIsModalOpen(true)}
+  className="cursor-pointer h-full"
+>
+  <Card className="flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full relative group">
+    <div className="relative group">
+      <Image
+        src={video.thumbnail}
+        alt={video.title}
+        width={500}
+        height={280}
+        className="w-full h-48 object-cover"
+        priority
+      />
+    </div>
+    <CardHeader className="p-4">
+      <CardTitle className="text-lg">{video.title}</CardTitle>
+      <time className="text-sm text-muted-foreground">
+        {formatDate(video.date)}
+      </time>
+    </CardHeader>
+    <CardContent className="p-4 pt-0 mt-auto">
+      <p className="text-sm text-muted-foreground">{video.description}</p>
+    </CardContent>
+  </Card>
+</div>
+
 
       {/*<VideoPlayerModal
         isOpen={isModalOpen}
