@@ -1,7 +1,7 @@
 import { Icons } from "@/components/icons";
 import { Description } from "@radix-ui/react-dialog";
 import { url } from "inspector";
-import { HomeIcon, NotebookIcon, ThumbsDown, VideoIcon, FolderIcon } from "lucide-react";
+import { HomeIcon, NotebookIcon, ThumbsDown, VideoIcon, FolderIcon, Medal } from "lucide-react";
 import { title } from "process";
 
 export const DATA = {
@@ -82,6 +82,7 @@ export const DATA = {
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/blog", icon: NotebookIcon, label: "Blog" },
     { href: "/projects", icon: FolderIcon, label: "Projects" },
+    { href: "/certificates", icon: Medal, label: "Certficates" }
   ],
   contact: {
     email: "evan.huang000@proton.me",
