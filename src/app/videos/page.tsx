@@ -4,8 +4,8 @@ import { DATA } from "@/data/resume";
 import { VideoSkeleton } from "@/components/skeletons/video-skeleton";
 
 export const metadata = {
-  title: "Videos",
-  description: "Watch my latest videos about software development and technology.",
+  title: "Certfiificates",
+  description: "Here are my certificates about technology.",
 };
 
 const BLUR_FADE_DELAY = 0.04;
@@ -22,13 +22,13 @@ export default function VideosPage() {
           <div className="flex flex-col items-center justify-center space-y-4 text-center mb-8">
             <div className="space-y-2">
               <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                My Videos
+                Certificates
               </div>
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                Latest Videos
+                My Certfificates
               </h1>
               <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Watch my latest videos about software development and technology.
+                Here are my certificates about technology.
               </p>
             </div>
           </div>
