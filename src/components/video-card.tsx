@@ -24,7 +24,7 @@ export function VideoCard({ video }: VideoCardProps) {
   return (
     <>
       <div onClick={() => setIsModalOpen(true)} className="cursor-pointer">
-        <Card className={cn("flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full relative group", className)}>
+        <Card className={cn("flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full relative group")}>
           <div className="relative group">
             <Image
               src={video.thumbnail}
@@ -34,9 +34,9 @@ export function VideoCard({ video }: VideoCardProps) {
               className="w-full h-48 object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            {/*<div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <PlayIcon className="w-12 h-12 text-white" />
-            </div>
+            </div>*/}
           </div>
           <CardHeader className="p-4">
             <CardTitle className="text-lg">{video.title}</CardTitle>
