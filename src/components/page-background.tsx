@@ -11,13 +11,13 @@ export function PageBackground() {
   const pathname = usePathname();
   const isBlogPage = pathname?.includes('/blog');
   const isProjectPage = pathname?.includes('/projects');
-  const isGadgetsPage = pathname?.includes('/gadgets');
+  const isCertPage = pathname?.includes('/certificates');
 
   if (isBlogPage) {
     return <GridPattern className="w-full h-full" />;
   }
 
-  if (isGadgetsPage) {
+  if (isCertPage) {
     return <GridPattern className="w-full h-full" />;
   }
 
