@@ -16,8 +16,6 @@ const VideoCard = dynamic(() => import("@/components/video-card").then(mod => mo
 
 export default function VideosPage() {
   return (
-    <main className="flex flex-col min-h-[100dvh] space-y-10">
-      <section id="videos">
     <div 
       className="relative min-h-screen bg-background"
       style={{
@@ -25,6 +23,8 @@ export default function VideosPage() {
         backgroundSize: '30px 30px',
       }}
     >
+    <main className="flex flex-col min-h-[100dvh] space-y-10">
+      <section id="videos">
         <BlurFade delay={BLUR_FADE_DELAY}>
           <div className="flex flex-col items-center justify-center space-y-4 text-center mb-8">
             <div className="space-y-2">
