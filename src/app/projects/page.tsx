@@ -31,15 +31,7 @@ export default function ProjectsPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {DATA.projects.map((project, id) => (
           <BlurFade key={project.title} delay={BLUR_FADE_DELAY * 2 + id * 0.05}>
-            <div className="relative overflow-hidden rounded-xl">
-              <BorderBeam
-                duration={4}
-                size={300}
-                reverse
-                className="from-transparent via-purple-500 to-transparent"
-              />
               <ProjectCard {...project} />
-            </div>
           </BlurFade>
         ))}
       </div>
