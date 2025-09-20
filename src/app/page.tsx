@@ -347,7 +347,7 @@ export default function Page() {
                 ))}
                 <BlurFade delay={BLUR_FADE_DELAY * 12}>
                   <Link
-                    href="/videos"
+                    href="/certificates"
                     className="mt-4 block"
                   >
                     <RainbowButton
