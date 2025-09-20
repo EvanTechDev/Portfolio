@@ -5,6 +5,7 @@ import { formatDate } from "@/lib/utils";
 import Image from "next/image";
 import { PlayIcon } from "lucide-react";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 import { VideoPlayerModal } from "./video-player-modal";
 
 interface VideoCardProps {
