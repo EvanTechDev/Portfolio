@@ -28,55 +28,40 @@ export const DATA = {
   ],
   videos: [
     {
-      title: "Track Your Coding time for free",
-      description: "Learn how to track your code time with complete analytics and insights.",
-      thumbnail: "/video1.avif",
-      url: "https://youtu.be/tBatfQjWxCg?si=sy2vZbCHoIYNME-3",
-      date: "2024-05-15"
+      title: "Gemini Certified Educator",
+      description: "A Google Certified Gemini Educator can articulate and demonstrate foundational knowledge of generative AI concepts and the core features and capabilities of Gemini within the educational context.",
+      thumbnail: "/GeminiCertifiedEducator.png",
+      url: "https://edu.google.accredible.com/0bed7002-73fe-40d6-9cb1-8f0ac1ee744d?key=19947581a8703cffd220da32ad1e4a089e875b5327bb1d90fd279129cc1cfd24",
+      date: "2025-09-14"
     },
     {
-      title: "Fix multi-cursor in VS Code",
-      description: "Simple trick to fix multi-cursor in VS Code.",
-      thumbnail: "/video2.avif",
-      url: "https://youtu.be/E9h7M6ZK_tA?si=ykzV7ARU4VMnbBRo",
-      date: "2024-07-01"
+      title: "Next.js App Router Fundamentals",
+      description: "Next.js course",
+      thumbnail: "/VercelAppRouter.png",
+      url: "",
+      date: "2025-04-30"
     },
     {
-     title: "Twitter(X)'s monetization (Hindi)",
-     description: "Is the policy broken? Let's find out.",
-     thumbnail: "/video3.avif",
-     url: "https://youtu.be/Z3h1jt6jKLY?si=blL4l4FNco9WW9FT",
-     date: "2024-11-04"
+     title: "Next.js Pages Router Fundamentals",
+     description: "Next.js course",
+     thumbnail: "/VercelPagesRoute.png",
+     url: "",
+     date: "2025-06-27"
     },
     {
-      title:"How to fix any kind of ban in twitter (Hindi)",
-      description: "Learn how to fix any kind of ban in twitter.",
-      thumbnail: "/video4.avif",
-      url:"https://youtu.be/P7JRFrcXlQU",
-      date: "2024-12-24"
+      title:"React Foundations for Next.js",
+      description: "Next.js course",
+      thumbnail: "/VercelReactFoundations.png",
+      url:"",
+      date: "2025-06-08"
     },
     {
-      title:"Microsoft's new shocking move (Hindi)",
-      description: "GitHub Copilot is now free for everyone, let's see what's the catch.",
-      thumbnail: "/video5.avif",
-      url:"https://www.youtube.com/watch?v=uIJOUe8T3_I",
-      date: "2024-12-19"
-    },
-    {
-      title:"How to run DeepSeek R1 model locally (Hindi)",
-      description:"Learn how to run DeepSeek R1 model locally, in easy steps",
-      thumbnail: "/video6.avif",
-      url:"https://youtu.be/BgB2pW6QgVg",
-      date: "2025-01-29"
-    },
-    {
-      title:"How to do zoom in and out video recording in Windows for free. (Hindi)",
-      description:"Learn how to do zoom in and out video recording in Windows for free.",
-      thumbnail: "/video7.avif",
-      url:"https://youtu.be/WziGdEiT9fE",
-      date: "2025-03-16"
-    }
-    
+      title:"Next.js SEO Fundamentals",
+      description: "Next.js course",
+      thumbnail: "/VercelSEO.png",
+      url:"",
+      date: "2025-06-24"
+    },    
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
