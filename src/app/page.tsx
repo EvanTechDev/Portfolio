@@ -319,12 +319,12 @@ export default function Page() {
               </BlurFade>
             ))}
           </div>
-        </section>
+        </section>*/}
 
         <section id="videos">
           <BlurFade delay={BLUR_FADE_DELAY * 10}>
             <div className="space-y-4">
-              <h2 className="text-xl font-bold">Recent Videos</h2>
+              <h2 className="text-xl font-bold">Certificates</h2>
               <div className="grid gap-6 sm:grid-cols-2">
                 {DATA.videos.slice(-2).map((video, idx) => (
                   <BlurFade key={video.url} delay={BLUR_FADE_DELAY * 11 + idx * 0.05}>
@@ -353,14 +353,14 @@ export default function Page() {
                     <RainbowButton
                       className="w-full sm:w-[160px] px-4 py-2 group transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] font-bold text-center"
                     >
-                      All Videos →
+                      All Certificates →
                     </RainbowButton>
                   </Link>
                 </BlurFade>
               </div>
             </div>
           </BlurFade>
-        </section>*/}
+        </section>
 
         <section id="contact">
           <BlurFade delay={BLUR_FADE_DELAY * 16}>
