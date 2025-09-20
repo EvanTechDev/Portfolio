@@ -353,7 +353,7 @@ export default function Page() {
                     <RainbowButton
                       className="w-full sm:w-[160px] px-4 py-2 group transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] font-bold text-center"
                     >
-                      All Certificates →
+                      All Certificates
                     </RainbowButton>
                   </Link>
                 </BlurFade>
