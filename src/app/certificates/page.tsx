@@ -4,7 +4,7 @@ import { DATA } from "@/data/resume";
 import { VideoSkeleton } from "@/components/skeletons/video-skeleton";
 
 export const metadata = {
-  title: "Certfiificates",
+  title: "Certificates",
   description: "Here are my certificates about technology.",
 };
 
@@ -25,7 +25,7 @@ export default function VideosPage() {
                 Certificates
               </div>
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                My Certfificates
+                My Certificates
               </h1>
               <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 Here are my certificates about technology.
