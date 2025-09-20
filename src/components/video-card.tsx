@@ -23,7 +23,7 @@ export function VideoCard({ video }: VideoCardProps) {
   return (
     <>
       <div onClick={() => setIsModalOpen(true)} className="cursor-pointer">
-        <Card className="overflow-hidden hover:shadow-lg transition-all duration-300">
+        <Card className="flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full relative group">
           <div className="relative group">
             <Image
               src={video.thumbnail}
