@@ -85,6 +85,18 @@ export const DATA = {
         icon: Icons.threads,
         navbar: true,
       },
+      Instagram: {
+        name: "Instagram",
+        url: "https://instagram.com/evan.tech",
+        icon: Icons.instagram,
+        navbar: true,
+      },
+      Medium: {
+        name: "Medium",
+        url: "https://medium.com/@evan-h",
+        icon: Icons.medium,
+        navbar: true,
+      },
       Bluesky: {
         name: "Bluesky",
         url: "https://bsky.app/profile/e.xyehr.cn",
@@ -98,15 +110,9 @@ export const DATA = {
         navbar: true,
       },
       Youtube: {
-        name: "Youtube",
+        name: "YouTube",
         url: "https://youtube.com/@EvanTechDev",
         icon: Icons.youtube,
-        navbar: true,
-      },
-      Instagram: {
-        name: "Instagram",
-        url: "https://instagram.com/evan.dev",
-        icon: Icons.instagram,
         navbar: true,
       },
       Telegram: {
