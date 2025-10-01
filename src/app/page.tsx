@@ -378,13 +378,13 @@ export default function Page() {
                 </div>
               <div>
                 <a
-                  href={DATA.contact.social.Bluesky.url}
+                  href={DATA.contact.social.Medium.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md text-background hover:opacity-90 transition-opacity bg-[#1185FE] text-white"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-foreground text-background hover:opacity-90 transition-opacity"
                 >
-                  <DATA.contact.social.Bluesky.icon className="size-4" />
-                  Connect on Bluesky
+                  <DATA.contact.social.Medium.icon className="size-4" />
+                  Connect on Medium
                 </a>
               </div>
             </div>
