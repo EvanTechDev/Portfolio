@@ -13,7 +13,7 @@ export const DATA = {
   description:
     "A Frontend Developer. Let's connect!",
   summary:
-    "Hello My name is Evan, I'm an engineer specializing in web development, mastering React, Next.js, TypeScript. I'm currently focus on front-end development.❤️  As for the future development direction, I look forward to continuous learning and growth.🌱",
+    "Hello, my name is Evan. I’m a former Frontend Developer currently focused on my studies 📚, but still passionate about coding 💻 and problem-solving.❤️ I have strong experience with React, Next.js, and TypeScript. Although I’m dedicating more time to learning at the moment, my love for technology and curiosity for solving problems remain strong. I look forward to applying what I’ve learned in future projects and continuing to grow. 🌱",
   avatarUrl: "/Evan.jpg",
   skills: [
     "React.js",
