@@ -97,18 +97,6 @@ export const DATA = {
         icon: Icons.medium,
         navbar: true,
       },
-      Bluesky: {
-        name: "Bluesky",
-        url: "https://bsky.app/profile/e.xyehr.cn",
-        icon: Icons.bluesky,
-        navbar: true,
-      },
-      X: {
-        name: "X",
-        url: "https://x.com/EvanTechDev",
-        icon: Icons.x,
-        navbar: true,
-      },
       Youtube: {
         name: "YouTube",
         url: "https://youtube.com/@EvanTechDev",
@@ -117,7 +105,7 @@ export const DATA = {
       },
       Telegram: {
         name: "Telegram",
-        url: "https://evantechdev.t.me",
+        url: "https://t.me/@Ev_Huang",
         icon: Icons.telegram,
         navbar: true,
       },
