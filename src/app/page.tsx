@@ -59,10 +59,17 @@ const BlogCard = dynamic(() => import("@/components/blog-card").then(mod => mod.
   loading: () => <BlogSkeleton />
 });
 
-const GithubContributions = dynamic(() => import("@/components/github-calendar").then(mod => mod.GithubContributions), {
-  ssr: false,
-  loading: () => <GithubSkeleton />
-});
+const GithubContributions = dynamic(
+  async () => {
+    const mod = await import("@/components/github-calendar");
+    return mod.GithubContributions;
+  },
+  {
+    ssr: false,
+    loading: () => <GithubSkeleton />,
+  }
+);
+
 
 const ProjectCardDynamic = dynamic(() => import("@/components/project-card").then(mod => mod.ProjectCard), {
   ssr: true,
