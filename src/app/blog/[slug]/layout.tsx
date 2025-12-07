@@ -1,13 +1,13 @@
 import { Metadata } from "next";
 import { DATA } from "@/data/resume";
 
+
 export async function generateMetadata({
   params,
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
   const canonicalUrl = `${DATA.url}/blog/${params.slug}`;
-
   return {
     metadataBase: new URL(DATA.url),
     alternates: {
