@@ -1,13 +1,10 @@
+import { ReactNode } from "react";
 import { Metadata } from "next";
 import { DATA } from "@/data/resume";
 
-
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const canonicalUrl = `${DATA.url}/blog/${params.slug}`;
+
   return {
     metadataBase: new URL(DATA.url),
     alternates: {
@@ -20,7 +17,7 @@ export default function BlogLayout({
   children,
   params,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   params: { slug: string };
 }) {
   return <>{children}</>;
