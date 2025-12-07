@@ -1,5 +1,3 @@
-"use client";
-
 import { HackathonCard } from "@/components/hackathon-card";
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
@@ -25,6 +23,7 @@ import { ProjectSkeleton } from "@/components/skeletons/project-skeleton";
 import { HackathonSkeleton } from "@/components/skeletons/hackathon-skeleton";
 import { BorderBeam } from "@/components/magicui/border-beam";
 import { GhibliSkyBackground } from "@/components/ghibli-elements";
+import GithubContributionsWrapper from "@/components/GithubContributionsWrapper";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -60,18 +59,6 @@ const BlogCard = dynamic(() => import("@/components/blog-card").then(mod => mod.
   ssr: true,
   loading: () => <BlogSkeleton />
 });
-
-const GithubContributions = dynamic(
-  async () => {
-    const mod = await import("@/components/github-calendar");
-    return mod.GithubContributions;
-  },
-  {
-    ssr: false,
-    loading: () => <GithubSkeleton />,
-  }
-);
-
 
 const ProjectCardDynamic = dynamic(() => import("@/components/project-card").then(mod => mod.ProjectCard), {
   ssr: true,
@@ -204,7 +191,7 @@ export default function Page() {
         <section id="contributions">
           <BlurFade delay={BLUR_FADE_DELAY * 10}>
             <h2 className="text-xl font-bold">GitHub Contributions</h2>
-            <GithubContributions />
+            <GithubContributionsWrapper />
           </BlurFade>
         </section>
         <section id="projects">
