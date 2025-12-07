@@ -1,5 +1,5 @@
-import { Metadata } from 'next';
-import { DATA } from '@/data/resume';
+import { Metadata } from "next";
+import { DATA } from "@/data/resume";
 
 export async function generateMetadata({
   params,
