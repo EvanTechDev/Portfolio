@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import GithubSkeleton from "@/components/ui/skeleton";
+import GithubSkeleton from "@/components/skeletons/github-skeleton";
 
 const GithubContributions = dynamic(
   async () => {
