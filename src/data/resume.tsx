@@ -14,11 +14,11 @@ export const DATA = {
     "Frontend Developer",
   summary:
     "Hello, my name is Evan. I’m a former Frontend Developer currently focused on my studies , but still passionate about coding and problem-solving. I have strong experience with React, Next.js, and TypeScript. Although I’m dedicating more time to learning at the moment, my love for technology and curiosity for solving problems remain strong. I look forward to applying what I’ve learned in future projects and continuing to grow.",
-  avatarUrl: "/Evan.jpg",
+  avatarUrl: "/Evan.webp",
   skills: [
     "React.js",
     "Next.js",
-    "Typescript",
+    "TypeScript",
     "JavaScript",
     "TailwindCSS",
     "Node.js",
