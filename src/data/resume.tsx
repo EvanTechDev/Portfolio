@@ -215,6 +215,34 @@ export const DATA = {
       image: "Mail.jpg",
       video: "",
     },
+    {
+      title: " Portfolio",
+      href: "https://e.xyehr.cn",
+      dates: "April 2025 - Now",
+      active: true,
+      description:
+        "My Portfolio built with Next.js",
+      technologies: [
+        "Next.js",
+        "React",
+        "TailwindCSS",
+        "TypeScript"
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://e.xyehr.cn",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/EvanTechDev/Portfolio",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "/Portfolio.jpg",
+      video: "",
+    },
     ],
   hackathons: [
     {
