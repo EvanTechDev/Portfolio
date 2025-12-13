@@ -106,7 +106,7 @@ export default function Page() {
     width={112}
     height={112}
     className="rounded-full object-cover"
-    priority={false}
+    priority={true}
   />
 
             <AvatarFallback>{DATA.initials}</AvatarFallback>
