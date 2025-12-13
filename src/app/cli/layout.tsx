@@ -1,5 +1,5 @@
 import type React from "react"
-import { jetbrainsMono } from "@/src/data/fonts"
+import { jetbrainsMono } from "@/src/data/font"
 
 export default function RootLayout({
   children,
