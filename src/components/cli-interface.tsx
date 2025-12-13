@@ -15,24 +15,11 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const ASCII_ART = `
-       ^
-      /|\
-     / | \
-    /  |  \
-    '-.|.-'                                                     
+                                                   
 `;
 
 const MOBILE_ASCII_ART = `
-                                        
- mmmmmmmm                               
- ##""""""                               
- ##        ##m  m##   m#####m  ##m####m 
- #######    ##  ##    " mmm##  ##"   ## 
- ##         "#mm#"   m##"""##  ##    ## 
- ##mmmmmm    ####    ##mmm###  ##    ## 
- """"""""     ""      """" ""  ""    "" 
-                                        
-                                        
+                                 
 `;
 
 interface CliInterfaceProps {
@@ -151,7 +138,7 @@ export function CliInterface({ onGuiCommand, onMinimize, onMaximize, onClose }: 
     
     setIsMounted(true);
     setOutput([
-      isMobile ? 'Welcome to prasen.dev CLI! 👋' : ASCII_ART + '\nWelcome to my portfolio CLI! 👋',
+      isMobile ? 'Welcome to my CLI! 👋' : ASCII_ART + '\nWelcome to my portfolio CLI! 👋',
       'Type "help" or "?" to see available commands.',
       ''
     ]);
@@ -320,7 +307,7 @@ export function CliInterface({ onGuiCommand, onMinimize, onMaximize, onClose }: 
           {/* Terminal Input */}
           <form onSubmit={handleSubmit} className="flex items-center group sticky bottom-0 bg-zinc-900/80 backdrop-blur-sm py-2">
             <span className="text-fuchsia-500 [text-shadow:0_0_10px_theme(colors.fuchsia.500/40)] transition-all group-hover:[text-shadow:0_0_15px_theme(colors.fuchsia.500/60)]">
-              dev@prasen:~
+              evan@localhost:~
             </span>
             <span className="text-green-400">$</span>
             <input
