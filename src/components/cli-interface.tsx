@@ -166,7 +166,7 @@ export function CliInterface({ onGuiCommand, onMinimize, onMaximize, onClose }: 
     }
 
     if (resolvedCmd === 'gui') {
-      setOutput(prev => [...prev, `$ ${cmd}`, 'Switching to GUI mode...', '']);
+      setOutput(prev => [...prev, `$ ${cmd}`, 'http://localhost:3000', '']);
       setTimeout(onGuiCommand, 500);
       return;
     }
