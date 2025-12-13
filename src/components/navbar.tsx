@@ -10,7 +10,6 @@ import {
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { CliButton } from "@/components/cli-button"
 
 export default function Navbar() {
   return (
@@ -55,9 +54,6 @@ export default function Navbar() {
             </Tooltip>
           </DockIcon>
         ))}
-        <DockIcon>
-          <CliButton />
-        </DockIcon>
         <Separator orientation="vertical" className="h-full opacity-10 mx-1" />
         <DockIcon>
           <Tooltip>
