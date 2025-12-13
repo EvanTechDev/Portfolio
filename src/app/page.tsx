@@ -101,7 +101,7 @@ export default function Page() {
             <AvatarImage alt={DATA.name} src={DATA.avatarUrl || "/placeholder.svg"} width={112} height={112} />
             <AvatarFallback>{DATA.initials}</AvatarFallback>
           </Avatar>
-          <div className="absolute -left-2 -top-12 z-20 size-16 -rotate-42">
+          <div className="absolute -left-2 -top-12 z-20 size-16 -rotate-45">
             <Image src="/santa.png" alt="Santa Hat" width={64} height={64} className="object-contain" priority />
           </div>
         </div>
