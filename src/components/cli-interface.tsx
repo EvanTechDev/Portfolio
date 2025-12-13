@@ -11,7 +11,6 @@ import ShinyButton from './ui/shiny-button';
 
 const jetbrainsMono = JetBrains_Mono({ 
   subsets: ['latin'],
-  variable: '--font-mono'
 });
 
 const ASCII_ART = `
@@ -250,7 +249,7 @@ export function CliInterface({ onGuiCommand, onMinimize, onMaximize, onClose }: 
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`fixed inset-0 bg-black ${jetbrainsMono.variable} font-mono overflow-hidden flex flex-col`}
+      className={`fixed inset-0 bg-black ${jetbrainsMono.className} overflow-hidden flex flex-col`}
     >
       {/* Back Button */}
       <div className="absolute top-3 md:left-8 right-4 md:right-auto z-50">
