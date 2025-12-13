@@ -217,7 +217,7 @@ export const DATA = {
       video: "",
     },
     {
-      title: " Portfolio",
+      title: "Portfolio",
       href: "https://e.xyehr.cn",
       dates: "April 2025 - Now",
       active: true,
@@ -242,6 +242,33 @@ export const DATA = {
         },
       ],
       image: "/Portfolio.jpg",
+      video: "",
+    },
+      title: "Tech-Art Docs",
+      href: "https://docs.xyehr.cn",
+      dates: "October 2024 - Now",
+      active: true,
+      description:
+        "Tech-Art Studio's Docs",
+      technologies: [
+        "Hugo",
+        "TailwindCSS",
+        "Markdown",
+        "i18n"
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://docs.xyehr.cn",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/EvanTechDev/Docs",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "/Docs.jpg",
       video: "",
     },
     ],
