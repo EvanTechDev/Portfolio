@@ -95,24 +95,32 @@ export default function Page() {
                   text={DATA.description}
                 />
               </div>
-<BlurFade delay={BLUR_FADE_DELAY}>
-  <div className="profile-wrapper relative inline-block">
-    <img
-      src="/santa.png"
-      alt="Santa Hat"
-      className="
-        absolute
-        -top-4
-        -left-3
-        w-12
-        rotate-[-15deg]
-        zght={112}
-        loading="eager"
-      />
-      <AvatarFallback>{DATA.initials}</AvatarFallback>
-    </Avatar>
-  </div>
-</BlurFade>
+              <BlurFade delay={BLUR_FADE_DELAY}>
+                <div className="profile-wrapper relative inline-block">
+                  <img
+                    src="/santa.png"
+                    alt="Santa Hat"
+                    className="
+                      absolute
+                      -top-4
+                      -left-3
+                      w-12
+                      rotate-[-15deg]
+                      zght={112}
+                      loading="eager"
+                  />
+                  <Avatar className="size-28 relative z-10">
+                    <AvatarImage
+                      alt={DATA.name}
+                      src={DATA.avatarUrl}
+                      width={112}
+                      height={112}
+                      loading="eager"
+                    />
+                    <AvatarFallback>{DATA.initials}</AvatarFallback>
+                  </Avatar>
+                </div>
+              </BlurFade>
             </div>
           </div>
         </section>
