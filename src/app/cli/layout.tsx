@@ -1,10 +1,5 @@
 import type React from "react"
-import { JetBrains_Mono } from "next/font/google"
-
-export const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-})
+import { jetbrainsMono } from "@/src/data/fonts"
 
 export default function RootLayout({
   children,
