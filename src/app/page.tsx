@@ -98,7 +98,17 @@ export default function Page() {
               <BlurFade delay={BLUR_FADE_DELAY}>
         <div className="profile-wrapper relative">
           <Avatar className="size-28 relative z-10">
-            <AvatarImage alt={DATA.name} src={DATA.avatarUrl || "/placeholder.svg"} width={112} height={112} />
+            {/*<AvatarImage alt={DATA.name} src={DATA.avatarUrl || "/placeholder.svg"} width={112} height={112} />*/}
+            
+<Image
+    src={DATA.avatarUrl}
+    alt="avatar"
+    width={112}
+    height={112}
+    className="rounded-full object-cover"
+    priority={false}
+  />
+
             <AvatarFallback>{DATA.initials}</AvatarFallback>
           </Avatar>
           <div className="absolute -left-4 -top-8 z-20 size-16 -rotate-[26deg]">
