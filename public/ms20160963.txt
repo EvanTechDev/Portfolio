@@ -1,6 +1,0 @@
-﻿{
-  "Description": "Microsoft 365 的域所有权验证文件 - 放置在网站根目录中",
-  "Domain": "e.xyehr.cn",
-  "Id": "2ad59365-815a-43a1-ab6a-26e6cf232a68"
-
-}
