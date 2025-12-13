@@ -15,16 +15,11 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const ASCII_ART = `
-                                                                                                    
- mmmmmmmm                                          mm    mm                                         
- ##""""""                                          ##    ##                                         
- ##        ##m  m##   m#####m  ##m####m            ##    ##  ##    ##   m#####m  ##m####m   m###m## 
- #######    ##  ##    " mmm##  ##"   ##            ########  ##    ##   " mmm##  ##"   ##  ##"  "## 
- ##         "#mm#"   m##"""##  ##    ##            ##    ##  ##    ##  m##"""##  ##    ##  ##    ## 
- ##mmmmmm    ####    ##mmm###  ##    ##            ##    ##  ##mmm###  ##mmm###  ##    ##  "##mm### 
- """"""""     ""      """" ""  ""    ""            ""    ""   """" ""   """" ""  ""    ""   m""" ## 
-                                                                                            "####"" 
-                                                                                                    
+       ^
+      /|\
+     / | \
+    /  |  \
+    '-.|.-'                                                     
 `;
 
 const MOBILE_ASCII_ART = `
@@ -86,7 +81,7 @@ const COMMANDS = {
   social: () => Object.entries(DATA.contact.social)
     .map(([platform, data]) => `${platform}: ${data.url}`)
     .join('\n'),
-  version: () => 'prasen.dev CLI v1.0.0',
+  version: () => 'e.xyehr.cn CLI v1.0.0',
   clear: 'CLEAR',
   gui: 'GUI',
 };
@@ -120,7 +115,7 @@ function formatCommandLine(line: string, currentTheme: string | undefined) {
   if (line.startsWith('$')) {
     return (
       <>
-        <span className={currentTheme === 'dark' ? 'text-fuchsia-500' : 'text-fuchsia-600'}>dev@prasen:~</span>
+        <span className={currentTheme === 'dark' ? 'text-fuchsia-500' : 'text-fuchsia-600'}>evan@localhost:~</span>
         <span className={currentTheme === 'dark' ? 'text-green-400' : 'text-green-600'}>$</span>
         {' '}{line.slice(1)}
       </>
@@ -268,7 +263,7 @@ export function CliInterface({ onGuiCommand, onMinimize, onMaximize, onClose }: 
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`fixed inset-0 bg-zinc-900 ${jetbrainsMono.variable} font-mono overflow-hidden flex flex-col`}
+      className={`fixed inset-0 bg-black ${jetbrainsMono.variable} font-mono overflow-hidden flex flex-col`}
     >
       {/* Back Button */}
       <div className="absolute top-3 md:left-8 right-4 md:right-auto z-50">
