@@ -359,6 +359,17 @@ export default function Page() {
                   evan.huang000@proton.me
                 </a>
 
+                <div>
+                <a
+                  href={DATA.contact.social.GitHub.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-foreground text-background hover:opacity-90 transition-opacity"
+                >
+                  <DATA.contact.social.GitHub.icon className="size-4" />
+                  Connect on GitHub
+                </a>
+              </div>
                 <a
                   href={DATA.contact.social.Threads.url}
                   target="_blank"
@@ -367,17 +378,6 @@ export default function Page() {
                 >
                   <DATA.contact.social.Threads.icon className="size-4" />
                   Connect on Threads
-                </a>
-                </div>
-              <div>
-                <a
-                  href={DATA.contact.social.Medium.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-foreground text-background hover:opacity-90 transition-opacity"
-                >
-                  <DATA.contact.social.Medium.icon className="size-4" />
-                  Connect on Medium
                 </a>
               </div>
             </div>
@@ -401,7 +401,7 @@ export default function Page() {
                     </a>
                     {' '}and available on{' '}
                     <a 
-                      href="https://github.com/StarKnightt/prasendev" 
+                      href="https://github.com/EvanTechDev/Portfolio" 
                       target="_blank"
                       rel="noopener noreferrer"
                       className="underline hover:text-foreground"
