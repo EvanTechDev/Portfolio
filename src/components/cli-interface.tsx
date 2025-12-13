@@ -48,7 +48,6 @@ const COMMANDS = {
     'about    (a)     - Display information about me\n' +
     'skills   (s)     - List my technical skills\n' +
     'projects (p, ls) - List my projects\n' +
-    'edu             - Show my education\n' +
     'contact   (c)    - Display contact information\n' +
     'social          - Show social media links\n' +
     'version  (v)    - Show CLI version\n' +
@@ -59,9 +58,6 @@ const COMMANDS = {
   skills: () => `Skills:\n${DATA.skills.join(', ')}`,
   projects: () => DATA.projects.map(project => 
     `\n${project.title}\n${project.description}\nTech: ${project.technologies.join(', ')}\n`
-  ).join('\n'),
-  edu: () => DATA.education.map(edu => 
-    `\n${edu.school} - ${edu.degree}\n${edu.start} - ${edu.end}\n`
   ).join('\n'),
   contact: () => `Email: ${DATA.contact.email}`,
   social: () => Object.entries(DATA.contact.social)
