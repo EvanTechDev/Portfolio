@@ -129,6 +129,9 @@ export default function Page() {
               {DATA.summary}
             </Markdown>
           </BlurFade>
+        </section>
+        
+        <section id="views">
           <BlurFade delay={BLUR_FADE_DELAY * 3}>
             <h2 className="text-xl font-bold">Views</h2>
           </BlurFade>
