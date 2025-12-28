@@ -112,7 +112,7 @@ export default function Page() {
             <AvatarFallback>{DATA.initials}</AvatarFallback>
           </Avatar>
           <div className="absolute -top-8 z-20 size-16 -rotate-[12deg]">
-            <Image src="/santa.png" alt="Santa Hat" width={64} height={64} className="object-contain" priority />
+            <Image src="/santa.png" alt="Santa Hat" width={58} height={58} className="object-contain" priority />
           </div>
         </div>
       </BlurFade>
