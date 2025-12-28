@@ -128,6 +128,11 @@ export default function Page() {
             <Markdown className="prose max-w-full text-pretty font-sans text-[14px] text-muted-foreground dark:prose-invert">
               {DATA.summary}
             </Markdown>
+          </BlurFade>
+          <BlurFade delay={BLUR_FADE_DELAY * 3}>
+            <h2 className="text-xl font-bold">Views</h2>
+          </BlurFade>
+          <BlurFade delay={BLUR_FADE_DELAY * 4}>
             <img src="https://count.getloli.com/get/@Dev-Huang1.github.readme" alt="Views" />
           </BlurFade>
         </section>
