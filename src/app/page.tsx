@@ -165,9 +165,9 @@ export default function Page() {
               <h2 className="text-xl font-bold">Skills</h2>
             </BlurFade>
             <div className="flex flex-wrap gap-1">
+              <img src="https://skills-icons.vercel.app/api/icons?perline=5&i=nextjs,react,typescript,javascript,tailwindcss,nodejs,postgresql,supabase,git,cloudflare" alt="Skills" />
               {DATA.skills.map((skill, id) => (
                 <BlurFade key={skill} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
-                  <img src="https://skills-icons.vercel.app/api/icons?perline=5&i=nextjs,react,typescript,javascript,tailwindcss,nodejs,postgresql,supabase,git,cloudflare" alt="Skills" />
                   <Badge key={skill}>{skill}</Badge>
                 </BlurFade>
               ))}
