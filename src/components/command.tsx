@@ -228,7 +228,7 @@ export function CommandPalette() {
       id: "threads",
       label: "Open Threads",
       description: "Visit Threads profile",
-      icon: <Icons.x className="size-4" />,
+      icon: <Icons.threads className="size-4" />,
       action: () => {
         window.open("https://threads.com/@evan.tech", "_blank");
         setOpen(false);
