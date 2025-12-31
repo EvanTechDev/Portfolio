@@ -166,7 +166,7 @@ export default function Page() {
             </BlurFade>
             <div className="flex flex-wrap gap-1">
               <BlurFade delay={BLUR_FADE_DELAY * 10}>
-                <img src="https://skills-icons.vercel.app/api/icons?perline=5&i=nextjs,react,typescript,javascript,tailwindcss,nodejs,postgresql,supabase,git,cloudflare" alt="Skills" />
+                <img src="https://skills.syvixor.com/api/icons?perline=5&i=nextjs,react,typescript,javascript,tailwindcss,nodejs,postgresql,supabase,git,cloudflare" alt="Skills" />
               </BlurFade>
             </div>
             <div className="flex flex-wrap gap-1">
