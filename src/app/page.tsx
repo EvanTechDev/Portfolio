@@ -165,7 +165,7 @@ export default function Page() {
               <h2 className="text-xl font-bold">Skills</h2>
             </BlurFade>
             <div className="flex flex-wrap gap-1">
-                <BlurFade delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
+                <BlurFade delay={BLUR_FADE_DELAY * 10}>
                   <img src="https://skills-icons.vercel.app/api/icons?i=nextjs,react,typescript,javascript,tailwindcss,nodejs,postgresql,supabase,git,cloudflare" alt="Skills" />
                 </BlurFade>
             </div>
