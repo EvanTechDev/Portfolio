@@ -13,6 +13,7 @@ import { PageBackground } from "@/components/page-background";
 import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { CommandPalette } from "@/components/command";
 import { GeistSans } from "geist/font/sans"
 
 /* const fontSans = FontSans({
@@ -152,6 +153,7 @@ export default function RootLayout({
               <Analytics />
               <SpeedInsights />
               <Navbar />
+              <CommandPalette />
             </TooltipProvider>
           </ThemeProvider>
         </div>
