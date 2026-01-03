@@ -22,8 +22,7 @@ export default function YearProgress() {
   return (
     <div className="w-full max-w-md space-y-2">
       <div className="flex justify-between text-sm font-medium">
-        <span>{new Date().getFullYear()} 年已过去</span>
-        <span>{percent}%</span>
+        <span>{percent}% of {new Date().getFullYear()} has already passed</span>
       </div>
       <Progress value={percent} />
     </div>
