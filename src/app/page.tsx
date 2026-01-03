@@ -24,6 +24,7 @@ import { HackathonSkeleton } from "@/components/skeletons/hackathon-skeleton";
 import { BorderBeam } from "@/components/magicui/border-beam";
 import { GhibliSkyBackground } from "@/components/ghibli-elements";
 import GithubContributionsWrapper from "@/components/GithubContributionsWrapper";
+import YearProgress from "@/components/year-progress";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -137,6 +138,15 @@ export default function Page() {
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 4}>
             <img src="https://count.getloli.com/get/@Dev-Huang1.github.readme" alt="Views" />
+          </BlurFade>
+        </section>
+
+        <section id="progress">
+          <BlurFade delay={BLUR_FADE_DELAY * 3}>
+            <h2 className="text-xl font-bold">Progress</h2>
+          </BlurFade>
+          <BlurFade delay={BLUR_FADE_DELAY * 4}>
+            <YearProgress />
           </BlurFade>
         </section>
 
