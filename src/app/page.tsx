@@ -375,22 +375,6 @@ export default function Page() {
           </BlurFade>
         </section>
 
-        <section id="photos">
-          <BlurFade delay={BLUR_FADE_DELAY * 9}>
-              <h2 className="text-xl font-bold">Gallery</h2>
-            </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 10}>
-        <div style={{ width: "100%", aspectRatio: "4 / 3" }}>
-  <iframe
-    src="https://embed.ente.io/?t=MQFZ6HFYZJ#FnJQzRWY1gffrsyg7KCH6qks7EoFxBRVzMskMQhM7pdv"
-    style={{ width: "100%", height: "100%" }}
-    frameBorder={0}
-    allowFullScreen
-  />
-</div>
-          </BlurFade>
-        </section>
-
         <section id="contact">
           <BlurFade delay={BLUR_FADE_DELAY * 16}>
             <div className="space-y-4">
