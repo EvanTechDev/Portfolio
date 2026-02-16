@@ -55,7 +55,7 @@ export function BlogInteractions({ slug }: BlogInteractionsProps) {
       <div className="mt-12">
         <Giscus
           id="comments"
-          repo="Dev-Huang1/Portfolio"
+          repo="EvanTechDev/Portfolio"
           repoId="R_kgDONlEGng"
           category="General"
           categoryId="DIC_kwDONlEGns4Co01K"
