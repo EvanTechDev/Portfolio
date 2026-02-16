@@ -25,6 +25,7 @@ import { BorderBeam } from "@/components/magicui/border-beam";
 import { GhibliSkyBackground } from "@/components/ghibli-elements";
 import GithubContributionsWrapper from "@/components/GithubContributionsWrapper";
 import YearProgress from "@/components/year-progress";
+import { getBlogPosts } from "@/data/blog";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -71,7 +72,12 @@ const HackathonCardDynamic = dynamic(() => import("@/components/hackathon-card")
   loading: () => <HackathonSkeleton />
 });
 
-export default function Page() {
+export default async function Page() {
+  const posts = await getBlogPosts();
+  const recentPosts = [...posts]
+    .sort((a, b) => new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime())
+    .slice(0, 3);
+
   return (
     <>
       <div className="fixed inset-0 -z-10 overflow-hidden">
@@ -112,9 +118,9 @@ export default function Page() {
 
             <AvatarFallback>{DATA.initials}</AvatarFallback>
           </Avatar>
-          <div className="absolute left-[22px] -top-[14px] z-20 size-10 -rotate-[10deg]">
+          {/* <div className="absolute left-[22px] -top-[14px] z-20 size-10 -rotate-[10deg]">
             <Image src="/santa.png" alt="Santa Hat" width={58} height={58} className="object-contain" priority />
-          </div>
+          </div> */}
         </div>
       </BlurFade>
             </div>
@@ -196,14 +202,21 @@ export default function Page() {
             </BlurFade>
             <BlurFade delay={BLUR_FADE_DELAY * 10}>
               <div className="flex flex-col space-y-4">
-                <BlogCard
-                  post={{
-                    title: "My new portfolio website!",
-                    publishedAt: "2025-04-04",
-                    summary: "I deployed a new portfolio website",
-                    slug: "hello"
-                  }}
-                />
+                {recentPosts.length > 0 ? (
+                  recentPosts.map((post) => (
+                    <BlogCard
+                      key={post.slug}
+                      post={{
+                        title: post.metadata.title,
+                        publishedAt: post.metadata.publishedAt,
+                        summary: post.metadata.summary,
+                        slug: post.slug,
+                      }}
+                    />
+                  ))
+                ) : (
+                  <p className="text-sm text-muted-foreground">No blog posts found.</p>
+                )}
                 <Link
                   href="/blog"
                   className="mt-4 block"
@@ -405,13 +418,13 @@ export default function Page() {
                 </a>
               </div>
                 <a
-                  href={DATA.contact.social.Threads.url}
+                  href={DATA.contact.social.Bluesky.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-foreground text-background hover:opacity-90 transition-opacity"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#1185fe] text-white hover:bg-[#0f75df] transition-colors"
                 >
-                  <DATA.contact.social.Threads.icon className="size-4" />
-                  Connect on Threads
+                  <DATA.contact.social.Bluesky.icon className="size-4" />
+                  Connect on Bluesky
                 </a>
               </div>
             </div>
