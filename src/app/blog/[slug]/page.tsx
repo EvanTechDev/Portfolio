@@ -14,11 +14,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }): Promise<Metadata | undefined> {
-  const post = await getPost(params.slug);
+  const { slug } = await params;
+  const post = await getPost(slug);
   if (!post) {
     return undefined;
   }
@@ -58,11 +59,12 @@ export async function generateMetadata({
 export default async function Blog({
   params,
 }: {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }) {
-  const post = await getPost(params.slug);
+  const { slug } = await params;
+  const post = await getPost(slug);
 
   if (!post) {
     notFound();
@@ -106,7 +108,7 @@ export default async function Blog({
         className="prose dark:prose-invert"
         dangerouslySetInnerHTML={{ __html: post.source }}
       />
-      <BlogInteractions slug={params.slug} />
+      <BlogInteractions slug={slug} />
     </section>
   );
 }
