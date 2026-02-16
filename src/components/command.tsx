@@ -225,15 +225,15 @@ export function CommandPalette() {
       group: "Social",
     },
     {
-      id: "threads",
-      label: "Open Threads",
-      description: "Visit Threads profile",
-      icon: <Icons.threads className="size-4" />,
+      id: "bluesky",
+      label: "Open Bluesky",
+      description: "Visit Bluesky profile",
+      icon: <Icons.bluesky className="size-4 text-[#1185fe]" />,
       action: () => {
-        window.open("https://threads.com/@evan.tech", "_blank");
+        window.open("https://bsky.app/profile/e.xyehr.cn", "_blank");
         setOpen(false);
       },
-      keywords: ["threads", "profile", "social"],
+      keywords: ["bluesky", "bsky", "profile", "social"],
       group: "Social",
     },
   ], [copied, router, setTheme, navigateToSection, copyToClipboard]);

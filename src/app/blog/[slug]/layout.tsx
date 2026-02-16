@@ -3,13 +3,14 @@ import { DATA } from '@/data/resume';
 
 interface BlogLayoutProps {
   children: React.ReactNode;
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: BlogLayoutProps): Promise<Metadata> {
-  const canonicalUrl = `${DATA.url}/blog/${params.slug}`;
+  const { slug } = await params;
+  const canonicalUrl = `${DATA.url}/blog/${slug}`;
   
   return {
     metadataBase: new URL(DATA.url),

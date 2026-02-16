@@ -1,16 +1,16 @@
 {
-  "name": "Prasenjit Nayak",
-  "short_name": "prasen.dev",
+  "name": "Evan Huang",
+  "short_name": "Evan",
   "icons": [
     {
-      "src": "/favicons/android-chrome-192x192.png",
+      "src": "/Evan.webp",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/webp"
     },
     {
-      "src": "/favicons/android-chrome-512x512.png", 
+      "src": "/Evan.webp",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/webp"
     }
   ],
   "theme_color": "#ffffff",

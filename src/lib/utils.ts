@@ -5,6 +5,15 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+
+export function formatDateYMD(date: string) {
+  if (!date) return "";
+  if (date.includes("T")) {
+    return date.split("T")[0];
+  }
+  return date;
+}
+
 export function formatDate(date: string) {
   let currentDate = new Date().getTime();
   if (!date.includes("T")) {

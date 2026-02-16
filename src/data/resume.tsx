@@ -23,8 +23,7 @@ export const DATA = {
     "TailwindCSS",
     "Node.js",
     "Git",
-    "PostgreSQL",
-    "Python"
+    "PostgreSQL"
   ],
   videos: [
     {
@@ -80,10 +79,10 @@ export const DATA = {
         icon: Icons.github,
         navbar: true,
       },
-      Threads: {
-        name: "Threads",
-        url: "https://threads.net/@evan.tech",
-        icon: Icons.threads,
+      Bluesky: {
+        name: "Bluesky",
+        url: "https://bsky.app/profile/e.xyehr.cn",
+        icon: Icons.bluesky,
         navbar: true,
       },
       Instagram: {
