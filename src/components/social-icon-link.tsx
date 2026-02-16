@@ -3,11 +3,12 @@
 
 import BlurFade from './magicui/blur-fade';
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 
 type SocialIconLinkProps = {
   name: string;
   url: string;
-  icon: JSX.Element;
+  icon: ReactNode;
   delay: number;
 };
 
