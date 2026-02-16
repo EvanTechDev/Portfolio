@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { formatDate } from "@/lib/utils";
+import { formatDateYMD } from "@/lib/utils";
 
 interface BlogPost {
   title: string;
@@ -19,7 +19,7 @@ export function BlogCard({ post }: { post: BlogPost }) {
           {post.title}
         </h2>
         <time className="text-sm text-muted-foreground">
-          {post.publishedAt.split('T')[0]}
+          {formatDateYMD(post.publishedAt)}
         </time>
       </article>
     </Link>
