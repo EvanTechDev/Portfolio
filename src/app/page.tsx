@@ -166,15 +166,6 @@ export default async function Page() {
           </BlurFade>
         </section>
 
-        <section id="views">
-          <BlurFade delay={BLUR_FADE_DELAY * 3}>
-            <h2 className="text-xl font-bold">Views</h2>
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 4}>
-            <img src="https://count.getloli.com/get/@Dev-Huang1.github.readme" alt="Views" />
-          </BlurFade>
-        </section>
-
         <section id="skills">
           <div className="flex min-h-0 flex-col gap-y-3">
             <BlurFade delay={BLUR_FADE_DELAY * 9}>
@@ -421,6 +412,14 @@ export default async function Page() {
                   <DATA.contact.social.Bluesky.icon className="size-4" />
                   Connect on Bluesky
                 </a>
+              </div>
+
+              <div className="pt-2">
+                <h3 className="text-lg font-semibold">Views</h3>
+                <img
+                  src="https://count.getloli.com/get/@Dev-Huang1.github.readme"
+                  alt="Views"
+                />
               </div>
             </div>
           </BlurFade>
