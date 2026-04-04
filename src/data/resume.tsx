@@ -160,16 +160,16 @@ export const DATA = {
     {
       title: "One Calendar",
       href: "https://calendar.xyehr.cn",
-      dates: "September 2024 - Now",
+      dates: "March 2025 - Now",
       active: true,
       description:
-        "One Calendar is a calendar web app that uses React + Vercel/blob for storage. It has rich features: address book, notes, bookmarks, to-do lists and analysis features! 📅",
+        "One Calendar is a privacy-first calendar web app built with Next.js. It has modern security features, including e2ee, password-protected sharing, and self-destructing share links 📅",
       technologies: [
         "Next.js",
         "React",
         "TailwindCSS",
         "TypeScript",
-        "shadcnUI",
+        "ShadcnUI",
       ],
       links: [
         {
@@ -183,7 +183,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/Banner.jpg",
+      image: "https://calendar.xyehr.cn/Banner.jpg",
       video: "",
     },
     {
