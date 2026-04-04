@@ -138,15 +138,6 @@ export default async function Page() {
           </BlurFade>
         </section>
         
-        <section id="views">
-          <BlurFade delay={BLUR_FADE_DELAY * 3}>
-            <h2 className="text-xl font-bold">Views</h2>
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 4}>
-            <img src="https://count.getloli.com/get/@Dev-Huang1.github.readme" alt="Views" />
-          </BlurFade>
-        </section>
-
         <section id="progress">
           <BlurFade delay={BLUR_FADE_DELAY * 3}>
             <h2 className="text-xl font-bold">Progress</h2>
@@ -175,16 +166,20 @@ export default async function Page() {
           </BlurFade>
         </section>
 
+        <section id="views">
+          <BlurFade delay={BLUR_FADE_DELAY * 3}>
+            <h2 className="text-xl font-bold">Views</h2>
+          </BlurFade>
+          <BlurFade delay={BLUR_FADE_DELAY * 4}>
+            <img src="https://count.getloli.com/get/@Dev-Huang1.github.readme" alt="Views" />
+          </BlurFade>
+        </section>
+
         <section id="skills">
           <div className="flex min-h-0 flex-col gap-y-3">
             <BlurFade delay={BLUR_FADE_DELAY * 9}>
               <h2 className="text-xl font-bold">Skills</h2>
             </BlurFade>
-            <div className="flex flex-wrap gap-1">
-              <BlurFade delay={BLUR_FADE_DELAY * 10}>
-                <img src="https://skills.syvixor.com/api/icons?perline=5&i=nextjs,react,typescript,javascript,tailwindcss,nodejs,postgresql,supabase,git,cloudflare" alt="Skills" />
-              </BlurFade>
-            </div>
             <div className="flex flex-wrap gap-1">
                 {DATA.skills.map((skill, id) => (
                 <BlurFade key={skill} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
