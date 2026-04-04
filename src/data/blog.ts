@@ -67,7 +67,10 @@ export async function markdownToHTML(markdown: string) {
     .use(remarkParse)
     .use(remarkRehype)
     .use(rehypePrettyCode, {
-      theme: "min-light",
+      theme: {
+        light: "min-light",
+        dark: "min-dark",
+      },
       keepBackground: false,
     })
     .use(rehypeStringify)

@@ -87,9 +87,9 @@
 
       --ghibli-element-fill: 0 0% 85%; /* Gray for dark mode */
       --ghibli-element-opacity: 0.7;
-      --code-block-bg: 210 20% 96%;
-      --code-inline-bg: 210 16% 90%;
-      --code-inline-fg: 220 30% 18%;
+      --code-block-bg: 220 20% 12%;
+      --code-inline-bg: 220 16% 20%;
+      --code-inline-fg: 210 20% 92%;
     }
   }
 
@@ -122,10 +122,16 @@
     counter-reset: line;
   }
   
-  code[data-theme],
-  code[data-theme] span {
+  code[data-theme*=" "],
+  code[data-theme*=" "] span {
     color: var(--shiki-light);
-    background-color: var(--shiki-light-bg);
+    background-color: transparent;
+  }
+
+  .dark code[data-theme*=" "],
+  .dark code[data-theme*=" "] span {
+    color: var(--shiki-dark);
+    background-color: transparent;
   }
 
   #blog pre {
@@ -133,10 +139,16 @@
     border: 1px solid hsl(var(--border));
   }
 
-  #blog pre code[data-theme],
-  #blog pre code[data-theme] span {
-    color: var(--shiki-light) !important;
+  #blog pre code[data-theme*=" "] {
     background-color: transparent !important;
+  }
+
+  #blog pre code[data-theme*=" "] span {
+    color: var(--shiki-light) !important;
+  }
+
+  .dark #blog pre code[data-theme*=" "] span {
+    color: var(--shiki-dark) !important;
   }
 
   #blog :not(pre) > code {
