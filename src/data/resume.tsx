@@ -183,7 +183,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "https://calendar.xyehr.cn/Banner.jpg",
+      image: "/Banner.jpg",
       video: "",
     },
     {
