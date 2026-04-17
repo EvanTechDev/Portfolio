@@ -99,7 +99,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="me" href="https://sifa.id/p/e.xyehr.cn">
+        <link rel="me" href="https://sifa.id/p/e.xyehr.cn" />
       </head>
       <body className={GeistSans.className}>
         {/* Background container */}
