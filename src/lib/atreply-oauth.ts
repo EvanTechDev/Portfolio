@@ -13,25 +13,15 @@ function toSession(raw: any): AtReplySession | null {
   };
 }
 
-function createOAuthClient() {
-  const baseUrl = window.location.origin;
-  const clientMetadataUrl = `${baseUrl}/client-metadata.json`;
-  return new (BrowserOAuthClient as any)({
-    clientMetadata: {
-      client_id: clientMetadataUrl,
-      application_type: 'web',
-      grant_types: ['authorization_code', 'refresh_token'],
-      response_types: ['code'],
-      scope: 'atproto transition:generic',
-      redirect_uris: [`${baseUrl}/blog`],
-      token_endpoint_auth_method: 'none',
-      dpop_bound_access_tokens: true,
-    },
-  });
+async function createOAuthClient() {
+  const response = await fetch('/client-metadata.json', { cache: 'no-store' });
+  if (!response.ok) throw new Error('Failed to load client metadata');
+  const clientMetadata = await response.json();
+  return new (BrowserOAuthClient as any)({ clientMetadata });
 }
 
 export async function restoreOAuthSession() {
-  const client = createOAuthClient();
+  const client = await createOAuthClient();
   const hasOauthParams = window.location.search.includes('code=') || window.location.search.includes('iss=');
   if (hasOauthParams) {
     const result = await client.callback?.(window.location.href);
@@ -42,7 +32,7 @@ export async function restoreOAuthSession() {
 }
 
 export async function beginOAuthSignIn(handle: string) {
-  const client = createOAuthClient();
+  const client = await createOAuthClient();
   const url = await client.authorize?.(handle, { scope: 'atproto transition:generic' });
   if (!url) throw new Error('Unable to start OAuth flow.');
   window.location.href = url;
