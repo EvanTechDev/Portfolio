@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Button } from './ui/button';
 import { Share2 } from 'lucide-react';
-import Giscus from '@giscus/react';
+import { AtReplyComments } from './atreply-comments';
 
 interface BlogInteractionsProps {
   slug: string;
@@ -53,21 +53,7 @@ export function BlogInteractions({ slug }: BlogInteractionsProps) {
       </div>
 
       <div className="mt-12">
-        <Giscus
-          id="comments"
-          repo="EvanTechDev/Portfolio"
-          repoId="R_kgDONlEGng"
-          category="General"
-          categoryId="DIC_kwDONlEGns4Co01K"
-          mapping="pathname"
-          term={slug}
-          reactionsEnabled="1"
-          emitMetadata="0"
-          inputPosition="top"
-          theme="preferred_color_scheme"
-          lang="en"
-          loading="lazy"
-        />
+        <AtReplyComments subject={shareUrl || `/blog/${slug}`} />
       </div>
     </div>
   );

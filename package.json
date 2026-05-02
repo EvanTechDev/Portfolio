@@ -7,7 +7,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "generate:client-metadata": "node scripts/generate-client-metadata.mjs",
+    "prebuild": "npm run generate:client-metadata",
+    "predev": "npm run generate:client-metadata"
   },
   "dependencies": {
     "@next/third-parties": "^16.0.0",
@@ -60,7 +63,9 @@
     "ogl": "latest",
     "postprocessing": "latest",
     "@react-three/fiber": "latest",
-    "@react-three/postprocessing": "latest"
+    "@react-three/postprocessing": "latest",
+    "@atproto/api": "^0.13.20",
+    "@atproto/oauth-client-browser": "^0.3.6"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.13",
