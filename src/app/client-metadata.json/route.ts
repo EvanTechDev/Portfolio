@@ -19,6 +19,6 @@ export function GET(request: Request) {
     scope: 'atproto transition:generic',
     redirect_uris: [redirectUrl],
     token_endpoint_auth_method: 'none',
-    dpop_bound_access_tokens: true,
+    dpop_bound_access_tokens: false,
   });
 }
