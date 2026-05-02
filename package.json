@@ -7,7 +7,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "generate:client-metadata": "node scripts/generate-client-metadata.mjs",
+    "prebuild": "npm run generate:client-metadata",
+    "predev": "npm run generate:client-metadata"
   },
   "dependencies": {
     "@next/third-parties": "^16.0.0",
