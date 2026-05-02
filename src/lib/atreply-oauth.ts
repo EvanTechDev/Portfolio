@@ -24,14 +24,19 @@ async function createOAuthClient() {
 }
 
 export async function restoreOAuthSession() {
-  const client = await createOAuthClient();
-  const hasOauthParams = window.location.search.includes('code=') || window.location.search.includes('iss=');
-  if (hasOauthParams) {
-    const result = await client.callback?.(window.location.href);
-    window.history.replaceState({}, document.title, window.location.pathname);
-    return toSession(result?.session ?? result);
+  try {
+    const client = await createOAuthClient();
+    const hasOauthParams = window.location.search.includes('code=') || window.location.search.includes('iss=');
+    if (hasOauthParams) {
+      const result = await client.callback?.(window.location.href);
+      window.history.replaceState({}, document.title, window.location.pathname);
+      return toSession(result?.session ?? result);
+    }
+    return toSession(await client.restore?.());
+  } catch (error) {
+    console.error(error);
+    return null;
   }
-  return toSession(await client.restore?.());
 }
 
 export async function beginOAuthSignIn(handle: string) {

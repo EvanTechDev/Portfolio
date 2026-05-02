@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from './ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 import { Input } from './ui/input';
 import { AtReplyClient, type AtReplyComment, type AtReplySession } from '@/lib/atreply';
 import { beginOAuthSignIn, restoreOAuthSession } from '@/lib/atreply-oauth';
@@ -90,6 +90,7 @@ restoreOAuthSession().then(setSession).catch(console.error);
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>Sign in to comment</DialogTitle>
+                <DialogDescription>Enter your atproto handle to continue with OAuth.</DialogDescription>
               </DialogHeader>
               <div className="space-y-3">
                 <Input
