@@ -14,9 +14,11 @@ export function AtReplyComments({ subject }: AtReplyCommentsProps) {
   const [text, setText] = useState('');
   const [replyTo, setReplyTo] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState('');
 
   const loadComments = useCallback(async () => {
+    setStatus('');
     setLoading(true);
     try {
       const list = await client.listComments(subject);
@@ -34,8 +36,9 @@ export function AtReplyComments({ subject }: AtReplyCommentsProps) {
   }, [loadComments]);
 
   const handleSubmit = async () => {
-    if (!text.trim()) return;
+    if (submitting || !text.trim()) return;
     setStatus('');
+    setSubmitting(true);
     try {
       await client.createComment({
         subject,
@@ -48,6 +51,8 @@ export function AtReplyComments({ subject }: AtReplyCommentsProps) {
     } catch (error) {
       console.error(error);
       setStatus('Publish failed, please finish OAuth sign-in first.');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -64,7 +69,9 @@ export function AtReplyComments({ subject }: AtReplyCommentsProps) {
           className="w-full rounded-md border bg-background px-3 py-2 text-sm"
         />
         <div className="flex items-center gap-2">
-          <Button size="sm" onClick={handleSubmit}>Post</Button>
+          <Button size="sm" onClick={handleSubmit} disabled={submitting || loading}>
+            {submitting ? 'Posting...' : 'Post'}
+          </Button>
           {replyTo && (
             <Button size="sm" variant="outline" onClick={() => setReplyTo(undefined)}>
               Cancel reply
