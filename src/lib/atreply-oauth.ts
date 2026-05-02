@@ -7,6 +7,8 @@ const SESSION_STORAGE_KEY = 'atreply_oauth_session';
 const RETURN_TO_STORAGE_KEY = 'atreply_oauth_return_to';
 export const ATREPLY_SESSION_EVENT = 'atreply:session-changed';
 
+let restorePromise: Promise<AtReplySession | null> | null = null;
+
 function toSession(raw: any): AtReplySession | null {
   if (!raw) return null;
   return {
@@ -37,37 +39,48 @@ async function createOAuthClient() {
   });
 }
 
-export async function restoreOAuthSession() {
-  try {
-    const client = await createOAuthClient();
-    const hasOauthParams =
-      window.location.search.includes('code=') ||
-      window.location.search.includes('iss=') ||
-      window.location.hash.includes('code=') ||
-      window.location.hash.includes('iss=');
-    if (hasOauthParams) {
-      const result = await client.callback?.(window.location.href);
-      const session = toSession(result?.session ?? result);
-      persistSession(session);
-      const returnTo = window.sessionStorage.getItem(RETURN_TO_STORAGE_KEY);
-      window.sessionStorage.removeItem(RETURN_TO_STORAGE_KEY);
-      window.history.replaceState({}, document.title, window.location.pathname);
-      if (returnTo && returnTo !== window.location.pathname) {
-        window.location.replace(returnTo);
+export function restoreOAuthSession() {
+  if (restorePromise) return restorePromise;
+
+  restorePromise = (async () => {
+    try {
+      const client = await createOAuthClient();
+      const hasOauthParams =
+        window.location.search.includes('code=') ||
+        window.location.search.includes('iss=') ||
+        window.location.hash.includes('code=') ||
+        window.location.hash.includes('iss=');
+
+      if (hasOauthParams) {
+        const result = await client.callback?.(window.location.href);
+        const session = toSession(result?.session ?? result);
+        persistSession(session);
+        const returnTo = window.sessionStorage.getItem(RETURN_TO_STORAGE_KEY);
+        window.sessionStorage.removeItem(RETURN_TO_STORAGE_KEY);
+        window.history.replaceState({}, document.title, window.location.pathname);
+        if (returnTo && returnTo !== window.location.pathname) {
+          window.location.replace(returnTo);
+        }
+        return session;
       }
-      return session;
+
+      const restored = toSession(await client.restore?.());
+      if (restored) {
+        persistSession(restored);
+        return restored;
+      }
+
+      const localSession = window.localStorage.getItem(SESSION_STORAGE_KEY);
+      return localSession ? toSession(JSON.parse(localSession)) : null;
+    } catch (error) {
+      console.error(error);
+      return null;
+    } finally {
+      restorePromise = null;
     }
-    const restored = toSession(await client.restore?.());
-    if (restored) {
-      persistSession(restored);
-      return restored;
-    }
-    const localSession = window.localStorage.getItem(SESSION_STORAGE_KEY);
-    return localSession ? toSession(JSON.parse(localSession)) : null;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+  })();
+
+  return restorePromise;
 }
 
 export async function beginOAuthSignIn(handle: string) {
