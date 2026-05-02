@@ -17,7 +17,10 @@ async function createOAuthClient() {
   const response = await fetch('/client-metadata.json', { cache: 'no-store' });
   if (!response.ok) throw new Error('Failed to load client metadata');
   const clientMetadata = await response.json();
-  return new (BrowserOAuthClient as any)({ clientMetadata });
+  return new (BrowserOAuthClient as any)({
+    clientMetadata,
+    handleResolver: 'https://public.api.bsky.app',
+  });
 }
 
 export async function restoreOAuthSession() {
