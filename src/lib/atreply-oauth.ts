@@ -11,11 +11,30 @@ let restorePromise: Promise<AtReplySession | null> | null = null;
 
 function toSession(raw: any): AtReplySession | null {
   if (!raw) return null;
+
+  const source = raw.session ?? raw;
+  const did = source.did ?? source.sub;
+  const handle = source.handle ?? source.username;
+  const accessToken =
+    source.accessJwt ??
+    source.accessToken ??
+    source.tokenSet?.access ??
+    source.tokenSet?.access_token ??
+    source.tokens?.accessJwt ??
+    source.tokens?.accessToken;
+  const pdsUrl =
+    source.pdsUrl ??
+    source.aud ??
+    source.dpopBoundAccessTokens?.resourceServer ??
+    'https://bsky.social';
+
+  if (!did || !accessToken) return null;
+
   return {
-    did: raw.did,
-    handle: raw.handle,
-    accessToken: raw.accessJwt ?? raw.accessToken,
-    pdsUrl: raw.pdsUrl ?? raw.aud ?? 'https://bsky.social',
+    did,
+    handle,
+    accessToken,
+    pdsUrl,
   };
 }
 
@@ -71,7 +90,9 @@ export function restoreOAuthSession() {
       }
 
       const localSession = window.localStorage.getItem(SESSION_STORAGE_KEY);
-      return localSession ? toSession(JSON.parse(localSession)) : null;
+      const recovered = localSession ? toSession(JSON.parse(localSession)) : null;
+      if (recovered) persistSession(recovered);
+      return recovered;
     } catch (error) {
       console.error(error);
       return null;
