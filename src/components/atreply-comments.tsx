@@ -5,7 +5,7 @@ import { Button } from './ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 import { Input } from './ui/input';
 import { AtReplyClient, type AtReplyComment, type AtReplySession } from '@/lib/atreply';
-import { beginOAuthSignIn, restoreOAuthSession } from '@/lib/atreply-oauth';
+import { ATREPLY_SESSION_EVENT, beginOAuthSignIn, restoreOAuthSession } from '@/lib/atreply-oauth';
 
 type AtReplyCommentsProps = {
   subject: string;
@@ -39,9 +39,18 @@ export function AtReplyComments({ subject }: AtReplyCommentsProps) {
   }, [client, subject]);
 
   useEffect(() => {
-restoreOAuthSession().then(setSession).catch(console.error);
+    restoreOAuthSession().then(setSession).catch(console.error);
     loadComments();
   }, [client, loadComments]);
+
+  useEffect(() => {
+    const onSessionChanged = (event: Event) => {
+      const customEvent = event as CustomEvent<AtReplySession | null>;
+      setSession(customEvent.detail ?? null);
+    };
+    window.addEventListener(ATREPLY_SESSION_EVENT, onSessionChanged);
+    return () => window.removeEventListener(ATREPLY_SESSION_EVENT, onSessionChanged);
+  }, []);
 
   const handleSignIn = async () => {
     if (!handle.trim()) return;
