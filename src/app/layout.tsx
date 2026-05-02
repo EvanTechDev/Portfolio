@@ -15,6 +15,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { CommandPalette } from "@/components/command";
 import { BackToTop } from "@/components/back-to-top";
+import { AtprotoOAuthBootstrap } from "@/components/atproto-oauth-bootstrap";
 import { GeistSans } from "geist/font/sans"
 
 /* const fontSans = FontSans({
@@ -123,6 +124,7 @@ export default function RootLayout({
             `}
           </Script>
           <JsonLd />
+          <AtprotoOAuthBootstrap />
           <ScrollProgress />
           <ThemeProvider
             attribute="class"
