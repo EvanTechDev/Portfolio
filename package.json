@@ -60,7 +60,9 @@
     "ogl": "latest",
     "postprocessing": "latest",
     "@react-three/fiber": "latest",
-    "@react-three/postprocessing": "latest"
+    "@react-three/postprocessing": "latest",
+    "@atproto/api": "^0.13.20",
+    "@atproto/oauth-client-browser": "^0.3.6"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.13",
