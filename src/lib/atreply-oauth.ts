@@ -3,6 +3,8 @@
 import { BrowserOAuthClient } from '@atproto/oauth-client-browser';
 import type { AtReplySession } from './atreply';
 
+const SESSION_STORAGE_KEY = 'atreply_oauth_session';
+
 function toSession(raw: any): AtReplySession | null {
   if (!raw) return null;
   return {
@@ -26,13 +28,27 @@ async function createOAuthClient() {
 export async function restoreOAuthSession() {
   try {
     const client = await createOAuthClient();
-    const hasOauthParams = window.location.search.includes('code=') || window.location.search.includes('iss=');
+    const hasOauthParams =
+      window.location.search.includes('code=') ||
+      window.location.search.includes('iss=') ||
+      window.location.hash.includes('code=') ||
+      window.location.hash.includes('iss=');
     if (hasOauthParams) {
       const result = await client.callback?.(window.location.href);
+      const session = toSession(result?.session ?? result);
+      if (session) {
+        window.localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(session));
+      }
       window.history.replaceState({}, document.title, window.location.pathname);
-      return toSession(result?.session ?? result);
+      return session;
     }
-    return toSession(await client.restore?.());
+    const restored = toSession(await client.restore?.());
+    if (restored) {
+      window.localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(restored));
+      return restored;
+    }
+    const localSession = window.localStorage.getItem(SESSION_STORAGE_KEY);
+    return localSession ? toSession(JSON.parse(localSession)) : null;
   } catch (error) {
     console.error(error);
     return null;
