@@ -14,8 +14,20 @@ function toSession(raw: any): AtReplySession | null {
 }
 
 function createOAuthClient() {
-  const clientMetadataUrl = `${window.location.origin}/client-metadata.json`;
-  return new (BrowserOAuthClient as any)({ clientMetadata: { client_id: clientMetadataUrl } });
+  const baseUrl = window.location.origin;
+  const clientMetadataUrl = `${baseUrl}/client-metadata.json`;
+  return new (BrowserOAuthClient as any)({
+    clientMetadata: {
+      client_id: clientMetadataUrl,
+      application_type: 'web',
+      grant_types: ['authorization_code', 'refresh_token'],
+      response_types: ['code'],
+      scope: 'atproto transition:generic',
+      redirect_uris: [`${baseUrl}/blog`],
+      token_endpoint_auth_method: 'none',
+      dpop_bound_access_tokens: true,
+    },
+  });
 }
 
 export async function restoreOAuthSession() {
