@@ -5,6 +5,7 @@ import { Button } from './ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 import { Input } from './ui/input';
 import { AtReplyClient, type AtReplyComment, type AtReplySession } from '@/lib/atreply';
+import { beginOAuthSignIn, restoreOAuthSession } from '@/lib/atreply-oauth';
 
 type AtReplyCommentsProps = {
   subject: string;
@@ -38,7 +39,7 @@ export function AtReplyComments({ subject }: AtReplyCommentsProps) {
   }, [client, subject]);
 
   useEffect(() => {
-    client.handleOAuthCallbackIfNeeded().then(setSession).catch(console.error);
+restoreOAuthSession().then(setSession).catch(console.error);
     loadComments();
   }, [client, loadComments]);
 
@@ -46,7 +47,7 @@ export function AtReplyComments({ subject }: AtReplyCommentsProps) {
     if (!handle.trim()) return;
     setAuthLoading(true);
     try {
-      await client.beginSignIn(handle.trim());
+      await beginOAuthSignIn(handle.trim());
     } catch (error) {
       console.error(error);
       setStatus('OAuth redirect failed.');
