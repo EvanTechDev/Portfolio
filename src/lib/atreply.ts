@@ -32,14 +32,14 @@ export class AtReplyClient {
   private readonly collection: string;
   private readonly indexerUrl: string;
   private readonly oauthClient: any;
-  private readonly clientMetadataUrl: string;
 
   constructor(options: AtReplyClientOptions = {}) {
     this.collection = options.collection ?? DEFAULT_COLLECTION;
     this.indexerUrl = options.indexerUrl ?? DEFAULT_INDEXER_URL;
-    this.clientMetadataUrl = options.clientMetadataUrl ?? `${window.location.origin}/client-metadata.json`;
+    const origin = typeof window === 'undefined' ? '' : window.location.origin;
+    const clientMetadataUrl = options.clientMetadataUrl ?? `${origin}/client-metadata.json`;
     this.oauthClient = new (BrowserOAuthClient as any)({
-      clientMetadata: { client_id: this.clientMetadataUrl },
+      clientMetadata: { client_id: clientMetadataUrl },
     });
   }
 
