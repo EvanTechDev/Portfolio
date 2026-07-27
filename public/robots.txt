@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://prasen.dev/sitemap.xml
+
+# Assets
+Allow: /favicons/
+Allow: /images/
+Allow: /static/
+
+# Disallow dynamic URLs
+Disallow: /api/
+Disallow: /*?*

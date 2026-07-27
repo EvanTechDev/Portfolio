@@ -1,0 +1,372 @@
+---
+title: "What is Middleware in Next.js: How to Implement Permission Control with It?"
+publishedAt: "2025-04-08"
+summary: "This article introduces the knowledge about Middleware"
+tags: ["nextjs", "middleware", "coding"]
+---
+
+Middleware in Next.js represents a powerful architectural pattern that enables developers to intercept and modify requests at the edge before they reach application routes. This comprehensive guide explores the technical implementation of middleware for sophisticated permission control systems in production-grade Next.js applications.
+
+---
+
+## 1. Fundamental Concepts of Next.js Middleware
+
+### 1.1 Architectural Position in Request Lifecycle
+
+Next.js middleware operates in the critical path between the network edge and your application routes:
+
+```
+Client Request → Edge Network → Middleware → Route Handler → Response
+```
+
+Key characteristics:
+- Executes before cached content and routes
+- Runs in the Edge Runtime (V8 isolates)
+- Supports both synchronous and asynchronous operations
+- Can modify request/response headers
+- Capable of redirects and rewrites
+
+### 1.2 Technical Specifications
+
+```typescript
+// middleware.ts
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+export function middleware(request: NextRequest) {
+  // Middleware logic here
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - public folder
+     */
+    '/((?!_next/static|_next/image|favicon.ico|public).*)',
+  ],
+};
+```
+
+---
+
+## 2. Advanced Permission Control Patterns
+
+### 2.1 Role-Based Access Control (RBAC) Implementation
+
+```typescript
+// middleware.ts
+import { getToken } from 'next-auth/jwt';
+import { NextResponse } from 'next/server';
+
+export async function middleware(req: NextRequest) {
+  const pathname = req.nextUrl.pathname;
+  const session = await getToken({ req, secret: process.env.SECRET });
+
+  // Protected routes configuration
+  const protectedRoutes = {
+    '/admin': ['admin'],
+    '/dashboard': ['admin', 'user'],
+    '/settings': ['admin', 'editor'],
+  };
+
+  // Check if current route is protected
+  const matchedRoute = Object.keys(protectedRoutes).find(route => 
+    pathname.startsWith(route)
+  );
+
+  if (matchedRoute) {
+    if (!session) {
+      return NextResponse.redirect(new URL('/login', req.url));
+    }
+
+    const requiredRoles = protectedRoutes[matchedRoute];
+    const hasPermission = requiredRoles.some(role => 
+      session.user.roles.includes(role)
+    );
+
+    if (!hasPermission) {
+      return NextResponse.redirect(new URL('/unauthorized', req.url));
+    }
+  }
+
+  return NextResponse.next();
+}
+```
+
+### 2.2 Attribute-Based Access Control (ABAC)
+
+For more granular control:
+
+```typescript
+interface Policy {
+  resource: string;
+  action: string;
+  conditions: {
+    [key: string]: any;
+  };
+}
+
+const policies: Policy[] = [
+  {
+    resource: '/projects/:id',
+    action: 'edit',
+    conditions: {
+      role: ['admin', 'editor'],
+      ownership: true,
+      status: ['active', 'pending'],
+    },
+  },
+];
+
+export async function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+  const user = await getUserSession(req);
+
+  const relevantPolicy = policies.find(policy => 
+    new RegExp(`^${policy.resource.replace(/:\w+/g, '\\w+')}$`).test(pathname)
+  );
+
+  if (relevantPolicy) {
+    const resourceId = pathname.split('/')[2];
+    const resource = await fetchResource(resourceId);
+    
+    const passesConditions = Object.entries(relevantPolicy.conditions)
+      .every(([key, value]) => {
+        if (key === 'ownership') {
+          return resource.ownerId === user.id;
+        }
+        return Array.isArray(value) 
+          ? value.includes(user[key])
+          : user[key] === value;
+      });
+
+    if (!passesConditions) {
+      return NextResponse.redirect(new URL('/forbidden', req.url));
+    }
+  }
+
+  return NextResponse.next();
+}
+```
+
+---
+
+## 3. Performance Optimization Techniques
+
+### 3.1 Smart Route Matching
+
+```typescript
+export const config = {
+  matcher: [
+    '/admin/:path*',
+    '/dashboard/:path*',
+    '/api/(?!public).*',
+  ],
+};
+```
+
+### 3.2 Session Caching Strategies
+
+```typescript
+const sessionCache = new Map();
+
+async function getCachedSession(req: NextRequest) {
+  const cacheKey = req.headers.get('authorization') || req.cookies.get('session')?.value;
+  
+  if (cacheKey && sessionCache.has(cacheKey)) {
+    return sessionCache.get(cacheKey);
+  }
+
+  const session = await fetchSession(req);
+  sessionCache.set(cacheKey, session);
+  
+  // Invalidate after 5 minutes
+  setTimeout(() => sessionCache.delete(cacheKey), 300000);
+  
+  return session;
+}
+```
+
+---
+
+## 4. Security Best Practices
+
+### 4.1 Secure Headers Injection
+
+```typescript
+function applySecurityHeaders(response: NextResponse) {
+  response.headers.set('Content-Security-Policy', "default-src 'self'");
+  response.headers.set('X-Frame-Options', 'DENY');
+  response.headers.set('X-Content-Type-Options', 'nosniff');
+  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  response.headers.set('Permissions-Policy', 'geolocation=(), microphone=()');
+  return response;
+}
+```
+
+### 4.2 Rate Limiting Implementation
+
+```typescript
+const rateLimiter = new Map();
+
+export async function middleware(req: NextRequest) {
+  const ip = req.ip || req.headers.get('x-forwarded-for');
+  const limit = 100; // Requests per minute
+  const windowMs = 60000; // 1 minute
+
+  if (!rateLimiter.has(ip)) {
+    rateLimiter.set(ip, {
+      count: 0,
+      lastReset: Date.now(),
+    });
+  }
+
+  const entry = rateLimiter.get(ip);
+  
+  if (Date.now() - entry.lastReset > windowMs) {
+    entry.count = 0;
+    entry.lastReset = Date.now();
+  }
+
+  entry.count++;
+
+  if (entry.count > limit) {
+    return new NextResponse('Too many requests', { status: 429 });
+  }
+
+  // Continue with other middleware logic
+}
+```
+
+---
+
+## 5. Advanced Use Cases
+
+### 5.1 Multi-Tenant Applications
+
+```typescript
+export async function middleware(req: NextRequest) {
+  const hostname = req.headers.get('host');
+  const subdomain = hostname?.split('.')[0];
+  
+  if (subdomain && subdomain !== 'www') {
+    const tenant = await verifyTenant(subdomain);
+    
+    if (!tenant) {
+      return NextResponse.redirect(new URL('/invalid-tenant', req.url));
+    }
+
+    // Clone the request headers and set tenant context
+    const headers = new Headers(req.headers);
+    headers.set('x-tenant-id', tenant.id);
+    
+    return NextResponse.next({
+      request: {
+        headers,
+      },
+    });
+  }
+}
+```
+
+### 5.2 Feature Flagging
+
+```typescript
+export async function middleware(req: NextRequest) {
+  const user = await getCurrentUser(req);
+  const pathname = req.nextUrl.pathname;
+  
+  // Check feature availability
+  if (pathname.startsWith('/beta') && !user.features.includes('beta-access')) {
+    return NextResponse.redirect(new URL('/upgrade', req.url));
+  }
+
+  // Canary release implementation
+  if (pathname.startsWith('/new-feature')) {
+    const percentage = 10; // 10% rollout
+    const userHash = hashCode(user.id);
+    const inTestGroup = (userHash % 100) < percentage;
+    
+    if (!inTestGroup) {
+      return NextResponse.rewrite(new URL('/old-feature', req.url));
+    }
+  }
+
+  return NextResponse.next();
+}
+```
+
+---
+
+## 6. Monitoring and Debugging
+
+### 6.1 Logging Implementation
+
+```typescript
+export async function middleware(req: NextRequest) {
+  const start = Date.now();
+  const response = await NextResponse.next();
+  const duration = Date.now() - start;
+
+  logRequest({
+    method: req.method,
+    path: req.nextUrl.pathname,
+    status: response.status,
+    duration,
+    userAgent: req.headers.get('user-agent'),
+    ip: req.ip,
+  });
+
+  return response;
+}
+```
+
+### 6.2 Error Handling
+
+```typescript
+export async function middleware(req: NextRequest) {
+  try {
+    // Middleware logic
+    return NextResponse.next();
+  } catch (error) {
+    console.error('Middleware error:', error);
+    
+    // Capture in error monitoring system
+    captureError(error);
+    
+    // Don't expose internal errors to client
+    return NextResponse.redirect(new URL('/error', req.url));
+  }
+}
+```
+
+---
+
+## Conclusion: Professional Implementation Guidelines
+
+1. **Performance Considerations**:
+   - Keep middleware lean and fast
+   - Implement proper caching strategies
+   - Use route matching carefully
+
+2. **Security Requirements**:
+   - Always validate inputs
+   - Implement proper session handling
+   - Include security headers
+
+3. **Maintainability Best Practices**:
+   - Modularize complex logic
+   - Implement comprehensive logging
+   - Document permission schemas
+
+4. **Monitoring Essentials**:
+   - Track performance metrics
+   - Log permission failures
+   - Monitor for suspicious patterns
+
+Middleware in Next.js provides an extremely powerful mechanism for implementing sophisticated permission control systems. When properly architected, it can handle complex authorization scenarios while maintaining excellent performance characteristics and security posture.
