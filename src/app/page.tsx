@@ -17,15 +17,11 @@ import { Icons } from "@/components/icons";
 import ShinyButton from "@/components/ui/shiny-button";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { SocialIconLink } from "@/components/social-icon-link";
-import { BlogSkeleton } from "@/components/skeletons/blog-skeleton";
 import { GithubSkeleton } from "@/components/skeletons/github-skeleton";
-import { ProjectSkeleton } from "@/components/skeletons/project-skeleton";
 import { HackathonSkeleton } from "@/components/skeletons/hackathon-skeleton";
-import { BorderBeam } from "@/components/magicui/border-beam";
 import { GhibliSkyBackground } from "@/components/ghibli-elements";
 import GithubContributionsWrapper from "@/components/GithubContributionsWrapper";
 import YearProgress from "@/components/year-progress";
-import { getBlogPosts } from "@/data/blog";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -57,27 +53,12 @@ export const metadata: Metadata = {
   },
 };
 
-const BlogCard = dynamic(() => import("@/components/blog-card").then(mod => mod.BlogCard), {
-  ssr: true,
-  loading: () => <BlogSkeleton />
-});
-
-const ProjectCardDynamic = dynamic(() => import("@/components/project-card").then(mod => mod.ProjectCard), {
-  ssr: true,
-  loading: () => <ProjectSkeleton />
-});
-
 const HackathonCardDynamic = dynamic(() => import("@/components/hackathon-card").then(mod => mod.HackathonCard), {
   ssr: true,
   loading: () => <HackathonSkeleton />
 });
 
 export default async function Page() {
-  const posts = await getBlogPosts();
-  const recentPosts = [...posts]
-    .sort((a, b) => new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime())
-    .slice(0, 3);
-
   return (
     <>
       <div className="fixed inset-0 -z-10 overflow-hidden">
@@ -181,42 +162,6 @@ export default async function Page() {
           </div>
         </section>
 
-        <section id="blogs">
-          <div className="flex min-h-0 flex-col gap-y-3">
-            <BlurFade delay={BLUR_FADE_DELAY * 9}>
-              <h2 className="text-xl font-bold">Recent Blog Posts</h2>
-            </BlurFade>
-            <BlurFade delay={BLUR_FADE_DELAY * 10}>
-              <div className="flex flex-col space-y-4">
-                {recentPosts.length > 0 ? (
-                  recentPosts.map((post) => (
-                    <BlogCard
-                      key={post.slug}
-                      post={{
-                        title: post.metadata.title,
-                        publishedAt: post.metadata.publishedAt,
-                        summary: post.metadata.summary,
-                        slug: post.slug,
-                      }}
-                    />
-                  ))
-                ) : (
-                  <p className="text-sm text-muted-foreground">No blog posts found.</p>
-                )}
-                <Link
-                  href="/blog"
-                  className="mt-4 block"
-                >
-                  <RainbowButton
-                    className="w-full sm:w-[160px] px-4 py-2 group transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] font-bold text-sm"
-                  >
-                    Read More Blogs
-                  </RainbowButton>
-                </Link>
-              </div>
-            </BlurFade>
-          </div>
-        </section>
 
         <section id="contributions">
           <BlurFade delay={BLUR_FADE_DELAY * 10}>
@@ -232,18 +177,10 @@ export default async function Page() {
             <BlurFade delay={BLUR_FADE_DELAY * 8}>
               <div className="grid gap-4 sm:grid-cols-2">
                 {DATA.projects.slice(0, 4).map((project) => (
-                  <div key={project.title} className="relative overflow-hidden rounded-xl">
-                    <BorderBeam
-                      duration={4}
-                      size={300}
-                      reverse
-                      className="from-transparent via-purple-500 to-transparent"
-                    />
-                    <ProjectCard
-                      {...project}
-                      tags={Array.from(project.technologies)}
-                    />
-                  </div>
+                  <ProjectCard
+                    {...project}
+                    tags={Array.from(project.technologies)}
+                  />
                 ))}
               </div>
               <Link

@@ -10,7 +10,6 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
-import { BorderBeam } from "@/components/magicui/border-beam";
 
 interface Props {
   title: string;
@@ -108,12 +107,6 @@ export function ProjectCard({
           </div>
         )}
       </CardFooter>
-      <BorderBeam
-        duration={4}
-        size={300}
-        reverse
-        className="from-transparent via-[#0066FF] to-transparent"
-      />
     </Card>
   );
 }

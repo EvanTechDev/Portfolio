@@ -1,8 +1,5 @@
 import { Icons } from "@/components/icons";
-import { Description } from "@radix-ui/react-dialog";
-import { url } from "inspector";
-import { HomeIcon, NotebookIcon, ThumbsDown, VideoIcon, FolderIcon, Medal, Terminal } from "lucide-react";
-import { title } from "process";
+import { HomeIcon, FolderIcon, Medal, Terminal } from "lucide-react";
 
 export const DATA = {
   name: "Evan Huang",
@@ -14,7 +11,7 @@ export const DATA = {
     "<Frontend />",
   summary:
     "Hello, my name is Evan. I’m a former Frontend Developer currently focused on my studies , but still passionate about coding and problem-solving. I have strong experience with React, Next.js, and TypeScript. Although I’m dedicating more time to learning at the moment, my love for technology and curiosity for solving problems remain strong. I look forward to applying what I’ve learned in future projects and continuing to grow.",
-  avatarUrl: "/Evan.webp",
+  avatarUrl: "/image.png",
   skills: [
     "React.js",
     "Next.js",
@@ -64,7 +61,6 @@ export const DATA = {
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
-    { href: "/blog", icon: NotebookIcon, label: "Blog" },
     { href: "/projects", icon: FolderIcon, label: "Projects" },
     { href: "/certificates", icon: Medal, label: "Certficates" },
     { href: "/cli", icon: Terminal, label: "CLI" }
