@@ -4,7 +4,6 @@ import React from "react";
 import GitHubCalendar from "react-github-calendar";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
-import { BorderBeam } from "@/components/magicui/border-beam";
 
 export function GithubContributions() {
   const { resolvedTheme } = useTheme();
@@ -26,20 +25,8 @@ export function GithubContributions() {
   }
 
   return (
-    <div className="relative overflow-hidden rounded-xl">
-      <BorderBeam
-        duration={6}
-        size={400}
-        className="from-transparent via-purple-500 to-transparent"
-      />
-      <BorderBeam
-        duration={6}
-        delay={3}
-        size={400}
-        className="from-transparent via-pink-500 to-transparent"
-      />
-      <motion.div
-        className="w-full overflow-hidden rounded-xl bg-card hover:shadow-lg transition-shadow duration-300 p-4"
+    <motion.div
+        className="w-full overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-card hover:shadow-lg transition-shadow duration-300 p-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -54,6 +41,5 @@ export function GithubContributions() {
           />
         </div>
       </motion.div>
-    </div>
   );
 }
